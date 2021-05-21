@@ -1,0 +1,74 @@
+
+note: 'train'
+# configs of data
+
+model: 'deeplab'
+train: True
+multigpu: True 
+fixbn: False  # check this also ..  chg 
+fix_seed: True
+
+
+# Optimizaers
+learning_rate: 7.5e-5
+num_steps: 5000 #chg for batch=8.. 372*num_epochs .. here 900 epochs 334800 .. not req
+epochs: 1000 #chg
+weight_decay: 0.0005
+momentum: 0.9
+power: 0.9
+round: 6
+
+# Logging
+print_freq: 372  # round(2975 cityscapes train / batch 8 )
+save_freq: 372
+tensorboard: True
+neptune: False
+screen: True
+val: True
+val_freq: 372 # 372 ..after one epoch for cityscapes train set (2975) with batch 8
+
+# Dataset 
+source: 'cityscapes' #chg
+target: 'cityscapes_val' #chg
+worker: 8
+batch_size: 8 #chg
+
+#Transforms
+input_src: 720
+input_tgt: 720
+crop_src: 600
+crop_tgt: 600
+mirror: True
+scale_min: 0.5
+scale_max: 1.5
+rec: False
+        
+# Model hypers
+init_weight: './model/DeepLab_resnet_pretrained_init-f81d91e8.pth'
+restore_from: None
+
+snapshot: './save/'
+result: './miou_result/'
+log: './log/'
+plabel: './plabel'
+gta5: {
+        data_dir: '/data/uts200/guangrui/gta5/',
+        data_list: './dataset/list/gta5_list.txt',
+        input_size: [1280, 720]
+        }
+synthia: {
+        data_dir: '/home/guangrui/data/synthia/',
+        data_list: './dataset/list/synthia_list.txt',
+        input_size: [1280, 760]
+        }
+cityscapes: {
+        data_dir: '/home/cse/staff/sid97.cstaff/scratch/data/cityscapes/',
+        data_list: './dataset/cityscapes_list/train.txt',
+        input_size: [1024, 512]
+        } #chg
+cityscapes_val: {
+        data_dir: '/home/cse/staff/sid97.cstaff/scratch/data/cityscapes/',
+        data_list: './dataset/cityscapes_list/val.txt',
+        input_size: [1024, 512]
+        }
+

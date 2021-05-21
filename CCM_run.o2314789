@@ -1,0 +1,827 @@
+===============================
+2314789.pbshpc
+vsky018.hpc.iitd.ac.in
+===============================
+/home/cse/phd/anz208849/CCM
+['run.py']
+Snapshot stored in: ../scratch/saved_models/CCM/save/train
+                     note : train          
+                    model : deeplab        
+                    train : 1              
+                 multigpu : 0              
+                    fixbn : 1              
+                 fix_seed : 1              
+                  cb_prop : 0.1            
+               num_center : 10             
+                     lamb : 0.5            
+                src_count : 1191           
+             src_pix_prop : 0.9            
+           src_pix_select : 1              
+                pool_prop : 0.2            
+                  src_fix : 0              
+                  tgt_fix : 0              
+               src_select : 1              
+               tgt_select : 1              
+                   resume : 0              
+                    start : 0              
+              round_start : 0              
+            learning_rate : 7.5e-05        
+                num_steps : 5000           
+                   epochs : 2              
+             weight_decay : 0.0005         
+                 momentum : 0.9            
+                    power : 0.9            
+                    round : 6              
+               print_freq : 10             
+                save_freq : 2000           
+              tensorboard : 0              
+                  neptune : 0              
+                   screen : 1              
+                      val : 1              
+                 val_freq : 150            
+                   source : cityscapes     
+                   target : darkzurich     
+               target_val : darkzurich_val 
+                   worker : 4              
+               batch_size : 4              
+              num_classes : 19             
+                input_src : 720            
+                input_tgt : 720            
+                 crop_src : 600            
+                 crop_tgt : 600            
+                   mirror : 1              
+                scale_min : 0.5            
+                scale_max : 1.5            
+                      rec : 0              
+              init_weight : ../scratch/saved_models/CCM/source/model410_city_deeplabv2.pth
+             restore_from : None           
+                 snapshot : ../scratch/saved_models/CCM/save/train
+                   result : ../scratch/saved_models/CCM/miou_result/
+                      log : ../scratch/saved_models/CCM/log/
+                   plabel : ../scratch/saved_models/CCM/plabel/
+
+Model restored with weights from : ../scratch/saved_models/CCM/source/model410_city_deeplabv2.pth
+Mode --> Train
+[Calculate Threshold using config.cb_prop]
+{0: 0.9999004602432251, 1: 0.9949570298194885, 2: 0.9939565658569336, 3: 0.9107348322868347, 4: 0.939110279083252, 5: 0.9523444771766663, 6: 0.9842981100082397, 7: 0.9902578592300415, 8: 0.9698877930641174, 9: 0.9279503226280212, 10: 0.8360652327537537, 11: 0.9618139863014221, 13: 0.9989835619926453, 15: 0.8548271656036377, 16: 0.9429222941398621, 17: 0.9493349194526672, 18: 0.9084594249725342, 12: 0.9428172707557678, 14: 0.7570504546165466}
+[Generate pseudo labels]
+[Semantic Layout Matching]
+Generate SLM[Semantic layour matrix] of target samples
+Pixel-wise similarity matching
+epoch:  0
+iter =      0/  5000, exp = train  loss_source:0.1200  loss_entropy:2.3239
+iter =     10/  5000, exp = train  loss_source:0.0386  loss_entropy:2.1282
+iter =     20/  5000, exp = train  loss_source:0.0691  loss_entropy:2.1384
+iter =     30/  5000, exp = train  loss_source:0.0223  loss_entropy:2.1307
+iter =     40/  5000, exp = train  loss_source:0.0984  loss_entropy:2.1730
+iter =     50/  5000, exp = train  loss_source:0.0722  loss_entropy:2.0928
+iter =     60/  5000, exp = train  loss_source:0.0641  loss_entropy:2.1190
+iter =     70/  5000, exp = train  loss_source:0.0242  loss_entropy:2.1119
+iter =     80/  5000, exp = train  loss_source:0.1072  loss_entropy:2.1579
+iter =     90/  5000, exp = train  loss_source:0.0946  loss_entropy:2.1471
+iter =    100/  5000, exp = train  loss_source:0.0584  loss_entropy:2.0932
+iter =    110/  5000, exp = train  loss_source:0.0719  loss_entropy:2.1787
+iter =    120/  5000, exp = train  loss_source:0.2558  loss_entropy:2.1274
+iter =    130/  5000, exp = train  loss_source:0.0646  loss_entropy:2.1128
+iter =    140/  5000, exp = train  loss_source:0.0102  loss_entropy:2.1553
+iter =    150/  5000, exp = train  loss_source:0.0555  loss_entropy:2.0899
+mIoU: 23.22% mAcc : 45.16% 
+********************************
+model saved
+iter =    160/  5000, exp = train  loss_source:0.0544  loss_entropy:2.1226
+iter =    170/  5000, exp = train  loss_source:0.0604  loss_entropy:2.1148
+iter =    180/  5000, exp = train  loss_source:0.0160  loss_entropy:2.1474
+iter =    190/  5000, exp = train  loss_source:0.0501  loss_entropy:2.0971
+iter =    200/  5000, exp = train  loss_source:0.1068  loss_entropy:2.1182
+iter =    210/  5000, exp = train  loss_source:0.0662  loss_entropy:2.1067
+iter =    220/  5000, exp = train  loss_source:0.0920  loss_entropy:2.1257
+iter =    230/  5000, exp = train  loss_source:0.0189  loss_entropy:2.0871
+iter =    240/  5000, exp = train  loss_source:0.3753  loss_entropy:2.1482
+iter =    250/  5000, exp = train  loss_source:0.0795  loss_entropy:2.1442
+iter =    260/  5000, exp = train  loss_source:0.0285  loss_entropy:2.0804
+iter =    270/  5000, exp = train  loss_source:0.2085  loss_entropy:2.1545
+iter =    280/  5000, exp = train  loss_source:0.1184  loss_entropy:2.1213
+iter =    290/  5000, exp = train  loss_source:0.0928  loss_entropy:2.0997
+iter =    300/  5000, exp = train  loss_source:0.0588  loss_entropy:2.0900
+mIoU: 23.53% mAcc : 48.59% 
+********************************
+model saved
+iter =    310/  5000, exp = train  loss_source:0.0458  loss_entropy:2.1352
+iter =    320/  5000, exp = train  loss_source:0.0046  loss_entropy:2.1074
+iter =    330/  5000, exp = train  loss_source:0.0644  loss_entropy:2.0867
+iter =    340/  5000, exp = train  loss_source:0.0544  loss_entropy:2.0933
+iter =    350/  5000, exp = train  loss_source:0.0083  loss_entropy:2.0773
+iter =    360/  5000, exp = train  loss_source:0.0868  loss_entropy:2.0918
+iter =    370/  5000, exp = train  loss_source:0.0297  loss_entropy:2.1189
+iter =    380/  5000, exp = train  loss_source:0.1155  loss_entropy:2.0829
+iter =    390/  5000, exp = train  loss_source:0.0349  loss_entropy:2.1029
+iter =    400/  5000, exp = train  loss_source:0.0149  loss_entropy:2.1192
+iter =    410/  5000, exp = train  loss_source:0.0522  loss_entropy:2.0884
+iter =    420/  5000, exp = train  loss_source:0.0301  loss_entropy:2.1199
+iter =    430/  5000, exp = train  loss_source:0.0648  loss_entropy:2.0738
+iter =    440/  5000, exp = train  loss_source:0.0307  loss_entropy:2.0801
+iter =    450/  5000, exp = train  loss_source:0.3556  loss_entropy:2.1576
+mIoU: 23.26% mAcc : 44.97% 
+********************************
+model saved
+iter =    460/  5000, exp = train  loss_source:0.0427  loss_entropy:2.0923
+iter =    470/  5000, exp = train  loss_source:0.0556  loss_entropy:2.0942
+iter =    480/  5000, exp = train  loss_source:0.0130  loss_entropy:2.0933
+iter =    490/  5000, exp = train  loss_source:0.0032  loss_entropy:2.1074
+iter =    500/  5000, exp = train  loss_source:0.0339  loss_entropy:2.1137
+iter =    510/  5000, exp = train  loss_source:0.0462  loss_entropy:2.1067
+iter =    520/  5000, exp = train  loss_source:0.0438  loss_entropy:2.1096
+iter =    530/  5000, exp = train  loss_source:0.1555  loss_entropy:2.1376
+iter =    540/  5000, exp = train  loss_source:0.0547  loss_entropy:2.0864
+iter =    550/  5000, exp = train  loss_source:0.0955  loss_entropy:2.1038
+iter =    560/  5000, exp = train  loss_source:0.1222  loss_entropy:2.1095
+iter =    570/  5000, exp = train  loss_source:0.0768  loss_entropy:2.1390
+iter =    580/  5000, exp = train  loss_source:0.0496  loss_entropy:2.1204
+iter =    590/  5000, exp = train  loss_source:0.0072  loss_entropy:2.0848
+iter =    600/  5000, exp = train  loss_source:0.0068  loss_entropy:2.1425
+mIoU: 23.60% mAcc : 49.28% 
+********************************
+model saved
+iter =    610/  5000, exp = train  loss_source:0.0173  loss_entropy:2.0916
+iter =    620/  5000, exp = train  loss_source:1.0639  loss_entropy:2.1213
+iter =    630/  5000, exp = train  loss_source:0.3035  loss_entropy:2.1333
+iter =    640/  5000, exp = train  loss_source:0.1484  loss_entropy:2.1508
+iter =    650/  5000, exp = train  loss_source:0.0964  loss_entropy:2.1111
+iter =    660/  5000, exp = train  loss_source:0.0573  loss_entropy:2.0759
+iter =    670/  5000, exp = train  loss_source:0.0263  loss_entropy:2.1112
+iter =    680/  5000, exp = train  loss_source:0.3780  loss_entropy:2.1217
+iter =    690/  5000, exp = train  loss_source:0.3658  loss_entropy:2.1757
+iter =    700/  5000, exp = train  loss_source:0.0827  loss_entropy:2.0876
+iter =    710/  5000, exp = train  loss_source:0.0239  loss_entropy:2.1216
+iter =    720/  5000, exp = train  loss_source:0.0259  loss_entropy:2.1051
+iter =    730/  5000, exp = train  loss_source:0.0384  loss_entropy:2.0977
+iter =    740/  5000, exp = train  loss_source:0.0162  loss_entropy:2.1159
+iter =    750/  5000, exp = train  loss_source:0.0580  loss_entropy:2.0779
+mIoU: 22.90% mAcc : 49.50% 
+********************************
+model saved
+epoch:  1
+iter =    752/  5000, exp = train  loss_source:0.1681  loss_entropy:2.0867
+iter =    762/  5000, exp = train  loss_source:0.0167  loss_entropy:2.1191
+iter =    772/  5000, exp = train  loss_source:0.0002  loss_entropy:2.0744
+iter =    782/  5000, exp = train  loss_source:0.0593  loss_entropy:2.1441
+iter =    792/  5000, exp = train  loss_source:0.0172  loss_entropy:2.0971
+iter =    802/  5000, exp = train  loss_source:0.0539  loss_entropy:2.0873
+iter =    812/  5000, exp = train  loss_source:0.0072  loss_entropy:2.0944
+iter =    822/  5000, exp = train  loss_source:0.1399  loss_entropy:2.1540
+iter =    832/  5000, exp = train  loss_source:0.0410  loss_entropy:2.0789
+iter =    842/  5000, exp = train  loss_source:0.0750  loss_entropy:2.1021
+iter =    852/  5000, exp = train  loss_source:0.0791  loss_entropy:2.0976
+iter =    862/  5000, exp = train  loss_source:0.0420  loss_entropy:2.1128
+iter =    872/  5000, exp = train  loss_source:0.0414  loss_entropy:2.1478
+iter =    882/  5000, exp = train  loss_source:0.1031  loss_entropy:2.1195
+iter =    892/  5000, exp = train  loss_source:0.0145  loss_entropy:2.1130
+iter =    902/  5000, exp = train  loss_source:0.0132  loss_entropy:2.1122
+mIoU: 22.38% mAcc : 47.65% 
+********************************
+model saved
+iter =    912/  5000, exp = train  loss_source:0.0773  loss_entropy:2.1237
+iter =    922/  5000, exp = train  loss_source:0.1643  loss_entropy:2.1034
+iter =    932/  5000, exp = train  loss_source:0.4000  loss_entropy:2.0895
+iter =    942/  5000, exp = train  loss_source:0.1407  loss_entropy:2.0918
+iter =    952/  5000, exp = train  loss_source:0.0432  loss_entropy:2.0817
+iter =    962/  5000, exp = train  loss_source:0.0298  loss_entropy:2.1035
+iter =    972/  5000, exp = train  loss_source:0.1122  loss_entropy:2.0951
+iter =    982/  5000, exp = train  loss_source:0.0842  loss_entropy:2.0875
+iter =    992/  5000, exp = train  loss_source:0.0219  loss_entropy:2.1001
+iter =   1002/  5000, exp = train  loss_source:0.0337  loss_entropy:2.1234
+iter =   1012/  5000, exp = train  loss_source:0.0181  loss_entropy:2.1062
+iter =   1022/  5000, exp = train  loss_source:0.0247  loss_entropy:2.1566
+iter =   1032/  5000, exp = train  loss_source:0.0164  loss_entropy:2.1139
+iter =   1042/  5000, exp = train  loss_source:0.1190  loss_entropy:2.1148
+iter =   1052/  5000, exp = train  loss_source:0.1387  loss_entropy:2.0962
+mIoU: 23.89% mAcc : 53.67% 
+********************************
+model saved
+iter =   1062/  5000, exp = train  loss_source:0.0463  loss_entropy:2.0849
+iter =   1072/  5000, exp = train  loss_source:0.1863  loss_entropy:2.1111
+iter =   1082/  5000, exp = train  loss_source:0.0693  loss_entropy:2.1021
+iter =   1092/  5000, exp = train  loss_source:0.1188  loss_entropy:2.1101
+iter =   1102/  5000, exp = train  loss_source:0.0344  loss_entropy:2.0800
+iter =   1112/  5000, exp = train  loss_source:0.0545  loss_entropy:2.0844
+iter =   1122/  5000, exp = train  loss_source:0.0516  loss_entropy:2.1062
+iter =   1132/  5000, exp = train  loss_source:0.0415  loss_entropy:2.0809
+iter =   1142/  5000, exp = train  loss_source:0.0081  loss_entropy:2.1054
+iter =   1152/  5000, exp = train  loss_source:0.0143  loss_entropy:2.1246
+iter =   1162/  5000, exp = train  loss_source:0.0441  loss_entropy:2.0771
+iter =   1172/  5000, exp = train  loss_source:0.0298  loss_entropy:2.0809
+iter =   1182/  5000, exp = train  loss_source:0.0192  loss_entropy:2.1210
+iter =   1192/  5000, exp = train  loss_source:0.1053  loss_entropy:2.1087
+iter =   1202/  5000, exp = train  loss_source:0.1067  loss_entropy:2.1133
+mIoU: 24.85% mAcc : 54.75% 
+********************************
+model saved
+iter =   1212/  5000, exp = train  loss_source:0.0853  loss_entropy:2.0864
+iter =   1222/  5000, exp = train  loss_source:0.0670  loss_entropy:2.0902
+iter =   1232/  5000, exp = train  loss_source:0.2516  loss_entropy:2.1214
+iter =   1242/  5000, exp = train  loss_source:0.0143  loss_entropy:2.0889
+iter =   1252/  5000, exp = train  loss_source:0.0653  loss_entropy:2.1544
+iter =   1262/  5000, exp = train  loss_source:0.0093  loss_entropy:2.0891
+iter =   1272/  5000, exp = train  loss_source:0.0491  loss_entropy:2.1211
+iter =   1282/  5000, exp = train  loss_source:0.0767  loss_entropy:2.1179
+iter =   1292/  5000, exp = train  loss_source:0.0571  loss_entropy:2.0858
+iter =   1302/  5000, exp = train  loss_source:0.1913  loss_entropy:2.0847
+iter =   1312/  5000, exp = train  loss_source:0.0657  loss_entropy:2.0711
+iter =   1322/  5000, exp = train  loss_source:0.0310  loss_entropy:2.1080
+iter =   1332/  5000, exp = train  loss_source:0.0217  loss_entropy:2.1040
+iter =   1342/  5000, exp = train  loss_source:0.0276  loss_entropy:2.0941
+iter =   1352/  5000, exp = train  loss_source:0.0181  loss_entropy:2.0941
+mIoU: 23.68% mAcc : 52.08% 
+********************************
+model saved
+iter =   1362/  5000, exp = train  loss_source:0.4722  loss_entropy:2.0700
+iter =   1372/  5000, exp = train  loss_source:0.0440  loss_entropy:2.1060
+iter =   1382/  5000, exp = train  loss_source:0.2124  loss_entropy:2.1340
+iter =   1392/  5000, exp = train  loss_source:0.0057  loss_entropy:2.0871
+iter =   1402/  5000, exp = train  loss_source:0.2159  loss_entropy:2.1106
+iter =   1412/  5000, exp = train  loss_source:0.1093  loss_entropy:2.1067
+iter =   1422/  5000, exp = train  loss_source:0.0718  loss_entropy:2.1160
+iter =   1432/  5000, exp = train  loss_source:0.0563  loss_entropy:2.0718
+iter =   1442/  5000, exp = train  loss_source:0.0212  loss_entropy:2.1137
+iter =   1452/  5000, exp = train  loss_source:0.0163  loss_entropy:2.1033
+iter =   1462/  5000, exp = train  loss_source:0.0531  loss_entropy:2.0929
+iter =   1472/  5000, exp = train  loss_source:0.0442  loss_entropy:2.0781
+iter =   1482/  5000, exp = train  loss_source:0.0840  loss_entropy:2.0702
+iter =   1492/  5000, exp = train  loss_source:0.0076  loss_entropy:2.0776
+iter =   1502/  5000, exp = train  loss_source:0.0461  loss_entropy:2.0788
+mIoU: 23.86% mAcc : 50.67% 
+********************************
+model saved
+[Calculate Threshold using config.cb_prop]
+{0: 1.0, 1: 0.9999825954437256, 2: 0.9999889135360718, 3: 0.999517560005188, 5: 0.9999076128005981, 6: 0.9998936653137207, 7: 0.9995297193527222, 8: 0.999971866607666, 10: 0.9925436973571777, 11: 0.9982799291610718, 13: 0.999996542930603, 18: 0.989331841468811, 4: 0.9961991906166077, 9: 0.9984661340713501, 12: 0.993285059928894, 14: 0.9676812291145325, 15: 0.9927831888198853, 17: 0.997459352016449, 16: 0.9934585690498352}
+[Generate pseudo labels]
+[Semantic Layout Matching]
+Generate SLM[Semantic layour matrix] of target samples
+Pixel-wise similarity matching
+epoch:  0
+iter =      0/  5000, exp = train  loss_source:0.0004  loss_entropy:2.1089
+iter =     10/  5000, exp = train  loss_source:0.0455  loss_entropy:2.0851
+iter =     20/  5000, exp = train  loss_source:0.0538  loss_entropy:2.0841
+iter =     30/  5000, exp = train  loss_source:0.0176  loss_entropy:2.0819
+iter =     40/  5000, exp = train  loss_source:0.0304  loss_entropy:2.0919
+iter =     50/  5000, exp = train  loss_source:0.0262  loss_entropy:2.0597
+iter =     60/  5000, exp = train  loss_source:0.0086  loss_entropy:2.0697
+iter =     70/  5000, exp = train  loss_source:0.0250  loss_entropy:2.0940
+iter =     80/  5000, exp = train  loss_source:0.0904  loss_entropy:2.1127
+iter =     90/  5000, exp = train  loss_source:0.0551  loss_entropy:2.0971
+iter =    100/  5000, exp = train  loss_source:0.0733  loss_entropy:2.0868
+iter =    110/  5000, exp = train  loss_source:0.0173  loss_entropy:2.1061
+iter =    120/  5000, exp = train  loss_source:0.0406  loss_entropy:2.1037
+iter =    130/  5000, exp = train  loss_source:0.0269  loss_entropy:2.0649
+iter =    140/  5000, exp = train  loss_source:0.0060  loss_entropy:2.0871
+iter =    150/  5000, exp = train  loss_source:0.0296  loss_entropy:2.0624
+mIoU: 23.53% mAcc : 51.89% 
+********************************
+model saved
+iter =    160/  5000, exp = train  loss_source:0.0870  loss_entropy:2.0763
+iter =    170/  5000, exp = train  loss_source:0.0754  loss_entropy:2.0767
+iter =    180/  5000, exp = train  loss_source:0.0007  loss_entropy:2.0864
+iter =    190/  5000, exp = train  loss_source:0.0394  loss_entropy:2.0748
+iter =    200/  5000, exp = train  loss_source:0.0219  loss_entropy:2.0715
+iter =    210/  5000, exp = train  loss_source:0.0286  loss_entropy:2.0809
+iter =    220/  5000, exp = train  loss_source:0.0442  loss_entropy:2.0801
+iter =    230/  5000, exp = train  loss_source:0.2935  loss_entropy:2.0868
+iter =    240/  5000, exp = train  loss_source:0.0212  loss_entropy:2.0991
+iter =    250/  5000, exp = train  loss_source:0.0471  loss_entropy:2.0993
+iter =    260/  5000, exp = train  loss_source:0.0605  loss_entropy:2.0672
+iter =    270/  5000, exp = train  loss_source:0.0129  loss_entropy:2.0921
+iter =    280/  5000, exp = train  loss_source:0.0357  loss_entropy:2.0828
+iter =    290/  5000, exp = train  loss_source:0.0447  loss_entropy:2.0747
+iter =    300/  5000, exp = train  loss_source:0.0598  loss_entropy:2.0821
+mIoU: 24.30% mAcc : 50.27% 
+********************************
+model saved
+iter =    310/  5000, exp = train  loss_source:0.0035  loss_entropy:2.1074
+iter =    320/  5000, exp = train  loss_source:0.0015  loss_entropy:2.0764
+iter =    330/  5000, exp = train  loss_source:0.0506  loss_entropy:2.0819
+iter =    340/  5000, exp = train  loss_source:0.0316  loss_entropy:2.0769
+iter =    350/  5000, exp = train  loss_source:0.0272  loss_entropy:2.0614
+iter =    360/  5000, exp = train  loss_source:0.0376  loss_entropy:2.0862
+iter =    370/  5000, exp = train  loss_source:0.0226  loss_entropy:2.0805
+iter =    380/  5000, exp = train  loss_source:0.0544  loss_entropy:2.0697
+iter =    390/  5000, exp = train  loss_source:0.0243  loss_entropy:2.0804
+iter =    400/  5000, exp = train  loss_source:0.0086  loss_entropy:2.0913
+iter =    410/  5000, exp = train  loss_source:0.2819  loss_entropy:2.0602
+iter =    420/  5000, exp = train  loss_source:0.0071  loss_entropy:2.0844
+iter =    430/  5000, exp = train  loss_source:0.0547  loss_entropy:2.0721
+iter =    440/  5000, exp = train  loss_source:0.0525  loss_entropy:2.0651
+iter =    450/  5000, exp = train  loss_source:0.0219  loss_entropy:2.1032
+mIoU: 21.98% mAcc : 50.37% 
+********************************
+model saved
+iter =    460/  5000, exp = train  loss_source:0.0580  loss_entropy:2.0741
+iter =    470/  5000, exp = train  loss_source:0.0137  loss_entropy:2.0582
+iter =    480/  5000, exp = train  loss_source:0.0277  loss_entropy:2.0695
+iter =    490/  5000, exp = train  loss_source:0.0009  loss_entropy:2.0738
+iter =    500/  5000, exp = train  loss_source:0.0026  loss_entropy:2.0866
+iter =    510/  5000, exp = train  loss_source:0.0558  loss_entropy:2.0760
+iter =    520/  5000, exp = train  loss_source:0.0164  loss_entropy:2.0809
+iter =    530/  5000, exp = train  loss_source:0.0921  loss_entropy:2.0992
+iter =    540/  5000, exp = train  loss_source:0.0231  loss_entropy:2.0622
+iter =    550/  5000, exp = train  loss_source:0.0447  loss_entropy:2.0728
+iter =    560/  5000, exp = train  loss_source:0.0730  loss_entropy:2.0717
+iter =    570/  5000, exp = train  loss_source:0.0058  loss_entropy:2.0957
+iter =    580/  5000, exp = train  loss_source:0.0324  loss_entropy:2.0969
+iter =    590/  5000, exp = train  loss_source:0.0621  loss_entropy:2.0796
+iter =    600/  5000, exp = train  loss_source:0.0010  loss_entropy:2.0943
+mIoU: 22.58% mAcc : 49.01% 
+********************************
+model saved
+iter =    610/  5000, exp = train  loss_source:0.0570  loss_entropy:2.0712
+iter =    620/  5000, exp = train  loss_source:0.0422  loss_entropy:2.0860
+iter =    630/  5000, exp = train  loss_source:0.0043  loss_entropy:2.0746
+iter =    640/  5000, exp = train  loss_source:0.0843  loss_entropy:2.0832
+iter =    650/  5000, exp = train  loss_source:0.0478  loss_entropy:2.0798
+iter =    660/  5000, exp = train  loss_source:0.0378  loss_entropy:2.0636
+iter =    670/  5000, exp = train  loss_source:0.0307  loss_entropy:2.0686
+iter =    680/  5000, exp = train  loss_source:0.0202  loss_entropy:2.0763
+iter =    690/  5000, exp = train  loss_source:0.0015  loss_entropy:2.0724
+iter =    700/  5000, exp = train  loss_source:0.0199  loss_entropy:2.0672
+iter =    710/  5000, exp = train  loss_source:0.0058  loss_entropy:2.0893
+iter =    720/  5000, exp = train  loss_source:0.0060  loss_entropy:2.0784
+iter =    730/  5000, exp = train  loss_source:0.0044  loss_entropy:2.0686
+iter =    740/  5000, exp = train  loss_source:0.0039  loss_entropy:2.0797
+iter =    750/  5000, exp = train  loss_source:0.0759  loss_entropy:2.0708
+mIoU: 23.91% mAcc : nan% 
+********************************
+model saved
+epoch:  1
+iter =    752/  5000, exp = train  loss_source:0.1772  loss_entropy:2.0758
+iter =    762/  5000, exp = train  loss_source:0.0029  loss_entropy:2.0992
+iter =    772/  5000, exp = train  loss_source:0.0013  loss_entropy:2.0659
+iter =    782/  5000, exp = train  loss_source:0.0053  loss_entropy:2.1039
+iter =    792/  5000, exp = train  loss_source:0.0032  loss_entropy:2.0797
+iter =    802/  5000, exp = train  loss_source:0.0869  loss_entropy:2.0821
+iter =    812/  5000, exp = train  loss_source:0.0100  loss_entropy:2.0775
+iter =    822/  5000, exp = train  loss_source:0.0841  loss_entropy:2.0942
+iter =    832/  5000, exp = train  loss_source:0.0350  loss_entropy:2.0737
+iter =    842/  5000, exp = train  loss_source:0.1395  loss_entropy:2.0832
+iter =    852/  5000, exp = train  loss_source:0.0523  loss_entropy:2.0755
+iter =    862/  5000, exp = train  loss_source:0.0327  loss_entropy:2.0858
+iter =    872/  5000, exp = train  loss_source:0.0048  loss_entropy:2.1017
+iter =    882/  5000, exp = train  loss_source:0.0048  loss_entropy:2.0827
+iter =    892/  5000, exp = train  loss_source:0.0025  loss_entropy:2.0799
+iter =    902/  5000, exp = train  loss_source:0.0019  loss_entropy:2.0772
+mIoU: nan% mAcc : nan% 
+********************************
+model saved
+iter =    912/  5000, exp = train  loss_source:0.0266  loss_entropy:2.0917
+iter =    922/  5000, exp = train  loss_source:0.0709  loss_entropy:2.0848
+iter =    932/  5000, exp = train  loss_source:0.0196  loss_entropy:2.0672
+iter =    942/  5000, exp = train  loss_source:0.0259  loss_entropy:2.0697
+iter =    952/  5000, exp = train  loss_source:0.0063  loss_entropy:2.0612
+iter =    962/  5000, exp = train  loss_source:0.0156  loss_entropy:2.0720
+iter =    972/  5000, exp = train  loss_source:0.1236  loss_entropy:2.0882
+iter =    982/  5000, exp = train  loss_source:0.0522  loss_entropy:2.0634
+iter =    992/  5000, exp = train  loss_source:0.0037  loss_entropy:2.0823
+iter =   1002/  5000, exp = train  loss_source:0.0043  loss_entropy:2.0965
+iter =   1012/  5000, exp = train  loss_source:0.0208  loss_entropy:2.0800
+iter =   1022/  5000, exp = train  loss_source:0.0048  loss_entropy:2.1070
+iter =   1032/  5000, exp = train  loss_source:0.0611  loss_entropy:2.0823
+iter =   1042/  5000, exp = train  loss_source:0.0005  loss_entropy:2.0775
+iter =   1052/  5000, exp = train  loss_source:0.0077  loss_entropy:2.0613
+mIoU: 22.91% mAcc : nan% 
+********************************
+model saved
+iter =   1062/  5000, exp = train  loss_source:0.0456  loss_entropy:2.0784
+iter =   1072/  5000, exp = train  loss_source:0.0523  loss_entropy:2.0853
+iter =   1082/  5000, exp = train  loss_source:0.0420  loss_entropy:2.0821
+iter =   1092/  5000, exp = train  loss_source:0.0821  loss_entropy:2.0791
+iter =   1102/  5000, exp = train  loss_source:0.0241  loss_entropy:2.0650
+iter =   1112/  5000, exp = train  loss_source:0.0669  loss_entropy:2.0748
+iter =   1122/  5000, exp = train  loss_source:0.0375  loss_entropy:2.0737
+iter =   1132/  5000, exp = train  loss_source:0.0386  loss_entropy:2.0688
+iter =   1142/  5000, exp = train  loss_source:0.0124  loss_entropy:2.0806
+iter =   1152/  5000, exp = train  loss_source:0.0112  loss_entropy:2.0931
+iter =   1162/  5000, exp = train  loss_source:0.0124  loss_entropy:2.0635
+iter =   1172/  5000, exp = train  loss_source:0.0347  loss_entropy:2.0731
+iter =   1182/  5000, exp = train  loss_source:0.0006  loss_entropy:2.0816
+iter =   1192/  5000, exp = train  loss_source:0.0787  loss_entropy:2.0739
+iter =   1202/  5000, exp = train  loss_source:0.0530  loss_entropy:2.0852
+mIoU: 22.91% mAcc : nan% 
+********************************
+model saved
+iter =   1212/  5000, exp = train  loss_source:0.0128  loss_entropy:2.0677
+iter =   1222/  5000, exp = train  loss_source:0.0685  loss_entropy:2.0799
+iter =   1232/  5000, exp = train  loss_source:0.0409  loss_entropy:2.1007
+iter =   1242/  5000, exp = train  loss_source:0.0134  loss_entropy:2.0730
+iter =   1252/  5000, exp = train  loss_source:0.0008  loss_entropy:2.0994
+iter =   1262/  5000, exp = train  loss_source:0.0219  loss_entropy:2.0766
+iter =   1272/  5000, exp = train  loss_source:0.0224  loss_entropy:2.1009
+iter =   1282/  5000, exp = train  loss_source:0.0774  loss_entropy:2.1207
+iter =   1292/  5000, exp = train  loss_source:0.0872  loss_entropy:2.1267
+iter =   1302/  5000, exp = train  loss_source:0.0745  loss_entropy:2.0687
+iter =   1312/  5000, exp = train  loss_source:0.1100  loss_entropy:2.0718
+iter =   1322/  5000, exp = train  loss_source:0.0065  loss_entropy:2.0846
+iter =   1332/  5000, exp = train  loss_source:0.0979  loss_entropy:2.0786
+iter =   1342/  5000, exp = train  loss_source:0.0008  loss_entropy:2.0755
+iter =   1352/  5000, exp = train  loss_source:0.0019  loss_entropy:2.0714
+mIoU: 22.38% mAcc : nan% 
+********************************
+model saved
+iter =   1362/  5000, exp = train  loss_source:0.0548  loss_entropy:2.0555
+iter =   1372/  5000, exp = train  loss_source:0.0249  loss_entropy:2.0790
+iter =   1382/  5000, exp = train  loss_source:0.0285  loss_entropy:2.0953
+iter =   1392/  5000, exp = train  loss_source:0.0009  loss_entropy:2.0724
+iter =   1402/  5000, exp = train  loss_source:0.1596  loss_entropy:2.0632
+iter =   1412/  5000, exp = train  loss_source:0.0087  loss_entropy:2.0729
+iter =   1422/  5000, exp = train  loss_source:0.0830  loss_entropy:2.0787
+iter =   1432/  5000, exp = train  loss_source:0.0250  loss_entropy:2.0624
+iter =   1442/  5000, exp = train  loss_source:0.0038  loss_entropy:2.0954
+iter =   1452/  5000, exp = train  loss_source:0.0033  loss_entropy:2.0952
+iter =   1462/  5000, exp = train  loss_source:0.0105  loss_entropy:2.0694
+iter =   1472/  5000, exp = train  loss_source:0.0232  loss_entropy:2.0714
+iter =   1482/  5000, exp = train  loss_source:0.0287  loss_entropy:2.0609
+iter =   1492/  5000, exp = train  loss_source:0.0009  loss_entropy:2.0668
+iter =   1502/  5000, exp = train  loss_source:0.0147  loss_entropy:2.0803
+mIoU: 22.24% mAcc : 50.43% 
+********************************
+model saved
+[Calculate Threshold using config.cb_prop]
+{0: 1.0, 1: 0.9999945163726807, 2: 0.9999998807907104, 3: 0.9998955726623535, 5: 0.9999666213989258, 6: 0.9999613761901855, 7: 0.9998416900634766, 8: 0.9999935626983643, 10: 0.9987175464630127, 13: 0.9999983310699463, 18: 0.9947850108146667, 4: 0.9986504912376404, 9: 0.9996497631072998, 14: 0.9875122904777527, 11: 0.9994388222694397, 17: 0.998199462890625, 12: 0.9946275353431702, 15: 0.9917329549789429, 16: 0.9954965114593506}
+[Generate pseudo labels]
+[Semantic Layout Matching]
+Generate SLM[Semantic layour matrix] of target samples
+Pixel-wise similarity matching
+epoch:  0
+iter =      0/  5000, exp = train  loss_source:0.0030  loss_entropy:2.0820
+iter =     10/  5000, exp = train  loss_source:0.0482  loss_entropy:2.0693
+iter =     20/  5000, exp = train  loss_source:0.0255  loss_entropy:2.0632
+iter =     30/  5000, exp = train  loss_source:0.0186  loss_entropy:2.0714
+iter =     40/  5000, exp = train  loss_source:0.0606  loss_entropy:2.0732
+iter =     50/  5000, exp = train  loss_source:0.0554  loss_entropy:2.0673
+iter =     60/  5000, exp = train  loss_source:0.0903  loss_entropy:2.0639
+iter =     70/  5000, exp = train  loss_source:0.1050  loss_entropy:2.0808
+iter =     80/  5000, exp = train  loss_source:0.0379  loss_entropy:2.0821
+iter =     90/  5000, exp = train  loss_source:0.0133  loss_entropy:2.0772
+iter =    100/  5000, exp = train  loss_source:0.0467  loss_entropy:2.0721
+iter =    110/  5000, exp = train  loss_source:0.0149  loss_entropy:2.1008
+iter =    120/  5000, exp = train  loss_source:0.2363  loss_entropy:2.1072
+iter =    130/  5000, exp = train  loss_source:0.0655  loss_entropy:2.0620
+iter =    140/  5000, exp = train  loss_source:0.0008  loss_entropy:2.0789
+iter =    150/  5000, exp = train  loss_source:0.0409  loss_entropy:2.0637
+mIoU: 21.66% mAcc : nan% 
+********************************
+model saved
+iter =    160/  5000, exp = train  loss_source:0.0235  loss_entropy:2.0701
+iter =    170/  5000, exp = train  loss_source:0.0438  loss_entropy:2.0676
+iter =    180/  5000, exp = train  loss_source:0.0004  loss_entropy:2.0794
+iter =    190/  5000, exp = train  loss_source:0.0288  loss_entropy:2.0693
+iter =    200/  5000, exp = train  loss_source:0.0440  loss_entropy:2.0642
+iter =    210/  5000, exp = train  loss_source:0.0445  loss_entropy:2.0751
+iter =    220/  5000, exp = train  loss_source:0.1203  loss_entropy:2.0914
+iter =    230/  5000, exp = train  loss_source:0.0506  loss_entropy:2.0619
+iter =    240/  5000, exp = train  loss_source:0.0102  loss_entropy:2.0826
+iter =    250/  5000, exp = train  loss_source:0.0421  loss_entropy:2.0886
+iter =    260/  5000, exp = train  loss_source:0.0293  loss_entropy:2.0582
+iter =    270/  5000, exp = train  loss_source:0.0066  loss_entropy:2.0758
+iter =    280/  5000, exp = train  loss_source:0.0146  loss_entropy:2.0763
+iter =    290/  5000, exp = train  loss_source:0.0953  loss_entropy:2.0659
+iter =    300/  5000, exp = train  loss_source:0.0817  loss_entropy:2.0746
+mIoU: 21.41% mAcc : 50.94% 
+********************************
+model saved
+iter =    310/  5000, exp = train  loss_source:0.0006  loss_entropy:2.0853
+iter =    320/  5000, exp = train  loss_source:0.0037  loss_entropy:2.0724
+iter =    330/  5000, exp = train  loss_source:0.1126  loss_entropy:2.0749
+iter =    340/  5000, exp = train  loss_source:0.0048  loss_entropy:2.0627
+iter =    350/  5000, exp = train  loss_source:0.0079  loss_entropy:2.0569
+iter =    360/  5000, exp = train  loss_source:0.0145  loss_entropy:2.0573
+iter =    370/  5000, exp = train  loss_source:0.0242  loss_entropy:2.0778
+iter =    380/  5000, exp = train  loss_source:0.0346  loss_entropy:2.0589
+iter =    390/  5000, exp = train  loss_source:0.0313  loss_entropy:2.0715
+iter =    400/  5000, exp = train  loss_source:0.0593  loss_entropy:2.0724
+iter =    410/  5000, exp = train  loss_source:0.1527  loss_entropy:2.0759
+iter =    420/  5000, exp = train  loss_source:0.0252  loss_entropy:2.0698
+iter =    430/  5000, exp = train  loss_source:0.0647  loss_entropy:2.0637
+iter =    440/  5000, exp = train  loss_source:0.0261  loss_entropy:2.0589
+iter =    450/  5000, exp = train  loss_source:0.0051  loss_entropy:2.0813
+mIoU: 20.76% mAcc : nan% 
+********************************
+model saved
+iter =    460/  5000, exp = train  loss_source:0.0363  loss_entropy:2.0672
+iter =    470/  5000, exp = train  loss_source:0.0508  loss_entropy:2.0678
+iter =    480/  5000, exp = train  loss_source:0.0000  loss_entropy:2.0601
+iter =    490/  5000, exp = train  loss_source:0.0113  loss_entropy:2.0679
+iter =    500/  5000, exp = train  loss_source:0.0029  loss_entropy:2.0738
+iter =    510/  5000, exp = train  loss_source:0.0738  loss_entropy:2.0758
+iter =    520/  5000, exp = train  loss_source:0.0034  loss_entropy:2.0657
+iter =    530/  5000, exp = train  loss_source:0.0496  loss_entropy:2.0791
+iter =    540/  5000, exp = train  loss_source:0.0776  loss_entropy:2.0654
+iter =    550/  5000, exp = train  loss_source:0.0366  loss_entropy:2.0746
+iter =    560/  5000, exp = train  loss_source:0.0782  loss_entropy:2.0694
+iter =    570/  5000, exp = train  loss_source:0.0028  loss_entropy:2.0849
+iter =    580/  5000, exp = train  loss_source:0.0358  loss_entropy:2.0714
+iter =    590/  5000, exp = train  loss_source:0.0392  loss_entropy:2.0608
+iter =    600/  5000, exp = train  loss_source:0.0164  loss_entropy:2.0786
+mIoU: 21.31% mAcc : nan% 
+********************************
+model saved
+iter =    610/  5000, exp = train  loss_source:0.0148  loss_entropy:2.0579
+iter =    620/  5000, exp = train  loss_source:0.1183  loss_entropy:2.0796
+iter =    630/  5000, exp = train  loss_source:0.6716  loss_entropy:2.0936
+iter =    640/  5000, exp = train  loss_source:0.0968  loss_entropy:2.0965
+iter =    650/  5000, exp = train  loss_source:0.0502  loss_entropy:2.0784
+iter =    660/  5000, exp = train  loss_source:0.1469  loss_entropy:2.0677
+iter =    670/  5000, exp = train  loss_source:0.0393  loss_entropy:2.0652
+iter =    680/  5000, exp = train  loss_source:0.0241  loss_entropy:2.0671
+iter =    690/  5000, exp = train  loss_source:0.0043  loss_entropy:2.0718
+iter =    700/  5000, exp = train  loss_source:0.0604  loss_entropy:2.0740
+iter =    710/  5000, exp = train  loss_source:0.0005  loss_entropy:2.0763
+iter =    720/  5000, exp = train  loss_source:0.0005  loss_entropy:2.0666
+iter =    730/  5000, exp = train  loss_source:0.0002  loss_entropy:2.0678
+iter =    740/  5000, exp = train  loss_source:0.0497  loss_entropy:2.0710
+iter =    750/  5000, exp = train  loss_source:0.0246  loss_entropy:2.0575
+mIoU: 21.17% mAcc : nan% 
+********************************
+model saved
+epoch:  1
+iter =    752/  5000, exp = train  loss_source:0.0361  loss_entropy:2.0563
+iter =    762/  5000, exp = train  loss_source:0.0012  loss_entropy:2.0924
+iter =    772/  5000, exp = train  loss_source:0.0001  loss_entropy:2.0578
+iter =    782/  5000, exp = train  loss_source:0.0004  loss_entropy:2.0818
+iter =    792/  5000, exp = train  loss_source:0.0783  loss_entropy:2.0694
+iter =    802/  5000, exp = train  loss_source:0.0461  loss_entropy:2.0623
+iter =    812/  5000, exp = train  loss_source:0.0018  loss_entropy:2.0638
+iter =    822/  5000, exp = train  loss_source:0.0943  loss_entropy:2.0862
+iter =    832/  5000, exp = train  loss_source:0.0308  loss_entropy:2.0608
+iter =    842/  5000, exp = train  loss_source:0.0978  loss_entropy:2.0761
+iter =    852/  5000, exp = train  loss_source:0.0725  loss_entropy:2.0654
+iter =    862/  5000, exp = train  loss_source:0.0122  loss_entropy:2.0703
+iter =    872/  5000, exp = train  loss_source:0.0097  loss_entropy:2.0783
+iter =    882/  5000, exp = train  loss_source:0.0015  loss_entropy:2.0775
+iter =    892/  5000, exp = train  loss_source:0.0181  loss_entropy:2.0806
+iter =    902/  5000, exp = train  loss_source:0.0014  loss_entropy:2.0739
+mIoU: 20.52% mAcc : nan% 
+********************************
+model saved
+iter =    912/  5000, exp = train  loss_source:0.0726  loss_entropy:2.0851
+iter =    922/  5000, exp = train  loss_source:0.0751  loss_entropy:2.0939
+iter =    932/  5000, exp = train  loss_source:0.0664  loss_entropy:2.0736
+iter =    942/  5000, exp = train  loss_source:0.0620  loss_entropy:2.0616
+iter =    952/  5000, exp = train  loss_source:0.0059  loss_entropy:2.0623
+iter =    962/  5000, exp = train  loss_source:0.0321  loss_entropy:2.0652
+iter =    972/  5000, exp = train  loss_source:0.0979  loss_entropy:2.0825
+iter =    982/  5000, exp = train  loss_source:0.0417  loss_entropy:2.0597
+iter =    992/  5000, exp = train  loss_source:0.0058  loss_entropy:2.0711
+iter =   1002/  5000, exp = train  loss_source:0.0047  loss_entropy:2.0832
+iter =   1012/  5000, exp = train  loss_source:0.0000  loss_entropy:2.0635
+iter =   1022/  5000, exp = train  loss_source:0.0068  loss_entropy:2.0745
+iter =   1032/  5000, exp = train  loss_source:0.4880  loss_entropy:2.0759
+iter =   1042/  5000, exp = train  loss_source:0.0001  loss_entropy:2.0695
+iter =   1052/  5000, exp = train  loss_source:0.0073  loss_entropy:2.0595
+mIoU: 21.20% mAcc : nan% 
+********************************
+model saved
+iter =   1062/  5000, exp = train  loss_source:0.0891  loss_entropy:2.0748
+iter =   1072/  5000, exp = train  loss_source:0.0413  loss_entropy:2.0793
+iter =   1082/  5000, exp = train  loss_source:0.0539  loss_entropy:2.0922
+iter =   1092/  5000, exp = train  loss_source:0.0611  loss_entropy:2.0767
+iter =   1102/  5000, exp = train  loss_source:0.0440  loss_entropy:2.0576
+iter =   1112/  5000, exp = train  loss_source:0.0270  loss_entropy:2.0714
+iter =   1122/  5000, exp = train  loss_source:0.0375  loss_entropy:2.0621
+iter =   1132/  5000, exp = train  loss_source:0.0539  loss_entropy:2.0666
+iter =   1142/  5000, exp = train  loss_source:0.0395  loss_entropy:2.0811
+iter =   1152/  5000, exp = train  loss_source:0.0545  loss_entropy:2.0838
+iter =   1162/  5000, exp = train  loss_source:0.0263  loss_entropy:2.0633
+iter =   1172/  5000, exp = train  loss_source:0.0559  loss_entropy:2.0709
+iter =   1182/  5000, exp = train  loss_source:0.0050  loss_entropy:2.0759
+iter =   1192/  5000, exp = train  loss_source:0.0443  loss_entropy:2.0731
+iter =   1202/  5000, exp = train  loss_source:0.0576  loss_entropy:2.0776
+mIoU: 20.68% mAcc : nan% 
+********************************
+model saved
+iter =   1212/  5000, exp = train  loss_source:0.0489  loss_entropy:2.0693
+iter =   1222/  5000, exp = train  loss_source:0.0323  loss_entropy:2.0695
+iter =   1232/  5000, exp = train  loss_source:0.1340  loss_entropy:2.1111
+iter =   1242/  5000, exp = train  loss_source:0.0196  loss_entropy:2.0697
+iter =   1252/  5000, exp = train  loss_source:0.0014  loss_entropy:2.0922
+iter =   1262/  5000, exp = train  loss_source:0.0027  loss_entropy:2.0690
+iter =   1272/  5000, exp = train  loss_source:0.0570  loss_entropy:2.0897
+iter =   1282/  5000, exp = train  loss_source:0.0972  loss_entropy:2.1004
+iter =   1292/  5000, exp = train  loss_source:0.0119  loss_entropy:2.0610
+iter =   1302/  5000, exp = train  loss_source:0.0438  loss_entropy:2.0612
+iter =   1312/  5000, exp = train  loss_source:0.2825  loss_entropy:2.0601
+iter =   1322/  5000, exp = train  loss_source:0.0000  loss_entropy:2.0747
+iter =   1332/  5000, exp = train  loss_source:0.0159  loss_entropy:2.0766
+iter =   1342/  5000, exp = train  loss_source:0.0007  loss_entropy:2.0681
+iter =   1352/  5000, exp = train  loss_source:0.0003  loss_entropy:2.0649
+mIoU: 19.60% mAcc : nan% 
+********************************
+model saved
+iter =   1362/  5000, exp = train  loss_source:0.0498  loss_entropy:2.0566
+iter =   1372/  5000, exp = train  loss_source:0.0172  loss_entropy:2.0768
+iter =   1382/  5000, exp = train  loss_source:0.0834  loss_entropy:2.0817
+iter =   1392/  5000, exp = train  loss_source:0.0002  loss_entropy:2.0616
+iter =   1402/  5000, exp = train  loss_source:0.3377  loss_entropy:2.0733
+iter =   1412/  5000, exp = train  loss_source:0.0200  loss_entropy:2.0792
+iter =   1422/  5000, exp = train  loss_source:0.0325  loss_entropy:2.0618
+iter =   1432/  5000, exp = train  loss_source:0.0561  loss_entropy:2.0629
+iter =   1442/  5000, exp = train  loss_source:0.0028  loss_entropy:2.0803
+iter =   1452/  5000, exp = train  loss_source:0.0035  loss_entropy:2.0855
+iter =   1462/  5000, exp = train  loss_source:0.0053  loss_entropy:2.0592
+iter =   1472/  5000, exp = train  loss_source:0.0268  loss_entropy:2.0607
+iter =   1482/  5000, exp = train  loss_source:0.0231  loss_entropy:2.0590
+iter =   1492/  5000, exp = train  loss_source:0.0005  loss_entropy:2.0640
+iter =   1502/  5000, exp = train  loss_source:0.0136  loss_entropy:2.0652
+mIoU: 21.14% mAcc : nan% 
+********************************
+model saved
+[Calculate Threshold using config.cb_prop]
+{0: 1.0, 1: 0.9999961853027344, 2: 1.0, 3: 0.9999431371688843, 5: 0.9999459981918335, 6: 0.9999618530273438, 7: 0.9998123049736023, 8: 0.9999891519546509, 9: 0.9997157454490662, 10: 0.9992958307266235, 13: 0.9999992847442627, 18: 0.9944276809692383, 4: 0.9991156458854675, 16: 0.9977496266365051, 11: 0.9994520545005798, 14: 0.9692167639732361, 17: 0.9975979924201965, 12: 0.9960674047470093, 15: 0.983498752117157}
+[Generate pseudo labels]
+[Semantic Layout Matching]
+Generate SLM[Semantic layour matrix] of target samples
+Pixel-wise similarity matching
+epoch:  0
+iter =      0/  5000, exp = train  loss_source:0.0010  loss_entropy:2.0784
+iter =     10/  5000, exp = train  loss_source:0.0364  loss_entropy:2.0592
+iter =     20/  5000, exp = train  loss_source:0.0504  loss_entropy:2.0658
+iter =     30/  5000, exp = train  loss_source:0.0132  loss_entropy:2.0647
+iter =     40/  5000, exp = train  loss_source:0.0377  loss_entropy:2.0677
+iter =     50/  5000, exp = train  loss_source:0.0304  loss_entropy:2.0549
+iter =     60/  5000, exp = train  loss_source:0.0678  loss_entropy:2.0620
+iter =     70/  5000, exp = train  loss_source:0.0560  loss_entropy:2.0691
+iter =     80/  5000, exp = train  loss_source:0.0787  loss_entropy:2.0768
+iter =     90/  5000, exp = train  loss_source:0.0900  loss_entropy:2.0749
+iter =    100/  5000, exp = train  loss_source:0.0187  loss_entropy:2.0595
+iter =    110/  5000, exp = train  loss_source:0.0160  loss_entropy:2.0887
+iter =    120/  5000, exp = train  loss_source:0.0540  loss_entropy:2.0721
+iter =    130/  5000, exp = train  loss_source:0.0455  loss_entropy:2.0555
+iter =    140/  5000, exp = train  loss_source:0.0003  loss_entropy:2.0734
+iter =    150/  5000, exp = train  loss_source:0.0263  loss_entropy:2.0540
+mIoU: 19.99% mAcc : nan% 
+********************************
+model saved
+iter =    160/  5000, exp = train  loss_source:0.0726  loss_entropy:2.0684
+iter =    170/  5000, exp = train  loss_source:0.0001  loss_entropy:2.0601
+iter =    180/  5000, exp = train  loss_source:0.0002  loss_entropy:2.0652
+iter =    190/  5000, exp = train  loss_source:0.0388  loss_entropy:2.0622
+iter =    200/  5000, exp = train  loss_source:0.0617  loss_entropy:2.0613
+iter =    210/  5000, exp = train  loss_source:0.0987  loss_entropy:2.0704
+iter =    220/  5000, exp = train  loss_source:0.0342  loss_entropy:2.0683
+iter =    230/  5000, exp = train  loss_source:0.3106  loss_entropy:2.0586
+iter =    240/  5000, exp = train  loss_source:0.0010  loss_entropy:2.0735
+iter =    250/  5000, exp = train  loss_source:0.0663  loss_entropy:2.0914
+iter =    260/  5000, exp = train  loss_source:0.0377  loss_entropy:2.0588
+iter =    270/  5000, exp = train  loss_source:0.0065  loss_entropy:2.0688
+iter =    280/  5000, exp = train  loss_source:0.0467  loss_entropy:2.0707
+iter =    290/  5000, exp = train  loss_source:0.0293  loss_entropy:2.0653
+iter =    300/  5000, exp = train  loss_source:0.0565  loss_entropy:2.0674
+mIoU: 20.94% mAcc : nan% 
+********************************
+model saved
+iter =    310/  5000, exp = train  loss_source:0.0004  loss_entropy:2.0792
+iter =    320/  5000, exp = train  loss_source:0.0006  loss_entropy:2.0682
+iter =    330/  5000, exp = train  loss_source:0.0548  loss_entropy:2.0745
+iter =    340/  5000, exp = train  loss_source:0.0174  loss_entropy:2.0640
+iter =    350/  5000, exp = train  loss_source:0.0465  loss_entropy:2.0606
+iter =    360/  5000, exp = train  loss_source:0.0365  loss_entropy:2.0626
+iter =    370/  5000, exp = train  loss_source:0.0018  loss_entropy:2.0945
+iter =    380/  5000, exp = train  loss_source:0.1040  loss_entropy:2.0673
+iter =    390/  5000, exp = train  loss_source:0.0537  loss_entropy:2.0669
+iter =    400/  5000, exp = train  loss_source:0.0005  loss_entropy:2.0737
+iter =    410/  5000, exp = train  loss_source:0.1511  loss_entropy:2.0681
+iter =    420/  5000, exp = train  loss_source:0.0236  loss_entropy:2.0687
+iter =    430/  5000, exp = train  loss_source:0.0425  loss_entropy:2.0669
+iter =    440/  5000, exp = train  loss_source:0.0424  loss_entropy:2.0602
+iter =    450/  5000, exp = train  loss_source:0.0218  loss_entropy:2.0787
+mIoU: 21.33% mAcc : nan% 
+********************************
+model saved
+iter =    460/  5000, exp = train  loss_source:0.0594  loss_entropy:2.0669
+iter =    470/  5000, exp = train  loss_source:0.0352  loss_entropy:2.0645
+iter =    480/  5000, exp = train  loss_source:0.0001  loss_entropy:2.0551
+iter =    490/  5000, exp = train  loss_source:0.0012  loss_entropy:2.0659
+iter =    500/  5000, exp = train  loss_source:0.0001  loss_entropy:2.0702
+iter =    510/  5000, exp = train  loss_source:0.0749  loss_entropy:2.0693
+iter =    520/  5000, exp = train  loss_source:0.0001  loss_entropy:2.0648
+iter =    530/  5000, exp = train  loss_source:0.1432  loss_entropy:2.0848
+iter =    540/  5000, exp = train  loss_source:0.0095  loss_entropy:2.0521
+iter =    550/  5000, exp = train  loss_source:0.1046  loss_entropy:2.0785
+iter =    560/  5000, exp = train  loss_source:0.0817  loss_entropy:2.0700
+iter =    570/  5000, exp = train  loss_source:0.0001  loss_entropy:2.0832
+iter =    580/  5000, exp = train  loss_source:0.0559  loss_entropy:2.0786
+iter =    590/  5000, exp = train  loss_source:0.0181  loss_entropy:2.0610
+iter =    600/  5000, exp = train  loss_source:0.0016  loss_entropy:2.0795
+mIoU: 21.44% mAcc : nan% 
+********************************
+model saved
+iter =    610/  5000, exp = train  loss_source:0.0572  loss_entropy:2.0623
+iter =    620/  5000, exp = train  loss_source:0.0012  loss_entropy:2.0689
+iter =    630/  5000, exp = train  loss_source:0.0651  loss_entropy:2.0736
+iter =    640/  5000, exp = train  loss_source:0.0175  loss_entropy:2.0965
+iter =    650/  5000, exp = train  loss_source:0.1428  loss_entropy:2.0738
+iter =    660/  5000, exp = train  loss_source:0.0405  loss_entropy:2.0568
+iter =    670/  5000, exp = train  loss_source:0.0633  loss_entropy:2.0768
+iter =    680/  5000, exp = train  loss_source:0.0404  loss_entropy:2.0647
+iter =    690/  5000, exp = train  loss_source:0.0000  loss_entropy:2.0869
+iter =    700/  5000, exp = train  loss_source:0.0292  loss_entropy:2.0617
+iter =    710/  5000, exp = train  loss_source:0.0036  loss_entropy:2.0743
+iter =    720/  5000, exp = train  loss_source:0.0004  loss_entropy:2.0614
+iter =    730/  5000, exp = train  loss_source:0.0105  loss_entropy:2.0670
+iter =    740/  5000, exp = train  loss_source:0.0006  loss_entropy:2.0724
+iter =    750/  5000, exp = train  loss_source:0.0459  loss_entropy:2.0619
+mIoU: 20.52% mAcc : 51.98% 
+********************************
+model saved
+epoch:  1
+iter =    752/  5000, exp = train  loss_source:0.1528  loss_entropy:2.0811
+iter =    762/  5000, exp = train  loss_source:0.0008  loss_entropy:2.0890
+iter =    772/  5000, exp = train  loss_source:0.0000  loss_entropy:2.0584
+iter =    782/  5000, exp = train  loss_source:0.0002  loss_entropy:2.0755
+iter =    792/  5000, exp = train  loss_source:0.0003  loss_entropy:2.0727
+iter =    802/  5000, exp = train  loss_source:0.0308  loss_entropy:2.0626
+iter =    812/  5000, exp = train  loss_source:0.0000  loss_entropy:2.0602
+iter =    822/  5000, exp = train  loss_source:0.0606  loss_entropy:2.0905
+iter =    832/  5000, exp = train  loss_source:0.0760  loss_entropy:2.0694
+iter =    842/  5000, exp = train  loss_source:0.0256  loss_entropy:2.0648
+iter =    852/  5000, exp = train  loss_source:0.0597  loss_entropy:2.0605
+iter =    862/  5000, exp = train  loss_source:0.0127  loss_entropy:2.0725
+iter =    872/  5000, exp = train  loss_source:0.0014  loss_entropy:2.0812
+iter =    882/  5000, exp = train  loss_source:0.0029  loss_entropy:2.0711
+iter =    892/  5000, exp = train  loss_source:0.0007  loss_entropy:2.0698
+iter =    902/  5000, exp = train  loss_source:0.0001  loss_entropy:2.0714
+mIoU: 20.94% mAcc : 49.59% 
+********************************
+model saved
+iter =    912/  5000, exp = train  loss_source:0.0876  loss_entropy:2.0774
+iter =    922/  5000, exp = train  loss_source:0.0419  loss_entropy:2.0728
+iter =    932/  5000, exp = train  loss_source:0.0950  loss_entropy:2.0651
+iter =    942/  5000, exp = train  loss_source:0.1421  loss_entropy:2.0819
+iter =    952/  5000, exp = train  loss_source:0.0044  loss_entropy:2.0608
+iter =    962/  5000, exp = train  loss_source:0.0000  loss_entropy:2.0614
+iter =    972/  5000, exp = train  loss_source:0.0387  loss_entropy:2.0756
+iter =    982/  5000, exp = train  loss_source:0.0170  loss_entropy:2.0555
+iter =    992/  5000, exp = train  loss_source:0.0001  loss_entropy:2.0656
+iter =   1002/  5000, exp = train  loss_source:0.0027  loss_entropy:2.0767
+iter =   1012/  5000, exp = train  loss_source:0.0000  loss_entropy:2.0608
+iter =   1022/  5000, exp = train  loss_source:0.0032  loss_entropy:2.0854
+iter =   1032/  5000, exp = train  loss_source:0.0008  loss_entropy:2.0764
+iter =   1042/  5000, exp = train  loss_source:0.0001  loss_entropy:2.0718
+iter =   1052/  5000, exp = train  loss_source:0.0011  loss_entropy:2.0581
+mIoU: 21.40% mAcc : 49.52% 
+********************************
+model saved
+iter =   1062/  5000, exp = train  loss_source:0.0349  loss_entropy:2.0644
+iter =   1072/  5000, exp = train  loss_source:0.0228  loss_entropy:2.0743
+iter =   1082/  5000, exp = train  loss_source:0.0090  loss_entropy:2.0885
+iter =   1092/  5000, exp = train  loss_source:0.0797  loss_entropy:2.0670
+iter =   1102/  5000, exp = train  loss_source:0.1482  loss_entropy:2.0666
+iter =   1112/  5000, exp = train  loss_source:0.0708  loss_entropy:2.0733
+iter =   1122/  5000, exp = train  loss_source:0.0249  loss_entropy:2.0644
+iter =   1132/  5000, exp = train  loss_source:0.0873  loss_entropy:2.0730
+iter =   1142/  5000, exp = train  loss_source:0.0070  loss_entropy:2.0805
+iter =   1152/  5000, exp = train  loss_source:0.0012  loss_entropy:2.0782
+iter =   1162/  5000, exp = train  loss_source:0.0396  loss_entropy:2.0612
+iter =   1172/  5000, exp = train  loss_source:0.0351  loss_entropy:2.0632
+iter =   1182/  5000, exp = train  loss_source:0.0000  loss_entropy:2.0790
+iter =   1192/  5000, exp = train  loss_source:0.0443  loss_entropy:2.0673
+iter =   1202/  5000, exp = train  loss_source:0.0002  loss_entropy:2.0706
+mIoU: 20.00% mAcc : nan% 
+********************************
+model saved
+iter =   1212/  5000, exp = train  loss_source:0.0460  loss_entropy:2.0641
+iter =   1222/  5000, exp = train  loss_source:0.0495  loss_entropy:2.0672
+iter =   1232/  5000, exp = train  loss_source:0.0860  loss_entropy:2.1072
+iter =   1242/  5000, exp = train  loss_source:0.0008  loss_entropy:2.0699
+iter =   1252/  5000, exp = train  loss_source:0.0007  loss_entropy:2.0884
+iter =   1262/  5000, exp = train  loss_source:0.0006  loss_entropy:2.0675
+iter =   1272/  5000, exp = train  loss_source:0.0195  loss_entropy:2.0800
+iter =   1282/  5000, exp = train  loss_source:0.0156  loss_entropy:2.0871
+iter =   1292/  5000, exp = train  loss_source:0.1538  loss_entropy:2.0822
+iter =   1302/  5000, exp = train  loss_source:0.0874  loss_entropy:2.0735
+iter =   1312/  5000, exp = train  loss_source:0.0479  loss_entropy:2.0585
+iter =   1322/  5000, exp = train  loss_source:0.0001  loss_entropy:2.0660
+iter =   1332/  5000, exp = train  loss_source:0.1740  loss_entropy:2.0818
+iter =   1342/  5000, exp = train  loss_source:0.0001  loss_entropy:2.0639
+iter =   1352/  5000, exp = train  loss_source:0.0001  loss_entropy:2.0583
+mIoU: 20.57% mAcc : 50.49% 
+********************************
+model saved
+iter =   1362/  5000, exp = train  loss_source:0.0799  loss_entropy:2.0557
+iter =   1372/  5000, exp = train  loss_source:0.0539  loss_entropy:2.0774
+iter =   1382/  5000, exp = train  loss_source:0.0274  loss_entropy:2.0772
+iter =   1392/  5000, exp = train  loss_source:0.0000  loss_entropy:2.0587
+iter =   1402/  5000, exp = train  loss_source:0.3944  loss_entropy:2.0700
+iter =   1412/  5000, exp = train  loss_source:0.0064  loss_entropy:2.0614
+iter =   1422/  5000, exp = train  loss_source:0.0485  loss_entropy:2.0617
+iter =   1432/  5000, exp = train  loss_source:0.0246  loss_entropy:2.0563
+iter =   1442/  5000, exp = train  loss_source:0.0241  loss_entropy:2.0739
+iter =   1452/  5000, exp = train  loss_source:0.0010  loss_entropy:2.0816
+iter =   1462/  5000, exp = train  loss_source:0.0838  loss_entropy:2.0611
+iter =   1472/  5000, exp = train  loss_source:0.0538  loss_entropy:2.0632
+iter =   1482/  5000, exp = train  loss_source:0.0423  loss_entropy:2.0559
+iter =   1492/  5000, exp = train  loss_source:0.0253  loss_entropy:2.0663
+iter =   1502/  5000, exp = train  loss_source:0.0922  loss_entropy:2.0639
+mIoU: 20.33% mAcc : 48.82% 
+********************************
+model saved
+[Calculate Threshold using config.cb_prop]
+{0: 1.0, 1: 0.9999983310699463, 2: 1.0, 3: 0.9999353885650635, 5: 0.9999494552612305, 7: 0.999809205532074, 8: 0.9999964237213135, 11: 0.9994982481002808, 13: 0.9999994039535522, 18: 0.9947003126144409, 4: 0.9991152882575989, 9: 0.9994823932647705, 6: 0.9999747276306152, 10: 0.9993064403533936, 14: 0.9871646165847778, 12: 0.9942082166671753, 17: 0.9963156580924988, 16: 0.9982048273086548, 15: 0.9899231791496277}
+[Generate pseudo labels]
