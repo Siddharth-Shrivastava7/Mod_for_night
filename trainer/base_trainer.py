@@ -209,16 +209,51 @@ class BaseTrainer(object):
             # print(img.shape)
             # print('******')
             # print(seg_label.shape)
-            # seg_label = seg_label.long().cuda()
-            seg_label = seg_label.float().cuda()
+            seg_label = seg_label.long().cuda()
+            # seg_label = seg_label.float().cuda()
             b, c, h, w = img.shape
             # print(img.shape)
             seg_pred = self.model(img.cuda())
-            seg_pred = seg_pred.squeeze(dim=1)
+            # seg_pred = seg_pred.squeeze(dim=1)
             # print(seg_pred.shape, seg_label.shape)
-            seg_loss = F.binary_cross_entropy(seg_pred, seg_label)
+            # seg_loss = F.binary_cross_entropy(seg_pred, seg_label)
+            loss = CrossEntropy2d()
+            seg_loss = loss(seg_pred, seg_label)
             total_loss += seg_loss.item()
         total_loss /= len(iter(testloader))
         print('---------------------')
         print('Validation seg loss: {} at epoch {}'.format(total_loss,epoch))
         return total_loss
+    
+
+class CrossEntropy2d(nn.Module):
+
+    def __init__(self, size_average=True, ignore_label=255):
+        super(CrossEntropy2d, self).__init__()
+        self.size_average = size_average
+        self.ignore_label = ignore_label
+
+    def forward(self, predict, target, weight=None):
+        """
+            Args:
+                predict:(n, c, h, w)
+                target:(n, h, w)
+                weight (Tensor, optional): a manual rescaling weight given to each class.
+                                           If given, has to be a Tensor of size "nclasses"
+        """
+        assert not target.requires_grad
+        assert predict.dim() == 4
+        assert target.dim() == 3
+        assert predict.size(0) == target.size(0), "{0} vs {1} ".format(predict.size(0), target.size(0))
+        assert predict.size(2) == target.size(1), "{0} vs {1} ".format(predict.size(2), target.size(1))
+        assert predict.size(3) == target.size(2), "{0} vs {1} ".format(predict.size(3), target.size(3))
+        n, c, h, w = predict.size()
+        target_mask = (target >= 0) * (target != self.ignore_label)
+        target = target[target_mask]
+        predict = predict.transpose(1, 2).transpose(2, 3).contiguous()
+        predict = predict[target_mask.view(n, h, w, 1).repeat(1, 1, 1, c)].view(-1, c)
+        # print(predict.shape)
+        # print('***************')
+        # print(target.shape)
+        loss = F.cross_entropy(predict, target, weight=weight, size_average=self.size_average)
+        return loss

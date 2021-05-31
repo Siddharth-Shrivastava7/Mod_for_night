@@ -160,30 +160,41 @@ def init_test_dataset(config, dataset_name, set, selected=None, prop=None, label
     if selected is not None:
         max_prop=None
     
-    if label_ori is None:
-        if dataset_name == 'gta5' or dataset_name=='synthia' or dataset_name=='cityscapes':
-            label_ori=False
-        else:
-            label_ori=True
+    # original
+    # if label_ori is None:
+    #     if dataset_name == 'gta5' or dataset_name=='synthia' or dataset_name=='cityscapes':
+    #         label_ori=False
+    #     else:
+    #         label_ori=True
 
-    if not label_ori:
-        joint_transform = [joint_transforms.Resize((1024, 512))]
-        joint_transform = joint_transforms.Compose(joint_transform)
-        transform_list = [
+    # if not label_ori:
+    #     joint_transform = [joint_transforms.Resize((1024, 512))]
+    #     joint_transform = joint_transforms.Compose(joint_transform)
+    #     transform_list = [
+    #         transforms.FlipChannels(),
+    #         transforms.SubMean(),
+    #         transforms.ToTensor()
+    #         ]
+    # else:
+    #     joint_transform = None
+    #     transform_list = [
+    #         transforms.Resize((1024, 512)),
+    #         transforms.FlipChannels(),
+    #         transforms.SubMean(),
+    #         transforms.ToTensor()
+    #         ]
+    # train_transform = standard_transforms.Compose(transform_list)
+    # original 
+
+    # mod
+    joint_transform = None
+    transform_list = [
             transforms.FlipChannels(),
             transforms.SubMean(),
             transforms.ToTensor()
             ]
-    else:
-        joint_transform = None
-        transform_list = [
-            transforms.Resize((1024, 512)),
-            transforms.FlipChannels(),
-            transforms.SubMean(),
-            transforms.ToTensor()
-            ]
-
     train_transform = standard_transforms.Compose(transform_list)
+    # mod 
 
     if label_ori and dataset_name=='gta5':
         label_transform = [transforms.ResizeLabel((1914, 1052)),

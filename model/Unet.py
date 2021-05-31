@@ -30,8 +30,8 @@ class UNet(nn.Module):
         self.dconv_up2 = double_conv(128 + 256, 128)
         self.dconv_up1 = double_conv(128 + 64, 64)
         
-        # self.conv_last = nn.Conv2d(64, n_class, 1)
-        self.conv_last = nn.Conv2d(64, 1, 1)
+        self.conv_last = nn.Conv2d(64, n_class, 1)
+        # self.conv_last = nn.Conv2d(64, 1, 1)
         
         
     def forward(self, x):
@@ -60,8 +60,10 @@ class UNet(nn.Module):
         x = self.dconv_up1(x)
         
         out = self.conv_last(x)
+        # print(out.shape)
         
-        return torch.sigmoid(out) 
+        # return torch.sigmoid(out) 
+        return out
     
 
 def Unet_model(num_classes = 2):

@@ -14,6 +14,7 @@ from PIL import Image
 import copy
 import torch.nn.functional as F
 from tensorboardX import SummaryWriter
+import torch.nn as nn
 
 class Trainer(BaseTrainer):
     def __init__(self, model, config, writer):
@@ -27,23 +28,28 @@ class Trainer(BaseTrainer):
         img, seg_label, _, _, name = batch
         # print(img.shape)
         
-        # seg_label = seg_label.long().cuda()
-        seg_label = seg_label.float().cuda()
+        seg_label = seg_label.long().cuda() # cross entropy
+        # seg_label = seg_label.float().cuda()
         b, c, h, w = img.shape
         # print(img.shape)
 
         seg_pred = self.model(img.cuda())
-        seg_pred = seg_pred.squeeze(dim=1)
+        # seg_pred = seg_pred.squeeze(dim=1) #for bce 
         # print('yes')
         # print(seg_label.shape, seg_pred.shape)
-        # seg_loss = F.cross_entropy(seg_pred, seg_label, ignore_index=255) 
-        seg_loss = F.binary_cross_entropy(seg_pred, seg_label)
+        # seg_loss = F.binary_cross_entropy(seg_pred, seg_label)
+        # print('**********************')
+        # print(seg_label.shape)
+        # print('**********************')
+        # print(seg_pred.shape)
+        loss = CrossEntropy2d()
+        seg_loss = loss(seg_pred, seg_label)
         self.losses.seg_loss = seg_loss
         loss = seg_loss  
         loss.backward()
 
     def train(self):
-        writer = SummaryWriter(comment="btad")
+        writer = SummaryWriter(comment="reak_fake")
 
         if self.config.neptune:
             neptune.init(project_qualified_name='solacex/segmentation-DA')
@@ -91,7 +97,7 @@ class Trainer(BaseTrainer):
             # if cu_iter % self.config.print_freq ==0:
             #     self.print_loss(cu_iter)
             # if self.config.val and cu_iter % self.config.val_freq ==0 and cu_iter!=0:
-                # miou = self.validate()
+                # miou = self.validate() 
             if self.config.val:
 
                 loss_infor = 'train loss :{:.4f}'.format(train_epoch_loss)
@@ -133,3 +139,35 @@ class Trainer(BaseTrainer):
         tmp_name = '_'.join((self.config.source, str(iter))) + '.pth'
         torch.save(self.model.state_dict(), osp.join(self.config['snapshot'], tmp_name))
 
+
+class CrossEntropy2d(nn.Module):
+
+    def __init__(self, size_average=True, ignore_label=255):
+        super(CrossEntropy2d, self).__init__()
+        self.size_average = size_average
+        self.ignore_label = ignore_label
+
+    def forward(self, predict, target, weight=None):
+        """
+            Args:
+                predict:(n, c, h, w)
+                target:(n, h, w)
+                weight (Tensor, optional): a manual rescaling weight given to each class.
+                                           If given, has to be a Tensor of size "nclasses"
+        """
+        assert not target.requires_grad
+        assert predict.dim() == 4
+        assert target.dim() == 3
+        assert predict.size(0) == target.size(0), "{0} vs {1} ".format(predict.size(0), target.size(0))
+        assert predict.size(2) == target.size(1), "{0} vs {1} ".format(predict.size(2), target.size(1))
+        assert predict.size(3) == target.size(2), "{0} vs {1} ".format(predict.size(3), target.size(3))
+        n, c, h, w = predict.size()
+        target_mask = (target >= 0) * (target != self.ignore_label)
+        target = target[target_mask]
+        predict = predict.transpose(1, 2).transpose(2, 3).contiguous()
+        predict = predict[target_mask.view(n, h, w, 1).repeat(1, 1, 1, c)].view(-1, c)
+        # print(predict.shape)
+        # print('***************')
+        # print(target.shape)
+        loss = F.cross_entropy(predict, target, weight=weight, size_average=self.size_average)
+        return loss

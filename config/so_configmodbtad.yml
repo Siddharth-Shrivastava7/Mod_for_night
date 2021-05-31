@@ -29,8 +29,9 @@ val_freq: 5 # 372 ..after one epoch for cityscapes train set (2975) with batch 8
 # Dataset 
 source: 'rf_city' #chg
 target: 'rf_city_val' #chg
-worker: 4 
+worker: 4
 batch_size: 8 #chg
+num_classes: 2
 
 #Transforms
 input_src: 720 

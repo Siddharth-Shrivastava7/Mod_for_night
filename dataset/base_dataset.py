@@ -43,11 +43,11 @@ class BaseDataSet(data.Dataset):
             # print(len(self.img_ids))
             pass
 
-        elif max_prop is not None:
-            total = len(self.img_ids)
-            to_sel = int(np.floor(total * max_prop))
-            index = list( np.random.choice(total, to_sel, replace=False) )
-            self.img_ids = [self.img_ids[i] for i in index]
+        # elif max_prop is not None:
+        #     total = len(self.img_ids)
+        #     to_sel = int(np.floor(total * max_prop))
+        #     index = list( np.random.choice(total, to_sel, replace=False) )
+        #     self.img_ids = [self.img_ids[i] for i in index]
 
         self.files = []
         self.id2train = {7: 0, 8: 1, 11: 2, 12: 3, 13: 4, 17: 5,
@@ -98,6 +98,7 @@ class BaseDataSet(data.Dataset):
             for name in self.img_ids:
                 # print(name)
                 img_file = osp.join(self.root, "gtFine/%s/%s" % (self.set, name))
+                # print(img_file)
                 # label_name = name.replace('leftImg8bit', 'gtFine_labelIds')
                 label_file = []
                 self.files.append({
@@ -183,7 +184,27 @@ class BaseDataSet(data.Dataset):
                     "img": img_file,
                     "label":label_file,
                     "name": name
+                }) 
+        elif dataset == 'acdc':
+            # print('yo')
+            for name in self.img_ids:
+                # print(name)
+                img_file = osp.join(self.root,  name)
+                tup = (('acdc_trainval','acdc_gt'),('_rgb_anon.png','_gt_labelIds.png')) 
+                for r in tup: 
+                    lbname = name.replace(*r)
+                lbname = lbname.replace('rgb_anon','gt') 
+                label_file = osp.join(self.root, lbname)
+                self.files.append({
+                    "img": img_file,
+                    "label":label_file,
+                    "name": name
                 })
+                # print(label_file)
+                # print(name)
+                # print(img_file)
+                # break
+                  
 
     def __len__(self):
         return len(self.files)
@@ -194,17 +215,27 @@ class BaseDataSet(data.Dataset):
         try:
             image = Image.open(datafiles["img"]).convert('RGB')
             # print(image.size)
-            image = image.resize((1024,512)) #(width, height)
+            # img_ignore_mask = np.all(image!=(0,0,0), axis = -1)
+            # mask = img_ignore_mask.astype(int)*255  
+            # print(image.size)
+            # image = image.resize((1024,512)) #(width, height) 
             # print(image.size)
             if self.dataset == 'rf_city' or 'rf_city_val':
                 # print('hi')
                 im = np.array(image).shape
                 if 'gta' in datafiles["name"]:
                     # print('hi')
-                    label = np.zeros((im[0], im[1]), dtype = np.uint8) #fake label 
+                    label = np.zeros((im[0], im[1]), dtype = np.long) #fake label # for cross entropy
+                    # label = np.zeros((im[0], im[1]), dtype = np.uint8) #fake label 
                 # print('yo')
                 else:
-                    label = np.ones((im[0], im[1]), dtype = np.uint8) # real label
+                    im_arr = np.array(image)
+                    indices = np.where(np.all(im_arr == (0,0,0), axis=-1))
+                    black_inx = np.transpose(indices)
+                    label = np.ones((im[0], im[1]), dtype = np.long) # real label # for cross entropy
+                    label[black_inx[:,0], black_inx[:,1]] = 255
+                    # label = np.ones((im[0], im[1]), dtype = np.uint8) # real label
+
                 label = Image.fromarray(label.astype(np.uint8))
                 # print('***************')
                 # print(label.size)

@@ -31,12 +31,13 @@ def main():
     cudnn.benchmark = True
 #    torch.backends.cudnn.deterministic = True
     config, writer = init_config("config/so_configmodbtad.yml", sys.argv)
-    if config.source=='synthia':
-        config.num_classes=16
-    elif config.source == 'city_rf':
-        config.num_classes = 2
-    else:
-        config.num_classes=19
+    # if config.source=='synthia':
+    #     config.num_classes=16
+    # elif config.source == 'city_rf':
+    #     # print('***********************')
+    #     config.num_classes = 2
+    # else:
+    #     config.num_classes=19
 
     model = init_model(config)
 

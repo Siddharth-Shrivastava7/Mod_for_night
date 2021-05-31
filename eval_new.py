@@ -4,6 +4,7 @@ import numpy as np
 import torch
 from model.DeeplabV2 import *#Res_Deeplab
 from model.Unet import * 
+from collections import OrderedDict
 
 from torch.utils import data
 import torch.nn as nn
@@ -60,8 +61,9 @@ def compute_iou(model, testloader, args):
             # print('label shape:{} output shape:{}'.format(label.shape, output.shape))
             output = interp(output).squeeze()
             # save_pred(output, './save/dark_zurich_val/btad', args.dataset +str(index)+'.png') # org
-            name = name[0].split("/")[-1] + '.png'
-            save_pred(output, '../scratch/saved_models/CCM/save/result/0', name)  # current org 
+            # print(name[0])
+            name =name[0].split('/')[-1]
+            save_pred(output, '../scratch/saved_models/deeplabv2_cityscapes/acdc/train_pred', name)  # current org 
 
             C, H, W = output.shape # original
             # print(torch.unique(output))
@@ -151,36 +153,36 @@ def compute_iou(model, testloader, args):
 
         return iou, mIoU, acc, mAcc
 
-# def label_img_to_color(img):
-#     label_to_color = {
-#         0: [128, 64,128],
-#         1: [244, 35,232],
-#         2: [ 70, 70, 70],
-#         3: [102,102,156],
-#         4: [190,153,153],
-#         5: [153,153,153],
-#         6: [250,170, 30],
-#         7: [220,220,  0],
-#         8: [107,142, 35],
-#         9: [152,251,152],
-#         10: [ 70,130,180],
-#         11: [220, 20, 60],
-#         12: [255,  0,  0],
-#         13: [  0,  0,142],
-#         14: [  0,  0, 70],
-#         15: [  0, 60,100],
-#         16: [  0, 80,100],
-#         17: [  0,  0,230],
-#         18: [119, 11, 32],
-#         19: [0,  0, 0]
-#         }
+def label_img_to_color(img):
+    label_to_color = {
+        0: [128, 64,128],
+        1: [244, 35,232],
+        2: [ 70, 70, 70],
+        3: [102,102,156],
+        4: [190,153,153],
+        5: [153,153,153],
+        6: [250,170, 30],
+        7: [220,220,  0],
+        8: [107,142, 35],
+        9: [152,251,152],
+        10: [ 70,130,180],
+        11: [220, 20, 60],
+        12: [255,  0,  0],
+        13: [  0,  0,142],
+        14: [  0,  0, 70],
+        15: [  0, 60,100],
+        16: [  0, 80,100],
+        17: [  0,  0,230],
+        18: [119, 11, 32],
+        19: [0,  0, 0]
+        }
     # with open('./dataset/cityscapes_list/info.json') as f:
     #     data = json.load(f)
 
-    label_to_color = {
-        0: [0, 0, 0],
-        1: [255,255,255]
-    }
+    # label_to_color = {
+    #     0: [0, 0, 0],
+    #     1: [255,255,255]
+    # }
 
     img_height, img_width = img.shape
 
@@ -214,12 +216,12 @@ def save_pred(pred, direc, name):
     pred = pred.cpu().numpy()
     # print(pred.shape)
 
-    # pred = np.asarray(np.argmax(pred, axis=0), dtype=np.uint8)   ##### original
+    pred = np.asarray(np.argmax(pred, axis=0), dtype=np.uint8)   ##### original
     # pred = np.asarray(np.argsort(pred, axis= 0)[-2], dtype = np.uint8)  ############ 2nd best prediction
     
     # if thresholding for binary segmentation 
-    pred[pred<0.5] = 0
-    pred[pred>=0.5] = 1
+    # pred[pred<0.5] = 0
+    # pred[pred>=0.5] = 1
     
     # pred = np.asarray(np.argmax(pred, axis=0))
     # print(pred.shape)
@@ -264,7 +266,7 @@ def save_pred(pred, direc, name):
 
 def main():
     args = get_arguments()
-    with open('./config/so_configmodbtad.yml') as f:
+    with open('./config/so_configmod.yml') as f:
         cfg = yaml.load(f, Loader=yaml.FullLoader)
     cfg = edict(cfg)
     cfg.num_classes=args.num_classes
@@ -278,13 +280,24 @@ def main():
             model = FCN8s(num_classes = args.num_classes).cuda() 
 
         # model = nn.DataParallel(model)
-        model.load_state_dict(torch.load(args.frm))
+        # model.load_state_dict(torch.load(args.frm))
         # model.load_state_dict(torch.load(args.frm,strict=False))
+
+        # original saved file with DataParallel
+        state_dict = torch.load(args.frm)
+        # create new OrderedDict that does not contain `module.`
+        new_state_dict = OrderedDict()
+        for k, v in state_dict.items():
+            name = k[7:] # remove `module.`
+            new_state_dict[name] = v
+        # load params
+        model.load_state_dict(new_state_dict)
+
         model.eval().cuda()
-        testloader  = init_test_dataset(cfg, args.dataset, set='val')
+        testloader  = init_test_dataset(cfg, args.dataset, set='train')
         # print('****************************************************')
-        save_fake(model, testloader)
-        # iou, mIoU, acc, mAcc = compute_iou(model, testloader, args) # original
+        # save_fake(model, testloader)
+        iou, mIoU, acc, mAcc = compute_iou(model, testloader, args) # original
         return
 
     # sys.stdout = Logger(osp.join(cfg['result'], args.frm+'.txt'))
