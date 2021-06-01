@@ -73,6 +73,7 @@ cityscapes_val: {
         }
 acdc: {
         data_dir: '/home/cse/phd/anz208849/scratch/data/',
-        data_list: './dataset/list/acdc/acdc_trainrgb.txt',
+        data_list: './dataset/list/acdc/acdc_valrgb.txt',
         input_size: [1920, 1080]
 }
+# using acdc for both val and train .. eval here

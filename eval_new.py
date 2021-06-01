@@ -63,7 +63,7 @@ def compute_iou(model, testloader, args):
             # save_pred(output, './save/dark_zurich_val/btad', args.dataset +str(index)+'.png') # org
             # print(name[0])
             name =name[0].split('/')[-1]
-            save_pred(output, '../scratch/saved_models/deeplabv2_cityscapes/acdc/train_pred', name)  # current org 
+            save_pred(output, '../scratch/data/acdc_gt/val_pred', name)  # current org 
 
             C, H, W = output.shape # original
             # print(torch.unique(output))

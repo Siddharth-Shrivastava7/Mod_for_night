@@ -204,7 +204,20 @@ class BaseDataSet(data.Dataset):
                 # print(name)
                 # print(img_file)
                 # break
-                  
+
+        elif dataset=='acdc_train_rf' or dataset=='acdc_val_rf':
+            # print('hi') 
+            for name in self.img_ids:
+                # print(name)
+                img_file = osp.join(self.root, name)
+                label_file = []
+                self.files.append({
+                    "img": img_file,
+                    "label":label_file,
+                    "name": name
+                })
+                # print(img_file)
+                # print(label_file)                 
 
     def __len__(self):
         return len(self.files)
@@ -251,6 +264,17 @@ class BaseDataSet(data.Dataset):
                 
             elif self.dataset == 'darkzurich' and self.plabel_path is None: # trg no gt labels
                 label = []
+            elif self.dataset == 'acdc_train_rf' or 'acdc_val_rf':
+                im = np.array(image).shape
+                if 'fake' in datafiles["name"]:
+                    # print('hi')
+                    label = np.zeros((im[0], im[1]), dtype = np.long) #fake label # for cross entropy
+                else:
+                    im_arr = np.array(image)
+                    indices = np.where(np.all(im_arr == (0,0,0), axis=-1))
+                    black_inx = np.transpose(indices)
+                    label = np.ones((im[0], im[1]), dtype = np.long) # real label # for cross entropy
+                    label[black_inx[:,0], black_inx[:,1]] = 255
             else:
                 label = Image.open(datafiles["label"])
                 label = np.asarray(label, np.uint8)

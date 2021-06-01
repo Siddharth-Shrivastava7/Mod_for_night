@@ -27,8 +27,8 @@ val: True
 val_freq: 5 # 372 ..after one epoch for cityscapes train set (2975) with batch 8
 
 # Dataset 
-source: 'rf_city' #chg
-target: 'rf_city_val' #chg
+source: 'acdc_train_rf' #chg
+target: 'acdc_val_rf' #chg
 worker: 4
 batch_size: 8 #chg
 num_classes: 2
@@ -118,3 +118,13 @@ night_city: {
         data_list: '/home/cse/staff/sid97.cstaff/research/MGCDA/data/NighttimeDrivingTest_lists_file_names/leftImg8bit_filenames.txt',
         input_size: [1920,1080]
         }
+acdc_train_rf: {
+        data_dir: '/home/cse/phd/anz208849/scratch/data/',
+        data_list: './dataset/list/acdc/acdc_train_rf.txt',
+        input_size: [1920, 1080]
+}
+acdc_val_rf: {
+        data_dir: '/home/cse/phd/anz208849/scratch/data/',
+        data_list: './dataset/list/acdc/acdc_val_rf.txt',
+        input_size: [1920, 1080]
+}
