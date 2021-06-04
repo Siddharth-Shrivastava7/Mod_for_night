@@ -28,7 +28,7 @@ val: True
 val_freq: 372 # 372 ..after one epoch for cityscapes train set (2975) with batch 8
 
 # Dataset 
-source: 'acdc' #chg
+source: 'cityscapes' #chg
 target: 'cityscapes_val' #chg
 worker: 8
 batch_size: 8 #chg
@@ -62,13 +62,13 @@ synthia: {
         input_size: [1280, 760]
         }
 cityscapes: {
-        data_dir: '/home/cse/staff/sid97.cstaff/scratch/data/cityscapes/',
-        data_list: './dataset/cityscapes_list/train.txt',
+        data_dir: '../scratch/data/cityscapes/',
+        data_list: './dataset/list/cityscapes/train.txt',
         input_size: [1024, 512]
         } #chg
 cityscapes_val: {
-        data_dir: '/home/cse/staff/sid97.cstaff/scratch/data/cityscapes/',
-        data_list: './dataset/cityscapes_list/val.txt',
+        data_dir: '../scratch/data/cityscapes/',
+        data_list: './dataset/list/cityscapes/val.txt',
         input_size: [1024, 512]
         }
 acdc: {

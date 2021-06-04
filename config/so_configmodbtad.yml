@@ -47,7 +47,7 @@ rec: False
 init_weight: './save/model410_city_deeplabv2.pth'
 restore_from: None
 
-snapshot: '../scratch/saved_models/CCM/save/train'
+snapshot: '../scratch/saved_models/acdc/'
 result: './miou_result/'
 log: './log/'
 plabel: './plabel'
@@ -80,6 +80,18 @@ rf_city: {
 rf_city_val: {
         data_dir: '../scratch/data/cityscapes/',
         data_list: './dataset/list/cityscapes/rf_val_city.txt',
+        input_size: [1024, 512]
+        }
+
+rf_city_dark: {
+        data_dir: '../scratch/data/cityscapes/',
+        data_list: './dataset/list/cityscapes/city_train_rf_dark.txt', #chg it
+        input_size: [1024, 512]
+        }
+
+rf_city_dark_val: {
+        data_dir: '../scratch/data/cityscapes/',
+        data_list: './dataset/list/cityscapes/city_val_rf_dark.txt',
         input_size: [1024, 512]
         }
 

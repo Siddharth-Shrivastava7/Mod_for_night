@@ -44,7 +44,7 @@ def print_iou(iou, acc, miou, macc):
 def compute_iou(model, testloader, args):
     model = model.eval()
 
-    interp = nn.Upsample(size=(1080,1920), mode='bilinear', align_corners=True)   # dark_zurich -> (1080,1920)
+    interp = nn.Upsample(size=(1024,2048), mode='bilinear', align_corners=True)   # dark_zurich -> (1080,1920)
     union = torch.zeros(args.num_classes, 1,dtype=torch.float).cuda().float()
     inter = torch.zeros(args.num_classes, 1, dtype=torch.float).cuda().float()
     preds = torch.zeros(args.num_classes, 1, dtype=torch.float).cuda().float()
@@ -60,10 +60,11 @@ def compute_iou(model, testloader, args):
             label = label.cuda()
             # print('label shape:{} output shape:{}'.format(label.shape, output.shape))
             output = interp(output).squeeze()
+            # output = output.squeeze()
             # save_pred(output, './save/dark_zurich_val/btad', args.dataset +str(index)+'.png') # org
             # print(name[0])
             name =name[0].split('/')[-1]
-            save_pred(output, '../scratch/data/acdc_gt/val_pred', name)  # current org 
+            save_pred(output, '../scratch/data/cityscapes/gtFine/train/dark_city_pred', name)  # current org 
 
             C, H, W = output.shape # original
             # print(torch.unique(output))
@@ -176,7 +177,7 @@ def label_img_to_color(img):
         18: [119, 11, 32],
         19: [0,  0, 0]
         }
-    # with open('./dataset/cityscapes_list/info.json') as f:
+    # # with open('./dataset/cityscapes_list/info.json') as f:
     #     data = json.load(f)
 
     # label_to_color = {
@@ -208,7 +209,6 @@ def save_fake(model, testloader):
             # print(name)
             save_pred(output, '../scratch/saved_models/CCM/save/result/rf_city_dzval', name)
     return
-
 
 
 def save_pred(pred, direc, name):
@@ -261,7 +261,6 @@ def save_pred(pred, direc, name):
     # print(dict(zip(unique, counts)))
     # img = Image.fromarray((img * 255).astype(np.uint8))
     # img.save(osp.join(direc,name))
-                
 
 
 def main():
@@ -275,12 +274,12 @@ def main():
         if args.model=='deeplab':
             model = Res_Deeplab(num_classes=args.num_classes).cuda()
         elif args.model == 'unet':
-            model = Unet(num_classes=1).cuda()
+            model = Unet(num_classes=2).cuda()
         else:
             model = FCN8s(num_classes = args.num_classes).cuda() 
 
         # model = nn.DataParallel(model)
-        # model.load_state_dict(torch.load(args.frm))
+        # model.load_state_dict(torch.load(args.frm)) #gta_source model
         # model.load_state_dict(torch.load(args.frm,strict=False))
 
         # original saved file with DataParallel

@@ -78,7 +78,12 @@ class BaseDataSet(data.Dataset):
                 label_root = self.plabel_path 
             for name in self.img_ids:
                 # print(name)
-                img_file = osp.join(self.root, "leftImg8bit/%s/%s" % (self.set, name))
+                nm = name.split('/')[-1] 
+                # print(self.set)
+                # print('**********')
+                # print(nm)
+                # img_file = osp.join(self.root, "leftImg8bit/%s/%s" % (self.set, name)) # original
+                img_file = osp.join(self.root, "leftImg8bit/%s/%s/%s" % (self.set, 'dark_city', nm))
                 label_name = name.replace('leftImg8bit', 'gtFine_labelIds')
                 label_file =osp.join(label_root, '%s' % (label_name))
                 self.files.append({
@@ -91,16 +96,15 @@ class BaseDataSet(data.Dataset):
 
         elif dataset=='rf_city' or dataset=='rf_city_val':
             # print('hi')
-            if self.plabel_path is None:
-                label_root = ''
-            else:
-                label_root = self.plabel_path 
             for name in self.img_ids:
                 # print(name)
-                img_file = osp.join(self.root, "gtFine/%s/%s" % (self.set, name))
-                # print(img_file)
-                # label_name = name.replace('leftImg8bit', 'gtFine_labelIds')
-                label_file = []
+                img_file = osp.join(self.root,  name)
+                if 'gta_pred' in img_file:
+                    name = name.split('/')[-1].replace('leftImg8bit','gtFine_color')
+                    label_file = osp.join(self.root, 'rf_fake', name)
+                else: 
+                    name = name.split('/')[-1] 
+                    label_file = osp.join(self.root, 'rf_real', name)
                 self.files.append({
                     "img": img_file,
                     "label":label_file,
@@ -206,18 +210,35 @@ class BaseDataSet(data.Dataset):
                 # break
 
         elif dataset=='acdc_train_rf' or dataset=='acdc_val_rf':
-            # print('hi') 
+            # print('************************') 
             for name in self.img_ids:
                 # print(name)
                 img_file = osp.join(self.root, name)
-                label_file = []
+                # print(img_file)
+                # print(name)
+                if 'fake' in img_file: 
+                    name = name.split('/' )[-1].split('fake_')[-1].split('_rgb')[0] + '.png'
+                    # print(name)
+                    fk_save = 'acdc_gt/rf_gen_' + self.set +  '/fake'
+                    label_file = osp.join(self.root, fk_save, name)
+                    # print(label_file)
+                else:
+                    name = name.split('/')[-1].split('_gt')[0] + '.png'
+                    # print(name)
+                    re_save = 'acdc_gt/rf_gen_'+ self.set + '/real/'
+                    label_file = osp.join(self.root, re_save, name) 
+                    # print("*****")
+                    # print(label_file)
+
                 self.files.append({
                     "img": img_file,
                     "label":label_file,
                     "name": name
                 })
                 # print(img_file)
-                # print(label_file)                 
+                # print('************')
+                # print(label_file) 
+                # break                
 
     def __len__(self):
         return len(self.files)
@@ -227,75 +248,63 @@ class BaseDataSet(data.Dataset):
 
         try:
             image = Image.open(datafiles["img"]).convert('RGB')
-            # print(image.size)
-            # img_ignore_mask = np.all(image!=(0,0,0), axis = -1)
-            # mask = img_ignore_mask.astype(int)*255  
-            # print(image.size)
-            # image = image.resize((1024,512)) #(width, height) 
-            # print(image.size)
-            if self.dataset == 'rf_city' or 'rf_city_val':
-                # print('hi')
-                im = np.array(image).shape
-                if 'gta' in datafiles["name"]:
-                    # print('hi')
-                    label = np.zeros((im[0], im[1]), dtype = np.long) #fake label # for cross entropy
-                    # label = np.zeros((im[0], im[1]), dtype = np.uint8) #fake label 
-                # print('yo')
-                else:
-                    im_arr = np.array(image)
-                    indices = np.where(np.all(im_arr == (0,0,0), axis=-1))
-                    black_inx = np.transpose(indices)
-                    label = np.ones((im[0], im[1]), dtype = np.long) # real label # for cross entropy
-                    label[black_inx[:,0], black_inx[:,1]] = 255
-                    # label = np.ones((im[0], im[1]), dtype = np.uint8) # real label
+            # print(self.dataset)
 
-                label = Image.fromarray(label.astype(np.uint8))
-                # print('***************')
-                # print(label.size)
-                if self.joint_transform is not None:
-                    image, label = self.joint_transform(image, label, None)
-                if self.label_transform is not None:
-                    label = self.label_transform(label)
+            # if self.dataset == 'rf_city' or self.dataset == 'rf_city_val':
+            #     # print('&???*******?')
+            #     im = np.array(image).shape
+            #     if 'gta' in datafiles["name"]:
+            #         # print('hi')
+            #         label = np.zeros((im[0], im[1]), dtype = np.long) #fake label # for cross entropy
+            #         # label = np.zeros((im[0], im[1]), dtype = np.uint8) #fake label 
+            #     else:
+            #         im_arr = np.array(image)
+            #         indices = np.where(np.all(im_arr == (0,0,0), axis=-1))
+            #         black_inx = np.transpose(indices)
+            #         label = np.ones((im[0], im[1]), dtype = np.long) # real label # for cross entropy
+            #         label[black_inx[:,0], black_inx[:,1]] = 255
+            #         # label = np.ones((im[0], im[1]), dtype = np.uint8) # real label
 
-            elif self.dataset == 'darkzurich_val_rf':
+            #     label = Image.fromarray(label.astype(np.uint8))
+
+            if self.dataset == 'darkzurich_val_rf':
+                # print(self.dataset)
                 im = np.array(image).shape
                 label = np.ones((im[0], im[1]), dtype = np.uint8) #real
                 label = Image.fromarray(label.astype(np.uint8))
                 
             elif self.dataset == 'darkzurich' and self.plabel_path is None: # trg no gt labels
+                # print(self.dataset)
                 label = []
-            elif self.dataset == 'acdc_train_rf' or 'acdc_val_rf':
-                im = np.array(image).shape
-                if 'fake' in datafiles["name"]:
-                    # print('hi')
-                    label = np.zeros((im[0], im[1]), dtype = np.long) #fake label # for cross entropy
-                else:
-                    im_arr = np.array(image)
-                    indices = np.where(np.all(im_arr == (0,0,0), axis=-1))
-                    black_inx = np.transpose(indices)
-                    label = np.ones((im[0], im[1]), dtype = np.long) # real label # for cross entropy
-                    label[black_inx[:,0], black_inx[:,1]] = 255
+
+            elif self.dataset == 'acdc_train_rf' or self.dataset == 'acdc_val_rf' or self.dataset == 'rf_city' or self.dataset == 'rf_city_val':
+                # print('*************>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>') 
+                label = np.array(Image.open(datafiles['label']), dtype = np.int32)
+                label[label == 127] = 1
+                label = Image.fromarray(label.astype(np.uint8)) 
+
             else:
+                # print(self.dataset)
                 label = Image.open(datafiles["label"])
                 label = np.asarray(label, np.uint8)
                 label_copy = 255 * np.ones(label.shape, dtype=np.uint8)
-                # print(datafiles['label']) # error is for dz pseudo labels
                 if self.plabel_path is None:
                     for k, v in self.id2train.items():
                         label_copy[label == k] = v
                 else:
                     label_copy = label
                 label = Image.fromarray(label_copy.astype(np.uint8))
-                if self.joint_transform is not None:
-                    image, label = self.joint_transform(image, label, None)
-                if self.label_transform is not None:
-                    label = self.label_transform(label)
-
+                
+            if self.joint_transform is not None:
+                image, label = self.joint_transform(image, label, None)
+            if self.label_transform is not None:
+                label = self.label_transform(label)
+       
             name = datafiles["name"]            
-            
+
             if self.transform is not None:
                 image = self.transform(image)
-           
+
         except Exception as e:
             # print('hi')
             print(index)

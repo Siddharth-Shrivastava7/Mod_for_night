@@ -146,8 +146,8 @@ def init_test_dataset(config, dataset_name, set, selected=None, prop=None, label
         max_prop = config.pool_prop
     if dataset_name=='synthia' and set=='train':
         max_prop = config.pool_prop
-    if dataset_name=='cityscapes' and set=='train':
-        max_prop = config.pool_prop
+    # if dataset_name=='cityscapes' and set=='train':
+    #     max_prop = config.pool_prop
 
     if list_path != 'none':
         data_list = list_path

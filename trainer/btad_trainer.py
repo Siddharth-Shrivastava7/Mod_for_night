@@ -78,7 +78,6 @@ class Trainer(BaseTrainer):
             # print(len(self.loader))
 
             for i_iter, batch in tqdm(enumerate(self.loader)):
-
                 # cu_iter +=1
                 # adjust_learning_rate(self.optim, cu_iter, self.config)
                 self.optim.zero_grad()
@@ -112,7 +111,7 @@ class Trainer(BaseTrainer):
                     print('********************')
                     print('best_val_epoch_loss: ', best_val_epoch_loss)
                     print("MODEL UPDATED")
-                    name = 'best_rf_city.pth'
+                    name = self.config['source'] + '.pth'
                     torch.save(self.model.state_dict(), osp.join(self.config["snapshot"], name))
                     
                 self.model = self.model.train()
