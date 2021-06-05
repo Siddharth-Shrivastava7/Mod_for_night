@@ -2,7 +2,7 @@
 note: 'train'
 # configs of data
 
-model: 'deeplab'
+model: 'unet'
 train: True
 multigpu: True 
 fixbn: False  # check this also ..  chg 
@@ -32,6 +32,7 @@ source: 'cityscapes' #chg
 target: 'cityscapes_val' #chg
 worker: 8
 batch_size: 8 #chg
+num_classes: 2
 
 #Transforms
 input_src: 720
@@ -76,4 +77,15 @@ acdc: {
         data_list: './dataset/list/acdc/acdc_valrgb.txt',
         input_size: [1920, 1080]
 }
-# using acdc for both val and train .. eval here
+
+acdc_val_rf: {
+        data_dir: '/home/cse/phd/anz208849/scratch/data/',
+        data_list: './dataset/list/acdc/acdc_val_rf.txt',
+        input_size: [1920, 1080]
+}
+
+dark_zurich_val_rf: { 
+        data_dir: '/home/cse/phd/anz208849/scratch/data/dark_zurich_val/gt',
+        data_list: './dataset/list/darkzurich/dz_val_rf_mgcda.txt',
+        input_size: [1920, 1080]
+        }

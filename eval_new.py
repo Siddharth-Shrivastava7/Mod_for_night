@@ -44,7 +44,7 @@ def print_iou(iou, acc, miou, macc):
 def compute_iou(model, testloader, args):
     model = model.eval()
 
-    interp = nn.Upsample(size=(1024,2048), mode='bilinear', align_corners=True)   # dark_zurich -> (1080,1920)
+    interp = nn.Upsample(size=(1080,1920), mode='bilinear', align_corners=True)   # dark_zurich -> (1080,1920)
     union = torch.zeros(args.num_classes, 1,dtype=torch.float).cuda().float()
     inter = torch.zeros(args.num_classes, 1, dtype=torch.float).cuda().float()
     preds = torch.zeros(args.num_classes, 1, dtype=torch.float).cuda().float()
@@ -53,25 +53,31 @@ def compute_iou(model, testloader, args):
     # Tp = 0  
     with torch.no_grad():
         for index, batch in tqdm(enumerate(testloader)):
+            # print('******************') 
             image, label, edge, _, name = batch
 #            edge = F.interpolate(edge.unsqueeze(0), (512, 1024)).view(1,512,1024)``
+            # print(name)
+            # if name[0].find('mgcda_pred')==-1: 
+            #     continue
             # print(name)
             output =  model(image.cuda())
             label = label.cuda()
             # print('label shape:{} output shape:{}'.format(label.shape, output.shape))
-            output = interp(output).squeeze()
-            # output = output.squeeze()
+            # output = interp(output).squeeze()
+            output = output.squeeze()
             # save_pred(output, './save/dark_zurich_val/btad', args.dataset +str(index)+'.png') # org
             # print(name[0])
             name =name[0].split('/')[-1]
-            save_pred(output, '../scratch/data/cityscapes/gtFine/train/dark_city_pred', name)  # current org 
+            save_pred(output, '../scratch/data/dark_zurich_val/gt/gta_model/val_pred_mgcda_rf', name)  # current org 
 
             C, H, W = output.shape # original
+            # print('[*****')
+            # print(C)
             # print(torch.unique(output))
             # print(torch.unique(torch.argmax(output, dim = 0)))
 
             #########################################################################original
-            Mask = (label.squeeze())<C
+            Mask = (label.squeeze())<C  # it is ignoring all the labels values equal or greater than 2
             pred_e = torch.linspace(0,C-1, steps=C).view(C, 1, 1)
             pred_e = pred_e.repeat(1, H, W).cuda()
             pred = output.argmax(dim=0).float()
@@ -155,35 +161,35 @@ def compute_iou(model, testloader, args):
         return iou, mIoU, acc, mAcc
 
 def label_img_to_color(img):
-    label_to_color = {
-        0: [128, 64,128],
-        1: [244, 35,232],
-        2: [ 70, 70, 70],
-        3: [102,102,156],
-        4: [190,153,153],
-        5: [153,153,153],
-        6: [250,170, 30],
-        7: [220,220,  0],
-        8: [107,142, 35],
-        9: [152,251,152],
-        10: [ 70,130,180],
-        11: [220, 20, 60],
-        12: [255,  0,  0],
-        13: [  0,  0,142],
-        14: [  0,  0, 70],
-        15: [  0, 60,100],
-        16: [  0, 80,100],
-        17: [  0,  0,230],
-        18: [119, 11, 32],
-        19: [0,  0, 0]
-        }
+    # label_to_color = {
+    #     0: [128, 64,128],
+    #     1: [244, 35,232],
+    #     2: [ 70, 70, 70],
+    #     3: [102,102,156],
+    #     4: [190,153,153],
+    #     5: [153,153,153],
+    #     6: [250,170, 30],
+    #     7: [220,220,  0],
+    #     8: [107,142, 35],
+    #     9: [152,251,152],
+    #     10: [ 70,130,180],
+    #     11: [220, 20, 60],
+    #     12: [255,  0,  0],
+    #     13: [  0,  0,142],
+    #     14: [  0,  0, 70],
+    #     15: [  0, 60,100],
+    #     16: [  0, 80,100],
+    #     17: [  0,  0,230],
+    #     18: [119, 11, 32],
+    #     19: [0,  0, 0]
+    #     }
     # # with open('./dataset/cityscapes_list/info.json') as f:
     #     data = json.load(f)
 
-    # label_to_color = {
-    #     0: [0, 0, 0],
-    #     1: [255,255,255]
-    # }
+    label_to_color = {
+        0: [0, 0, 0],
+        1: [255,255,255]
+    }
 
     img_height, img_width = img.shape
 
@@ -215,15 +221,14 @@ def save_pred(pred, direc, name):
     # palette = get_palette(256)
     pred = pred.cpu().numpy()
     # print(pred.shape)
-
-    pred = np.asarray(np.argmax(pred, axis=0), dtype=np.uint8)   ##### original
+    # pred = np.asarray(np.argmax(pred, axis=0), dtype=np.uint8)   ##### original
     # pred = np.asarray(np.argsort(pred, axis= 0)[-2], dtype = np.uint8)  ############ 2nd best prediction
     
     # if thresholding for binary segmentation 
-    # pred[pred<0.5] = 0
-    # pred[pred>=0.5] = 1
+    pred[pred<0.5] = 0
+    pred[pred>=0.5] = 1
     
-    # pred = np.asarray(np.argmax(pred, axis=0))
+    pred = np.asarray(np.argmax(pred, axis=0))
     # print(pred.shape)
     label_img_color = label_img_to_color(pred)
     # print(label_img_color.dtype)
@@ -231,6 +236,7 @@ def save_pred(pred, direc, name):
     # print(np.unique(label_img_color))
     # cv2.imwrite(osp.join(direc,name), label_img_color)
     im = Image.fromarray(label_img_color) # use always PIL or other library .. try to avoid cv2.. but if no other option then ok
+    # im.save(osp.join(direc,name))
     im.save(osp.join(direc,name))
     return 
     # print('img saved!')
@@ -272,28 +278,31 @@ def main():
     if args.single:
         #from model.fuse_deeplabv2 import Res_Deeplab
         if args.model=='deeplab':
+            # print('*********************************')
             model = Res_Deeplab(num_classes=args.num_classes).cuda()
         elif args.model == 'unet':
-            model = Unet(num_classes=2).cuda()
+            # print(')))))))))))))))))))))))))))')
+            model = UNet(n_class=2).cuda()
         else:
             model = FCN8s(num_classes = args.num_classes).cuda() 
 
         # model = nn.DataParallel(model)
-        # model.load_state_dict(torch.load(args.frm)) #gta_source model
+        model.load_state_dict(torch.load(args.frm)) #original
         # model.load_state_dict(torch.load(args.frm,strict=False))
 
         # original saved file with DataParallel
-        state_dict = torch.load(args.frm)
-        # create new OrderedDict that does not contain `module.`
-        new_state_dict = OrderedDict()
-        for k, v in state_dict.items():
-            name = k[7:] # remove `module.`
-            new_state_dict[name] = v
-        # load params
-        model.load_state_dict(new_state_dict)
+        # state_dict = torch.load(args.frm)
+        # # create new OrderedDict that does not contain `module.`
+        # new_state_dict = OrderedDict()
+        # for k, v in state_dict.items():
+        #     name = k[7:] # remove `module.`
+        #     new_state_dict[name] = v
+        # # load params
+        # model.load_state_dict(new_state_dict)
 
         model.eval().cuda()
-        testloader  = init_test_dataset(cfg, args.dataset, set='train')
+        testloader  = init_test_dataset(cfg, args.dataset, set='val')
+        # print(len(testloader))
         # print('****************************************************')
         # save_fake(model, testloader)
         iou, mIoU, acc, mAcc = compute_iou(model, testloader, args) # original

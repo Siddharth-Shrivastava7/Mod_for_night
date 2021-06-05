@@ -113,6 +113,27 @@ class BaseDataSet(data.Dataset):
                 # print(img_file)
                 # print(label_file)
 
+        elif dataset=='rf_city_dark' or dataset=='rf_city_dark_val':
+            # print('hi')
+            for name in self.img_ids:
+                # print(name)
+                img_file = osp.join(self.root,  name)
+                if 'dark_city' in img_file:
+                    # print(name)
+                    name = name.split('/')[-1].replace('leftImg8bit','gtFine_color')
+                    label_file = osp.join(self.root, 'rf_fake_dark', name)
+                else: 
+                    name = name.split('/')[-1].replace('leftImg8bit','gtFine_color')
+                    label_file = osp.join(self.root, 'rf_real_dark', name)
+                self.files.append({
+                    "img": img_file,
+                    "label":label_file,
+                    "name": name
+                })
+                # print(img_file)
+                # print('***************************')
+                # print(label_file)
+
         elif dataset == 'darkzurich_val':
             if self.plabel_path is None:
                 label_root = osp.join(self.root, 'gt')
@@ -132,16 +153,16 @@ class BaseDataSet(data.Dataset):
                     "name": name
                 })
         
-        elif dataset == 'darkzurich_val_rf':
-            if self.plabel_path is None:
-                label_root = osp.join(self.root, 'gt')
-            else:
-                label_root = self.plabel_path 
+        elif dataset == 'dark_zurich_val_rf':
             for name in self.img_ids:
                 # print(name)
-                # img_file = osp.join(self.root, "rgb_anon/%s_rgb_anon.png" % (name))
-                img_file =osp.join(label_root, '%s_gt_labelColor.png' % (name))
-                label_file = []
+                img_file =osp.join(self.root, name)
+                if 'mgcda_pred' in name: 
+                    nm = name.split('/')[-1].replace('rgb_anon','gt_labelColor')
+                    label_file = osp.join(self.root, 'rf_fake', nm)
+                else: 
+                    nm = name.split('/')[-1]
+                    label_file = osp.join(self.root, 'rf_real', nm)
                 # print(img_file)
                 # print(label_file)
 
@@ -217,16 +238,14 @@ class BaseDataSet(data.Dataset):
                 # print(img_file)
                 # print(name)
                 if 'fake' in img_file: 
-                    name = name.split('/' )[-1].split('fake_')[-1].split('_rgb')[0] + '.png'
-                    # print(name)
+                    nm = name.split('/' )[-1].split('fake_')[-1].split('_rgb')[0] + '.png'
                     fk_save = 'acdc_gt/rf_gen_' + self.set +  '/fake'
-                    label_file = osp.join(self.root, fk_save, name)
+                    label_file = osp.join(self.root, fk_save, nm)
                     # print(label_file)
                 else:
-                    name = name.split('/')[-1].split('_gt')[0] + '.png'
-                    # print(name)
+                    nm = name.split('/')[-1].split('_gt')[0] + '.png'
                     re_save = 'acdc_gt/rf_gen_'+ self.set + '/real/'
-                    label_file = osp.join(self.root, re_save, name) 
+                    label_file = osp.join(self.root, re_save, nm) 
                     # print("*****")
                     # print(label_file)
 
@@ -266,19 +285,14 @@ class BaseDataSet(data.Dataset):
             #         # label = np.ones((im[0], im[1]), dtype = np.uint8) # real label
 
             #     label = Image.fromarray(label.astype(np.uint8))
-
-            if self.dataset == 'darkzurich_val_rf':
-                # print(self.dataset)
-                im = np.array(image).shape
-                label = np.ones((im[0], im[1]), dtype = np.uint8) #real
-                label = Image.fromarray(label.astype(np.uint8))
                 
-            elif self.dataset == 'darkzurich' and self.plabel_path is None: # trg no gt labels
+            if self.dataset == 'darkzurich' and self.plabel_path is None: # trg no gt labels
                 # print(self.dataset)
                 label = []
 
-            elif self.dataset == 'acdc_train_rf' or self.dataset == 'acdc_val_rf' or self.dataset == 'rf_city' or self.dataset == 'rf_city_val':
+            elif self.dataset == 'acdc_train_rf' or self.dataset == 'acdc_val_rf' or self.dataset == 'rf_city' or self.dataset == 'rf_city_val' or self.dataset == 'rf_city_dark' or self.dataset=='rf_city_dark_val' or self.dataset == 'dark_zurich_val_rf':
                 # print('*************>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>') 
+                # print(self.dataset)
                 label = np.array(Image.open(datafiles['label']), dtype = np.int32)
                 label[label == 127] = 1
                 label = Image.fromarray(label.astype(np.uint8)) 

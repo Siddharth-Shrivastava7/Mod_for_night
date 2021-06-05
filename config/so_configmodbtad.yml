@@ -27,8 +27,8 @@ val: True
 val_freq: 5 # 372 ..after one epoch for cityscapes train set (2975) with batch 8
 
 # Dataset 
-source: 'acdc_train_rf' #chg
-target: 'acdc_val_rf' #chg
+source: 'rf_city_dark' #chg
+target: 'rf_city_dark_val' #chg
 worker: 4
 batch_size: 8 #chg
 num_classes: 2
@@ -47,7 +47,7 @@ rec: False
 init_weight: './save/model410_city_deeplabv2.pth'
 restore_from: None
 
-snapshot: '../scratch/saved_models/acdc/'
+snapshot: '../scratch/saved_models/dark_city/'
 result: './miou_result/'
 log: './log/'
 plabel: './plabel'
@@ -84,13 +84,13 @@ rf_city_val: {
         }
 
 rf_city_dark: {
-        data_dir: '../scratch/data/cityscapes/',
+        data_dir: '../scratch/data/cityscapes/gtFine/train',
         data_list: './dataset/list/cityscapes/city_train_rf_dark.txt', #chg it
         input_size: [1024, 512]
         }
 
 rf_city_dark_val: {
-        data_dir: '../scratch/data/cityscapes/',
+        data_dir: '../scratch/data/cityscapes/gtFine/val',
         data_list: './dataset/list/cityscapes/city_val_rf_dark.txt',
         input_size: [1024, 512]
         }
