@@ -3,11 +3,11 @@ from PIL import Image, ImageChops
 from tqdm import tqdm
 # i = 0 
 
-with open('/home/cse/phd/anz208849/Mod_for_night/dataset/list/darkzurich/dz_val_rf_mgcda.txt') as f: 
+with open('/home/cse/phd/anz208849/Mod_for_night/dataset/list/darkzurich/dz_val_rf_dannet.txt') as f: 
     content = f.readlines() 
 
-pred_cols = [x.strip() for x in content if x.find('mgcda_pred') != -1] 
-pred_bin = '/home/cse/phd/anz208849/scratch/data/dark_zurich_val/gt/gta_model/val_pred_fake_mgcda/'
+pred_cols = [x.strip() for x in content if x.find('dannet_pred') != -1] 
+pred_bin = '/home/cse/phd/anz208849/scratch/data/dark_zurich_val/gt/acdc_model_dannet/val_pred/'
 src_path = '/home/cse/phd/anz208849/scratch/data/dark_zurich_val/gt/'
 
 for i in tqdm(range(len(pred_cols))): 
@@ -15,7 +15,7 @@ for i in tqdm(range(len(pred_cols))):
     nm = pred_cols[i].split('/')[-1]
     binary = Image.open(pred_bin + nm).convert('RGB') 
     im3 = ImageChops.multiply(binary, pred) 
-    im3.save( src_path + 'overlay_rf_pred_gta/' + nm)  
+    im3.save( src_path + 'overlay_rf_pred_dannet/' + nm)  
     
 print('done')
 

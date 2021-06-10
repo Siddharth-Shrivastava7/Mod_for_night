@@ -27,8 +27,8 @@ val: True
 val_freq: 5 # 372 ..after one epoch for cityscapes train set (2975) with batch 8
 
 # Dataset 
-source: 'rf_city' #chg
-target: 'rf_city_val' #chg
+source: 'acdc_train_rf' #chg
+target: 'acdc_val_rf' #chg
 worker: 4
 batch_size: 8 #chg
 num_classes: 2
@@ -47,7 +47,7 @@ rec: False
 init_weight: './save/model410_city_deeplabv2.pth'
 restore_from: None
 
-snapshot: '../scratch/saved_models/cityscapes/'
+snapshot: '../scratch/saved_models/acdc/dannet'
 result: './miou_result/'
 log: './log/'
 plabel: './plabel'
@@ -96,8 +96,8 @@ dark_zurich_valbtad: {
         }
 
 dark_zurich_val_rf: { 
-        data_dir: '/home/cse/staff/sid97.cstaff/scratch/data/dark_zurich_val/',
-        data_list: './dataset/dark_zurich/val.txt',
+        data_dir: '/home/cse/phd/anz208849/scratch/data/dark_zurich_val/gt',
+        data_list: './dataset/list/darkzurich/dz_val_rf_mgcda.txt',
         input_size: [1920, 1080]
         }
 
@@ -120,11 +120,16 @@ night_city: {
         }
 acdc_train_rf: {
         data_dir: '/home/cse/phd/anz208849/scratch/data/',
-        data_list: './dataset/list/acdc/acdc_train_rf.txt',
+        data_list: './dataset/list/acdc/rf_acdc_train_dannet.txt',
         input_size: [1920, 1080]
 }
 acdc_val_rf: {
         data_dir: '/home/cse/phd/anz208849/scratch/data/',
-        data_list: './dataset/list/acdc/acdc_val_rf.txt',
+        data_list: './dataset/list/acdc/rf_acdc_val_dannet.txt',
+        input_size: [1920, 1080]
+}
+acdc_dz_val_rf: {
+        data_dir: '/home/cse/phd/anz208849/scratch/data/dark_zurich_val/gt',
+        data_list: './dataset/list/darkzurich/dz_val_rf_dannet.txt',
         input_size: [1920, 1080]
 }

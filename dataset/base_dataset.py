@@ -235,18 +235,20 @@ class BaseDataSet(data.Dataset):
             for name in self.img_ids:
                 # print(name)
                 img_file = osp.join(self.root, name)
+                # print('^^^^^^^')
                 # print(img_file)
                 # print(name)
-                if 'fake' in img_file: 
-                    nm = name.split('/' )[-1].split('fake_')[-1].split('_rgb')[0] + '.png'
-                    fk_save = 'acdc_gt/rf_gen_' + self.set +  '/fake'
+                if 'pred_dannet' in img_file: 
+                    # print('*****')
+                    nm = name.split('/')[-1].replace('rgb_anon_color', 'gt_labelColor')
+                    fk_save = 'acdc_gt/rf_fake_dannet_' + self.set 
                     label_file = osp.join(self.root, fk_save, nm)
                     # print(label_file)
                 else:
-                    nm = name.split('/')[-1].split('_gt')[0] + '.png'
-                    re_save = 'acdc_gt/rf_gen_'+ self.set + '/real/'
+                    # print('>>>>>')
+                    nm = name.split('/')[-1] 
+                    re_save = 'acdc_gt/rf_real_dannet_' + self.set 
                     label_file = osp.join(self.root, re_save, nm) 
-                    # print("*****")
                     # print(label_file)
 
                 self.files.append({
@@ -257,7 +259,33 @@ class BaseDataSet(data.Dataset):
                 # print(img_file)
                 # print('************')
                 # print(label_file) 
-                # break                
+                # break  
+        elif dataset == 'acdc_dz_val_rf':
+            for name in self.img_ids:
+                # print(name)
+                img_file = osp.join(self.root, name)
+                if 'dannet_pred' in img_file:
+                    nm = name.split('/')[-1].replace('rgb_anon_color', 'gt_labelColor')
+                    fk_save = 'rf_fake_dannet'    
+                    label_file = osp.join(self.root, fk_save, nm) 
+                    # print(nm)
+                else: 
+                    # print('***********')
+                    nm = name.split('/')[-1] 
+                    # print(nm)  
+                    re_save = 'rf_real_dannet'    
+                    label_file = osp.join(self.root, re_save, nm) 
+                
+                self.files.append({
+                    "img": img_file,
+                    "label":label_file,
+                    "name": name
+                })
+
+                # print(img_file)
+                # print('************')
+                # print(label_file) 
+                # break  
 
     def __len__(self):
         return len(self.files)
@@ -290,7 +318,7 @@ class BaseDataSet(data.Dataset):
                 # print(self.dataset)
                 label = []
 
-            elif self.dataset == 'acdc_train_rf' or self.dataset == 'acdc_val_rf' or self.dataset == 'rf_city' or self.dataset == 'rf_city_val' or self.dataset == 'rf_city_dark' or self.dataset=='rf_city_dark_val' or self.dataset == 'dark_zurich_val_rf':
+            elif self.dataset == 'acdc_train_rf' or self.dataset == 'acdc_val_rf' or self.dataset == 'rf_city' or self.dataset == 'rf_city_val' or self.dataset == 'rf_city_dark' or self.dataset=='rf_city_dark_val' or self.dataset == 'dark_zurich_val_rf' or 'acdc_dz_val_rf':
                 # print('*************>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>') 
                 # print(self.dataset)
                 label = np.array(Image.open(datafiles['label']), dtype = np.int32)

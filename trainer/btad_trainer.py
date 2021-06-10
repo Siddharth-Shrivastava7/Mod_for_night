@@ -49,7 +49,7 @@ class Trainer(BaseTrainer):
         loss.backward()
 
     def train(self):
-        writer = SummaryWriter(comment="reak_fake")
+        writer = SummaryWriter(comment="reak_fake_acdc")
 
         if self.config.neptune:
             neptune.init(project_qualified_name='solacex/segmentation-DA')

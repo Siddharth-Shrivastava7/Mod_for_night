@@ -57,7 +57,7 @@ def compute_iou(model, testloader, args):
             image, label, edge, _, name = batch
 #            edge = F.interpolate(edge.unsqueeze(0), (512, 1024)).view(1,512,1024)``
             # print(name)
-            # if name[0].find('mgcda_pred')==-1: 
+            # if name[0].find('dannet_pred')==-1: 
             #     continue
             # print(name)
             output =  model(image.cuda())
@@ -68,7 +68,7 @@ def compute_iou(model, testloader, args):
             # save_pred(output, './save/dark_zurich_val/btad', args.dataset +str(index)+'.png') # org
             # print(name[0])
             name =name[0].split('/')[-1]
-            save_pred(output, '../scratch/data/dark_zurich_val/gt/gta_model/val_pred_mgcda_rf', name)  # current org 
+            save_pred(output, '../scratch/data/try', name)  # current org 
 
             C, H, W = output.shape # original
             # print('[*****')
@@ -77,12 +77,14 @@ def compute_iou(model, testloader, args):
             # print(torch.unique(torch.argmax(output, dim = 0)))
 
             #########################################################################original
-            Mask = (label.squeeze())<C  # it is ignoring all the labels values equal or greater than 2
-            pred_e = torch.linspace(0,C-1, steps=C).view(C, 1, 1)
-            pred_e = pred_e.repeat(1, H, W).cuda()
+            Mask = (label.squeeze())<C  # it is ignoring all the labels values equal or greater than 2 # (1080, 1920) 
+            pred_e = torch.linspace(0,C-1, steps=C).view(C, 1, 1)  
+            pred_e = pred_e.repeat(1, H, W).cuda() 
             pred = output.argmax(dim=0).float()
-            pred_mask = torch.eq(pred_e, pred).byte()
+            pred_mask = torch.eq(pred_e, pred).byte() 
             pred_mask = pred_mask*Mask
+            # print(Mask.shape) #torch.Size([1080, 1920])
+            # print(pred_mask.shape) #torch.Size([2, 1080, 1920]) 
 
             label_e = torch.linspace(0,C-1, steps=C).view(C, 1, 1)
             label_e = label_e.repeat(1, H, W).cuda()
@@ -94,7 +96,6 @@ def compute_iou(model, testloader, args):
             cu_inter = (tmp_inter==2).view(C, -1).sum(dim=1, keepdim=True).float()
             cu_union = (tmp_inter>0).view(C, -1).sum(dim=1, keepdim=True).float()
             cu_preds = pred_mask.view(C, -1).sum(dim=1, keepdim=True).float()
-
             union+=cu_union
             inter+=cu_inter
             preds+=cu_preds
@@ -271,7 +272,7 @@ def save_pred(pred, direc, name):
 
 def main():
     args = get_arguments()
-    with open('./config/so_configmod.yml') as f:
+    with open('./config/so_configmodbtad_2.yml') as f:
         cfg = yaml.load(f, Loader=yaml.FullLoader)
     cfg = edict(cfg)
     cfg.num_classes=args.num_classes
