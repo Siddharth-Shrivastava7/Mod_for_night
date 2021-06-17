@@ -8,6 +8,9 @@ from PIL import Image
 import torchvision.transforms.functional as TF
 import torch
 import imageio
+from . import transforms
+from . import joint_transforms
+from torch.nn import functional as F 
 class BaseDataSet(data.Dataset):
     def __init__(self, root, list_path,dataset, num_class,  joint_transform=None, transform=None, label_transform = None, max_iters=None, ignore_label=255, set='val', plabel_path=None, max_prop=None, selected=None,centroid=None, wei_path=None):
         
@@ -260,6 +263,34 @@ class BaseDataSet(data.Dataset):
                 # print('************')
                 # print(label_file) 
                 # break  
+
+        elif dataset=='acdc_train_rf_tensor' or dataset=='acdc_val_rf_tensor':
+        # print('************************') 
+            for name in self.img_ids:
+                # print(name)
+                # img_file = osp.join(self.root, name)
+                # print('^^^^^^^')
+                # print(img_file)
+                # print(name)
+                # print('*****')
+                nm = name.split('/')[-1].replace('.png','.pt')
+                fk_save = 'acdc/tensor_' + self.set + '_pred'
+                img_file = osp.join(self.root, fk_save, nm) 
+                nm = name.split('/')[-1].replace('rgb_anon', 'gt_labelColor')
+                fk_save = 'acdc_gt/rf_fake_dannet_' + self.set 
+                root = '/home/cse/phd/anz208849/scratch/data'
+                label_file = osp.join(root, fk_save, nm) 
+                # print(label_file)
+                self.files.append({
+                    "img": img_file,
+                    "label":label_file,
+                    "name": name
+                })
+                # print(img_file)
+                # print('************')
+                # print(label_file) 
+                # break
+
         elif dataset == 'acdc_dz_val_rf':
             for name in self.img_ids:
                 # print(name)
@@ -294,8 +325,43 @@ class BaseDataSet(data.Dataset):
         datafiles = self.files[index]
 
         try:
-            image = Image.open(datafiles["img"]).convert('RGB')
-            # print(self.dataset)
+            # image = Image.open(datafiles["img"]).convert('RGB')
+            if self.dataset in ['acdc_val_rf_tensor', 'acdc_train_rf_tensor']:
+                # print(self.dataset)
+                # print(')))))))))))))))))')
+                # print(img_file)
+                name = datafiles["name"] 
+                image = torch.load(datafiles["img"])
+                image = image.transpose(2,0,1)
+                image = torch.from_numpy(image)
+                image = F.softmax(image, dim = 0)
+                # print(image.shape)
+                # print('*******((((((((((((((')
+                label = np.array(Image.open(datafiles['label']), dtype = np.int32)
+                # print('&&&&&&&&&&&&&&&&&&&&&&')
+                # print(label.shape)
+                label[label == 127] = 1
+                label = Image.fromarray(label.astype(np.uint8)) 
+                label_transform = transforms.MaskToTensor()
+                label = label_transform(label)
+                
+                # joint_transforms.RandomSizeAndCrop(600,
+                #                                 True,
+                #                                 scale_min=0.5,
+                #                                 scale_max=1.5,
+                #                                 pre_size=720
+                #                                 )
+                # source_joint_list = [       
+                #     joint_transforms.Resize(600)
+                #     ]
+                # source_joint_transform = joint_transforms.Compose(source_joint_list) 
+                # image, label = source_joint_transform(image, label, None)
+                # print(torch.unique(label))
+                # print(label.shape) #torch.Size([1080, 1920])
+                # print(image.shape) # torch.Size([19, 1080, 1920])
+                # print(torch.is_tensor(image)) 
+                # print(torch.is_tensor(label))   
+                # print('yo')
 
             # if self.dataset == 'rf_city' or self.dataset == 'rf_city_val':
             #     # print('&???*******?')
@@ -314,18 +380,23 @@ class BaseDataSet(data.Dataset):
 
             #     label = Image.fromarray(label.astype(np.uint8))
                 
-            if self.dataset == 'darkzurich' and self.plabel_path is None: # trg no gt labels
+            elif self.dataset == 'darkzurich' and self.plabel_path is None: # trg no gt labels
                 # print(self.dataset)
+                image = Image.open(datafiles["img"]).convert('RGB')
                 label = []
 
-            elif self.dataset == 'acdc_train_rf' or self.dataset == 'acdc_val_rf' or self.dataset == 'rf_city' or self.dataset == 'rf_city_val' or self.dataset == 'rf_city_dark' or self.dataset=='rf_city_dark_val' or self.dataset == 'dark_zurich_val_rf' or 'acdc_dz_val_rf':
+            # elif self.dataset == 'acdc_train_rf' or self.dataset == 'acdc_val_rf' or self.dataset == 'rf_city' or self.dataset == 'rf_city_val' or self.dataset == 'rf_city_dark' or self.dataset=='rf_city_dark_val' or self.dataset == 'dark_zurich_val_rf' or self.dataset=='acdc_dz_val_rf':
+            elif self.dataset in ['acdc_train_rf', 'acdc_val_rf', 'rf_city', 'rf_city_val', 
+                'rf_city_dark', 'rf_city_dark_val', 'dark_zurich_val_rf', 'acdc_dz_val_rf']:  
                 # print('*************>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>') 
                 # print(self.dataset)
+                image = Image.open(datafiles["img"]).convert('RGB')
                 label = np.array(Image.open(datafiles['label']), dtype = np.int32)
                 label[label == 127] = 1
                 label = Image.fromarray(label.astype(np.uint8)) 
 
             else:
+                image = Image.open(datafiles["img"]).convert('RGB')
                 # print(self.dataset)
                 label = Image.open(datafiles["label"])
                 label = np.asarray(label, np.uint8)
@@ -336,16 +407,22 @@ class BaseDataSet(data.Dataset):
                 else:
                     label_copy = label
                 label = Image.fromarray(label_copy.astype(np.uint8))
-                
-            if self.joint_transform is not None:
-                image, label = self.joint_transform(image, label, None)
-            if self.label_transform is not None:
-                label = self.label_transform(label)
-       
-            name = datafiles["name"]            
 
-            if self.transform is not None:
-                image = self.transform(image)
+            # original >>>>>>
+            # if self.joint_transform is not None:
+            #     # print('*****************')
+            #     image, label = self.joint_transform(image, label, None)
+            # print('>>>>>>>>>>>>>>>>')
+            # if self.label_transform is not None:
+            #     # print('&&&&&&&&&&&&&&&&&&&')
+            #     label = self.label_transform(label)
+            
+            # name = datafiles["name"] 
+            # print(name)
+            # print('*****************')           
+            # if self.transform is not None:
+            #     image = self.transform(image)
+            # original >>>>>>
 
         except Exception as e:
             # print('hi')

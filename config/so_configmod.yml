@@ -28,7 +28,7 @@ val: True
 val_freq: 372 # 372 ..after one epoch for cityscapes train set (2975) with batch 8
 
 # Dataset 
-source: 'cityscapes' #chg
+source: 'acdc' #chg
 target: 'cityscapes_val' #chg
 worker: 8
 batch_size: 8 #chg

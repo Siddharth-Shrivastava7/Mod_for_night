@@ -64,7 +64,7 @@ def compute_iou(model, testloader, args):
             # save_pred(output, './save/dark_zurich_val/btad', args.dataset +str(index)+'.png') # org
             # print(name[0])
             name =name[0].split('/')[-1]
-            save_pred(output, '../scratch/data/cityscapes/gtFine/val/dark_city_pred_val', name)  # current org 
+            save_pred(output, '../scratch/data/acdc_gt/tensor_val_pred', name)  # current org 
 
             C, H, W = output.shape # original
             # print(torch.unique(output))
@@ -213,25 +213,31 @@ def save_fake(model, testloader):
 
 def save_pred(pred, direc, name):
     # palette = get_palette(256)
-    pred = pred.cpu().numpy()
-    # print(pred.shape)
 
-    pred = np.asarray(np.argmax(pred, axis=0), dtype=np.uint8)   ##### original
-    # pred = np.asarray(np.argsort(pred, axis= 0)[-2], dtype = np.uint8)  ############ 2nd best prediction
+    # tebn
+    torch.save(pred, osp.join(direc,name))
+
+    # original >>>>>>
+    # pred = pred.cpu().numpy()
+    # # print(pred.shape)
+
+    # pred = np.asarray(np.argmax(pred, axis=0), dtype=np.uint8)   ##### original
+    # # pred = np.asarray(np.argsort(pred, axis= 0)[-2], dtype = np.uint8)  ############ 2nd best prediction
     
-    # if thresholding for binary segmentation 
-    # pred[pred<0.5] = 0
-    # pred[pred>=0.5] = 1
+    # # if thresholding for binary segmentation 
+    # # pred[pred<0.5] = 0
+    # # pred[pred>=0.5] = 1
     
-    # pred = np.asarray(np.argmax(pred, axis=0))
-    # print(pred.shape)
-    label_img_color = label_img_to_color(pred)
-    # print(label_img_color.dtype)
-    # print(label_img_color.shape)
-    # print(np.unique(label_img_color))
-    # cv2.imwrite(osp.join(direc,name), label_img_color)
-    im = Image.fromarray(label_img_color) # use always PIL or other library .. try to avoid cv2.. but if no other option then ok
-    im.save(osp.join(direc,name))
+    # # pred = np.asarray(np.argmax(pred, axis=0))
+    # # print(pred.shape)
+    # label_img_color = label_img_to_color(pred)
+    # # print(label_img_color.dtype)
+    # # print(label_img_color.shape)
+    # # print(np.unique(label_img_color))
+    # # cv2.imwrite(osp.join(direc,name), label_img_color)
+    # im = Image.fromarray(label_img_color) # use always PIL or other library .. try to avoid cv2.. but if no other option then ok
+    # im.save(osp.join(direc,name))
+    # original >>>>>> 
     return 
     # print('img saved!')
 

@@ -113,11 +113,12 @@ dark_zurich_val_rf: {
         input_size: [1920, 1080]
         }
 
-dark_zurich_val: { 
-        data_dir: '/home/cse/staff/sid97.cstaff/scratch/data/dark_zurich/val/',
-        data_list: './dataset/dark_zurich/val.txt',
-        input_size: [1920, 1080]
-        }
+darkzurich_val: {
+        data_dir: "../scratch/data/dark_zurich_val/",
+        data_list: './dataset/list/darkzurich/val.txt',
+        input_size: [1024,512]
+}
+
 
 # dark_zurich_val: {
 #         data_dir: '/home/cse/staff/sid97.cstaff/scratch/data/dark_zurich_enhanced/val/',

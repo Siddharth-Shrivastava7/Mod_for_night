@@ -57,8 +57,8 @@ def compute_iou(model, testloader, args):
             image, label, edge, _, name = batch
 #            edge = F.interpolate(edge.unsqueeze(0), (512, 1024)).view(1,512,1024)``
             # print(name)
-            # if name[0].find('dannet_pred')==-1: 
-            #     continue
+            if name[0].find('dannet_pred')==-1: 
+                continue
             # print(name)
             output =  model(image.cuda())
             label = label.cuda()
@@ -68,7 +68,7 @@ def compute_iou(model, testloader, args):
             # save_pred(output, './save/dark_zurich_val/btad', args.dataset +str(index)+'.png') # org
             # print(name[0])
             name =name[0].split('/')[-1]
-            save_pred(output, '../scratch/data/try', name)  # current org 
+            # save_pred(output, '../scratch/data/try', name)  # current org # now not save
 
             C, H, W = output.shape # original
             # print('[*****')

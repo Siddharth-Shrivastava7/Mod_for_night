@@ -7,15 +7,15 @@ with open('/home/cse/phd/anz208849/Mod_for_night/dataset/list/darkzurich/dz_val_
     content = f.readlines() 
 
 pred_cols = [x.strip() for x in content if x.find('dannet_pred') != -1] 
-pred_bin = '/home/cse/phd/anz208849/scratch/data/dark_zurich_val/gt/acdc_model_dannet/val_pred/'
+pred_bin = '/home/cse/phd/anz208849/scratch/data/dark_zurich_val/gt/rf_fake_dannet/'
 src_path = '/home/cse/phd/anz208849/scratch/data/dark_zurich_val/gt/'
 
 for i in tqdm(range(len(pred_cols))): 
     pred = Image.open(src_path + pred_cols[i]).convert('RGB')
-    nm = pred_cols[i].split('/')[-1]
+    nm = pred_cols[i].split('/')[-1].replace('rgb_anon_color', 'gt_labelColor')
     binary = Image.open(pred_bin + nm).convert('RGB') 
     im3 = ImageChops.multiply(binary, pred) 
-    im3.save( src_path + 'overlay_rf_pred_dannet/' + nm)  
+    im3.save( src_path + 'gt_overlay_rf_pred_dannet/' + nm)  
     
 print('done')
 

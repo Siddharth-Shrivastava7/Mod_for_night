@@ -27,10 +27,10 @@ val: True
 val_freq: 5 # 372 ..after one epoch for cityscapes train set (2975) with batch 8
 
 # Dataset 
-source: 'acdc_train_rf' #chg
-target: 'acdc_val_rf' #chg
+source: 'acdc_train_rf_tensor' #chg
+target: 'acdc_val_rf_tensor' #chg
 worker: 4
-batch_size: 8 #chg
+batch_size: 2 #chg
 num_classes: 2
 
 #Transforms
@@ -126,6 +126,16 @@ acdc_train_rf: {
 acdc_val_rf: {
         data_dir: '/home/cse/phd/anz208849/scratch/data/',
         data_list: './dataset/list/acdc/rf_acdc_val_dannet.txt',
+        input_size: [1920, 1080]
+}
+acdc_train_rf_tensor: {
+        data_dir: '/home/cse/phd/anz208849/scratch/saved_models/DANNet/',
+        data_list: './dataset/list/acdc/acdc_trainrgb.txt',
+        input_size: [1920, 1080]
+}
+acdc_val_rf_tensor: {
+        data_dir: '/home/cse/phd/anz208849/scratch/saved_models/DANNet/',
+        data_list: './dataset/list/acdc/acdc_valrgb.txt',
         input_size: [1920, 1080]
 }
 acdc_dz_val_rf: {

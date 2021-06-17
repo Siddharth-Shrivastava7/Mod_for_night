@@ -34,6 +34,7 @@ class Trainer(BaseTrainer):
         # print(img.shape)
 
         seg_pred = self.model(img.cuda())
+        # seg_pred = nn.DataParallel(self.model(img.cuda()))
         # seg_pred = seg_pred.squeeze(dim=1) #for bce 
         # print('yes')
         # print(seg_label.shape, seg_pred.shape)
@@ -49,7 +50,7 @@ class Trainer(BaseTrainer):
         loss.backward()
 
     def train(self):
-        writer = SummaryWriter(comment="reak_fake_acdc")
+        writer = SummaryWriter(comment="reak_fake_tensor_acdc")
 
         if self.config.neptune:
             neptune.init(project_qualified_name='solacex/segmentation-DA')
