@@ -11,6 +11,10 @@ import imageio
 from . import transforms
 from . import joint_transforms
 from torch.nn import functional as F 
+import random
+from torchvision import transforms 
+
+
 class BaseDataSet(data.Dataset):
     def __init__(self, root, list_path,dataset, num_class,  joint_transform=None, transform=None, label_transform = None, max_iters=None, ignore_label=255, set='val', plabel_path=None, max_prop=None, selected=None,centroid=None, wei_path=None):
         
@@ -291,6 +295,26 @@ class BaseDataSet(data.Dataset):
                 # print(label_file) 
                 # break
 
+        elif dataset == 'acdc_dz_val_rf_tensor':
+            for name in self.img_ids:
+                # print(name)
+                if 'dannet_pred' in name:
+                    nm = name.split('/')[-1].replace('rgb_anon_color.png', 'rgb_anon.pt')
+                    fk_save = '/home/cse/phd/anz208849/scratch/saved_models/DANNet/dz_val/tensor_pred'
+                    img_file = osp.join(fk_save, nm) 
+                    nm = name.split('/')[-1].replace('rgb_anon_color', 'gt_labelColor')
+                    fk_save = 'rf_fake_dannet'    
+                    label_file = osp.join(self.root, fk_save, nm)  
+                    self.files.append({
+                        "img": img_file,
+                        "label":label_file,
+                        "name": name
+                    })
+                    # print(img_file)
+                    # print('************')
+                    # print(label_file) 
+                    # break  
+        
         elif dataset == 'acdc_dz_val_rf':
             for name in self.img_ids:
                 # print(name)
@@ -313,52 +337,103 @@ class BaseDataSet(data.Dataset):
                     "name": name
                 })
 
-                # print(img_file)
-                # print('************')
+        elif dataset == 'acdc_dz_val_rf_vr':
+            for name in self.img_ids:
+                # print(name)
+                if 'dannet_pred' in name:
+                    nm = name.split('/')[-1].replace('rgb_anon_color.png', 'rgb_anon.png')
+                    fk_save = '/home/cse/phd/anz208849/scratch/saved_models/DANNet/dz_val/seg_variation_map_bin'
+                    img_file = osp.join(fk_save, nm) 
+                    nm = name.split('/')[-1].replace('rgb_anon_color', 'gt_labelColor')
+                    fk_save = 'rf_fake_dannet'    
+                    label_file = osp.join(self.root, fk_save, nm)  
+                    self.files.append({
+                        "img": img_file,
+                        "label":label_file,
+                        "name": name
+                    })
+                    # print(img_file)
+                    # print('*****************')
+                    # print(label_file)
                 # print(label_file) 
-                # break  
+                    # print(label_file)
+                # print(label_file) 
+                    # print(label_file)
 
     def __len__(self):
         return len(self.files)
 
     def __getitem__(self, index):
         datafiles = self.files[index]
-
+        name = datafiles["name"]
+        # print(datafiles["img"])
+        # print('**********')
+        # print(datafiles["label"])
         try:
             # image = Image.open(datafiles["img"]).convert('RGB')
-            if self.dataset in ['acdc_val_rf_tensor', 'acdc_train_rf_tensor']:
-                # print(self.dataset)
-                # print(')))))))))))))))))')
-                # print(img_file)
-                name = datafiles["name"] 
-                image = torch.load(datafiles["img"])
-                image = image.transpose(2,0,1)
-                image = torch.from_numpy(image)
-                image = F.softmax(image, dim = 0)
-                # print(image.shape)
-                # print('*******((((((((((((((')
-                label = np.array(Image.open(datafiles['label']), dtype = np.int32)
-                # print('&&&&&&&&&&&&&&&&&&&&&&')
-                # print(label.shape)
-                label[label == 127] = 1
-                label = Image.fromarray(label.astype(np.uint8)) 
-                label_transform = transforms.MaskToTensor()
-                label = label_transform(label)
+            if self.dataset in ['acdc_val_rf_tensor', 'acdc_train_rf_tensor', 'acdc_dz_val_rf_tensor']:
                 
-                # joint_transforms.RandomSizeAndCrop(600,
-                #                                 True,
-                #                                 scale_min=0.5,
-                #                                 scale_max=1.5,
-                #                                 pre_size=720
-                #                                 )
-                # source_joint_list = [       
-                #     joint_transforms.Resize(600)
-                #     ]
-                # source_joint_transform = joint_transforms.Compose(source_joint_list) 
-                # image, label = source_joint_transform(image, label, None)
-                # print(torch.unique(label))
-                # print(label.shape) #torch.Size([1080, 1920])
-                # print(image.shape) # torch.Size([19, 1080, 1920])
+                if self.set == 'val': 
+                    x = []
+                    image = torch.load(datafiles["img"])
+                    image = image.transpose(2,0,1)
+
+                    label = Image.open(datafiles['label'])
+                    i, j, h, w = transforms.RandomCrop.get_params(
+                                    label, output_size=(256, 256)) 
+                    label = TF.crop(label, i, j, h,w)
+                    label = np.array(label, dtype = np.int32)
+                    label[label == 127] = 1
+                    label = TF.to_tensor(label).to(dtype=torch.uint8)
+                    label = label.squeeze(dim=0) 
+
+                    for ch in image: 
+                        ch = Image.fromarray(ch)
+                        ch = TF.crop(ch, i,j ,h,w)
+                        x.append(TF.to_tensor(ch))
+                    image = torch.cat(x)
+                    image = F.softmax(image, dim = 0)
+                    
+                else:
+                    seed = np.random.randint(2147483647) 
+                    x = []
+                    # 19 channel image transformation                
+                    name = datafiles["name"] 
+                    image = torch.load(datafiles["img"])
+                    image = image.transpose(2,0,1)
+                    
+                    label = Image.open(datafiles['label'])
+                    i, j, h, w = transforms.RandomCrop.get_params(
+                                    label, output_size=(256, 256))
+                    # print('****************')
+                    # print(i,j,h,w)
+                    tfms = transforms.Compose([
+                            transforms.RandomHorizontalFlip(),
+                            transforms.RandomVerticalFlip()])
+                    for ch in image: 
+                        random.seed(seed) 
+                        torch.manual_seed(seed)
+                        ch = Image.fromarray(ch)
+                        ch = TF.crop(ch, i,j ,h,w)
+                        ch = tfms(ch)
+                        x.append(TF.to_tensor(ch))
+                    image = torch.cat(x)
+                    image = F.softmax(image, dim = 0)
+
+                    label = TF.crop(label, i, j, h,w)
+                    label = tfms(label)
+                    label = np.array(label, dtype = np.int32)
+                    label[label == 127] = 1
+                    random.seed(seed) 
+                    torch.manual_seed(seed)
+                    label = TF.to_tensor(label).to(dtype=torch.uint8)
+                    label = label.squeeze(dim=0)
+                
+                # print(torch.unique(label)) #tensor([0, 1, 255], dtype=torch.int32)
+                # print('####################')
+                # print(label.shape) #torch.Size([1080, 1920]); torch.Size([256, 256])
+                # print(image.shape) # torch.Size([19, 1080, 1920]); torch.Size([19, 256, 256])
+                # print('&&&&&&&&&&&&&&&&&&&&')
                 # print(torch.is_tensor(image)) 
                 # print(torch.is_tensor(label))   
                 # print('yo')
@@ -395,6 +470,24 @@ class BaseDataSet(data.Dataset):
                 label[label == 127] = 1
                 label = Image.fromarray(label.astype(np.uint8)) 
 
+            elif self.dataset == 'acdc_dz_val_rf_vr':
+                # print('*****')
+                # print(datafiles["img"])
+                image = np.array(Image.open(datafiles["img"]), dtype = np.int32)
+                # print('&&&&&&&')
+                # print('***************')
+                # print(image.shape)
+                image[image==0] = 1
+                image[image==255] = 0
+                # print(np.unique(image))
+                image = torch.from_numpy(image)
+                label = np.array(Image.open(datafiles['label']), dtype = np.int32)
+                label[label == 127] = 1
+                # print(np.unique(label))
+                label = Image.fromarray(label.astype(np.uint8))
+                label_transform = transforms.MaskToTensor()
+                label = label_transform(label)
+
             else:
                 image = Image.open(datafiles["img"]).convert('RGB')
                 # print(self.dataset)
@@ -412,14 +505,14 @@ class BaseDataSet(data.Dataset):
             # if self.joint_transform is not None:
             #     # print('*****************')
             #     image, label = self.joint_transform(image, label, None)
-            # print('>>>>>>>>>>>>>>>>')
+            # # print('>>>>>>>>>>>>>>>>')
             # if self.label_transform is not None:
             #     # print('&&&&&&&&&&&&&&&&&&&')
             #     label = self.label_transform(label)
             
             # name = datafiles["name"] 
-            # print(name)
-            # print('*****************')           
+            # # print(name)
+            # # print('*****************')           
             # if self.transform is not None:
             #     image = self.transform(image)
             # original >>>>>>

@@ -28,29 +28,31 @@ class Trainer(BaseTrainer):
         img, seg_label, _, _, name = batch
         # print(img.shape)
         
-        seg_label = seg_label.long().cuda() # cross entropy
-        # seg_label = seg_label.float().cuda()
+        # seg_label = seg_label.long().cuda() # cross entropy
+        seg_label = seg_label.float().cuda() # bce or focal loss 
         b, c, h, w = img.shape
         # print(img.shape)
 
         seg_pred = self.model(img.cuda())
         # seg_pred = nn.DataParallel(self.model(img.cuda()))
-        # seg_pred = seg_pred.squeeze(dim=1) #for bce 
+        seg_pred = seg_pred.squeeze(dim=1) #for bce or focal loss 
         # print('yes')
         # print(seg_label.shape, seg_pred.shape)
         # seg_loss = F.binary_cross_entropy(seg_pred, seg_label)
-        # print('**********************')
         # print(seg_label.shape)
-        # print('**********************')
+        # print('&&&&&&&&&&&&&&&&&&&&&&&&')
         # print(seg_pred.shape)
-        loss = CrossEntropy2d()
+        # print('**********************')
+        loss = WeightedFocalLoss(alpha= 0.82, gamma=2)
         seg_loss = loss(seg_pred, seg_label)
+        # loss = CrossEntropy2d() # ce loss 
+        # seg_loss = loss(seg_pred, seg_label)
         self.losses.seg_loss = seg_loss
         loss = seg_loss  
         loss.backward()
 
     def train(self):
-        writer = SummaryWriter(comment="reak_fake_tensor_acdc")
+        writer = SummaryWriter(comment="reak_fake_tensor_acdc_focal_aug")
 
         if self.config.neptune:
             neptune.init(project_qualified_name='solacex/segmentation-DA')
@@ -85,6 +87,8 @@ class Trainer(BaseTrainer):
                 self.losses = edict({})
                 losses = self.iter(batch)
 
+                # print(self.config['model'])
+
                 # print(self.losses['seg_loss'].item())
                 # print(cu_iter)
                 train_epoch_loss += self.losses['seg_loss'].item()
@@ -112,7 +116,8 @@ class Trainer(BaseTrainer):
                     print('********************')
                     print('best_val_epoch_loss: ', best_val_epoch_loss)
                     print("MODEL UPDATED")
-                    name = self.config['source'] + '.pth'
+                    name = self.config['model'] + '.pth' # for the ce loss 
+                    # name = 'acdc_tensor_focal.pth' # focal loss 
                     torch.save(self.model.state_dict(), osp.join(self.config["snapshot"], name))
                     
                 self.model = self.model.train()
@@ -171,3 +176,28 @@ class CrossEntropy2d(nn.Module):
         # print(target.shape)
         loss = F.cross_entropy(predict, target, weight=weight, size_average=self.size_average)
         return loss
+
+class WeightedFocalLoss(nn.Module):
+    "Non weighted version of Focal Loss"
+    def __init__(self, alpha=.25, gamma=2, ignore_label=255):
+        super(WeightedFocalLoss, self).__init__()
+        self.alpha = torch.tensor([alpha, 1-alpha]).cuda()
+        self.gamma = gamma
+        self.ignore_label = ignore_label
+
+    def forward(self, inputs, targets):
+        # n, h, w = inputs.size()
+        targets_mask = (targets >= 0) * (targets != self.ignore_label)
+        targets = targets[targets_mask]
+        inputs = inputs[targets_mask]
+        BCE_loss = F.binary_cross_entropy(inputs, targets)
+        targets = targets.type(torch.long)
+        at = self.alpha.gather(0, targets.data.view(-1))
+        # print(at[targets==1])
+        # # print(at)
+        # print('**********')
+        pt = torch.exp(-BCE_loss)
+        # print(pt)
+        # print('^^^^^^^^^^^^')
+        F_loss = at*(1-pt)**self.gamma * BCE_loss
+        return F_loss.mean()

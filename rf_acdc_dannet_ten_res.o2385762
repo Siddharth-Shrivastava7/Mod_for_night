@@ -1,0 +1,3356 @@
+===============================
+2385762.pbshpc
+vsky012.hpc.iitd.ac.in
+===============================
+/home/cse/phd/anz208849/Mod_for_night
+_____params______
+blocks.0.0.conv1.weight torch.Size([64, 19, 3, 3])
+blocks.0.0.conv1.bias torch.Size([64])
+blocks.0.0.conv2.weight torch.Size([64, 64, 3, 3])
+blocks.0.0.conv2.bias torch.Size([64])
+blocks.0.0.conv_sc.weight torch.Size([64, 19, 1, 1])
+blocks.0.0.conv_sc.bias torch.Size([64])
+blocks.1.0.conv1.weight torch.Size([128, 64, 3, 3])
+blocks.1.0.conv1.bias torch.Size([128])
+blocks.1.0.conv2.weight torch.Size([128, 128, 3, 3])
+blocks.1.0.conv2.bias torch.Size([128])
+blocks.1.0.conv_sc.weight torch.Size([128, 64, 1, 1])
+blocks.1.0.conv_sc.bias torch.Size([128])
+blocks.2.0.conv1.weight torch.Size([256, 128, 3, 3])
+blocks.2.0.conv1.bias torch.Size([256])
+blocks.2.0.conv2.weight torch.Size([256, 256, 3, 3])
+blocks.2.0.conv2.bias torch.Size([256])
+blocks.2.0.conv_sc.weight torch.Size([256, 128, 1, 1])
+blocks.2.0.conv_sc.bias torch.Size([256])
+blocks.3.0.conv1.weight torch.Size([512, 256, 3, 3])
+blocks.3.0.conv1.bias torch.Size([512])
+blocks.3.0.conv2.weight torch.Size([512, 512, 3, 3])
+blocks.3.0.conv2.bias torch.Size([512])
+blocks.3.0.conv_sc.weight torch.Size([512, 256, 1, 1])
+blocks.3.0.conv_sc.bias torch.Size([512])
+blocks.4.0.conv1.weight torch.Size([512, 512, 3, 3])
+blocks.4.0.conv1.bias torch.Size([512])
+blocks.4.0.conv2.weight torch.Size([512, 512, 3, 3])
+blocks.4.0.conv2.bias torch.Size([512])
+blocks.4.0.conv_sc.weight torch.Size([512, 512, 1, 1])
+blocks.4.0.conv_sc.bias torch.Size([512])
+blocks.5.0.conv1.weight torch.Size([1024, 512, 3, 3])
+blocks.5.0.conv1.bias torch.Size([1024])
+blocks.5.0.conv2.weight torch.Size([1024, 1024, 3, 3])
+blocks.5.0.conv2.bias torch.Size([1024])
+blocks.5.0.conv_sc.weight torch.Size([1024, 512, 1, 1])
+blocks.5.0.conv_sc.bias torch.Size([1024])
+blocks.6.0.conv1.weight torch.Size([512, 1024, 3, 3])
+blocks.6.0.conv1.bias torch.Size([512])
+blocks.6.0.conv2.weight torch.Size([512, 512, 3, 3])
+blocks.6.0.conv2.bias torch.Size([512])
+blocks.6.0.conv_sc.weight torch.Size([512, 1024, 1, 1])
+blocks.6.0.conv_sc.bias torch.Size([512])
+blocks.7.0.conv1.weight torch.Size([512, 1024, 3, 3])
+blocks.7.0.conv1.bias torch.Size([512])
+blocks.7.0.conv2.weight torch.Size([512, 512, 3, 3])
+blocks.7.0.conv2.bias torch.Size([512])
+blocks.7.0.conv_sc.weight torch.Size([512, 1024, 1, 1])
+blocks.7.0.conv_sc.bias torch.Size([512])
+blocks.8.0.conv1.weight torch.Size([256, 1024, 3, 3])
+blocks.8.0.conv1.bias torch.Size([256])
+blocks.8.0.conv2.weight torch.Size([256, 256, 3, 3])
+blocks.8.0.conv2.bias torch.Size([256])
+blocks.8.0.conv_sc.weight torch.Size([256, 1024, 1, 1])
+blocks.8.0.conv_sc.bias torch.Size([256])
+blocks.9.0.conv1.weight torch.Size([128, 512, 3, 3])
+blocks.9.0.conv1.bias torch.Size([128])
+blocks.9.0.conv2.weight torch.Size([128, 128, 3, 3])
+blocks.9.0.conv2.bias torch.Size([128])
+blocks.9.0.conv_sc.weight torch.Size([128, 512, 1, 1])
+blocks.9.0.conv_sc.bias torch.Size([128])
+blocks.10.0.conv1.weight torch.Size([64, 256, 3, 3])
+blocks.10.0.conv1.bias torch.Size([64])
+blocks.10.0.conv2.weight torch.Size([64, 64, 3, 3])
+blocks.10.0.conv2.bias torch.Size([64])
+blocks.10.0.conv_sc.weight torch.Size([64, 256, 1, 1])
+blocks.10.0.conv_sc.bias torch.Size([64])
+blocks.11.0.conv1.weight torch.Size([64, 128, 3, 3])
+blocks.11.0.conv1.bias torch.Size([64])
+blocks.11.0.conv2.weight torch.Size([64, 64, 3, 3])
+blocks.11.0.conv2.bias torch.Size([64])
+blocks.11.0.conv_sc.weight torch.Size([64, 128, 1, 1])
+blocks.11.0.conv_sc.bias torch.Size([64])
+blocks.12.weight torch.Size([2, 64, 1, 1])
+blocks.12.bias torch.Size([2])
+wait
+['so_run_btad_2.py']
+Snapshot stored in: ../scratch/saved_models/acdc/dannet/train
+                     note : train          
+                    model : deeplab        
+                    train : 1              
+                 multigpu : 0              
+                    fixbn : 0              
+                 fix_seed : 1              
+            learning_rate : 7.5e-05        
+                num_steps : 5000           
+                   epochs : 1000           
+             weight_decay : 0.0005         
+                 momentum : 0.9            
+                    power : 0.9            
+                    round : 6              
+               print_freq : 372            
+                save_freq : 372            
+              tensorboard : 1              
+                  neptune : 0              
+                   screen : 1              
+                      val : 1              
+                 val_freq : 5              
+                   source : acdc_train_rf_tensor
+                   target : acdc_val_rf_tensor
+                   worker : 4              
+               batch_size : 16             
+              num_classes : 2              
+                input_src : 720            
+                input_tgt : 720            
+                 crop_src : 600            
+                 crop_tgt : 600            
+                   mirror : 1              
+                scale_min : 0.5            
+                scale_max : 1.5            
+                      rec : 0              
+              init_weight : ./save/model410_city_deeplabv2.pth
+             restore_from : None           
+                 snapshot : ../scratch/saved_models/acdc/dannet/train
+                   result : ./miou_result/ 
+                      log : ./log/         
+                   plabel : ./plabel       
+                       tb : ./log/train    
+
+_____params______
+blocks.0.0.conv1.weight torch.Size([64, 19, 3, 3])
+blocks.0.0.conv1.bias torch.Size([64])
+blocks.0.0.conv2.weight torch.Size([64, 64, 3, 3])
+blocks.0.0.conv2.bias torch.Size([64])
+blocks.0.0.conv_sc.weight torch.Size([64, 19, 1, 1])
+blocks.0.0.conv_sc.bias torch.Size([64])
+blocks.1.0.conv1.weight torch.Size([128, 64, 3, 3])
+blocks.1.0.conv1.bias torch.Size([128])
+blocks.1.0.conv2.weight torch.Size([128, 128, 3, 3])
+blocks.1.0.conv2.bias torch.Size([128])
+blocks.1.0.conv_sc.weight torch.Size([128, 64, 1, 1])
+blocks.1.0.conv_sc.bias torch.Size([128])
+blocks.2.0.conv1.weight torch.Size([256, 128, 3, 3])
+blocks.2.0.conv1.bias torch.Size([256])
+blocks.2.0.conv2.weight torch.Size([256, 256, 3, 3])
+blocks.2.0.conv2.bias torch.Size([256])
+blocks.2.0.conv_sc.weight torch.Size([256, 128, 1, 1])
+blocks.2.0.conv_sc.bias torch.Size([256])
+blocks.3.0.conv1.weight torch.Size([512, 256, 3, 3])
+blocks.3.0.conv1.bias torch.Size([512])
+blocks.3.0.conv2.weight torch.Size([512, 512, 3, 3])
+blocks.3.0.conv2.bias torch.Size([512])
+blocks.3.0.conv_sc.weight torch.Size([512, 256, 1, 1])
+blocks.3.0.conv_sc.bias torch.Size([512])
+blocks.4.0.conv1.weight torch.Size([512, 512, 3, 3])
+blocks.4.0.conv1.bias torch.Size([512])
+blocks.4.0.conv2.weight torch.Size([512, 512, 3, 3])
+blocks.4.0.conv2.bias torch.Size([512])
+blocks.4.0.conv_sc.weight torch.Size([512, 512, 1, 1])
+blocks.4.0.conv_sc.bias torch.Size([512])
+blocks.5.0.conv1.weight torch.Size([1024, 512, 3, 3])
+blocks.5.0.conv1.bias torch.Size([1024])
+blocks.5.0.conv2.weight torch.Size([1024, 1024, 3, 3])
+blocks.5.0.conv2.bias torch.Size([1024])
+blocks.5.0.conv_sc.weight torch.Size([1024, 512, 1, 1])
+blocks.5.0.conv_sc.bias torch.Size([1024])
+blocks.6.0.conv1.weight torch.Size([512, 1024, 3, 3])
+blocks.6.0.conv1.bias torch.Size([512])
+blocks.6.0.conv2.weight torch.Size([512, 512, 3, 3])
+blocks.6.0.conv2.bias torch.Size([512])
+blocks.6.0.conv_sc.weight torch.Size([512, 1024, 1, 1])
+blocks.6.0.conv_sc.bias torch.Size([512])
+blocks.7.0.conv1.weight torch.Size([512, 1024, 3, 3])
+blocks.7.0.conv1.bias torch.Size([512])
+blocks.7.0.conv2.weight torch.Size([512, 512, 3, 3])
+blocks.7.0.conv2.bias torch.Size([512])
+blocks.7.0.conv_sc.weight torch.Size([512, 1024, 1, 1])
+blocks.7.0.conv_sc.bias torch.Size([512])
+blocks.8.0.conv1.weight torch.Size([256, 1024, 3, 3])
+blocks.8.0.conv1.bias torch.Size([256])
+blocks.8.0.conv2.weight torch.Size([256, 256, 3, 3])
+blocks.8.0.conv2.bias torch.Size([256])
+blocks.8.0.conv_sc.weight torch.Size([256, 1024, 1, 1])
+blocks.8.0.conv_sc.bias torch.Size([256])
+blocks.9.0.conv1.weight torch.Size([128, 512, 3, 3])
+blocks.9.0.conv1.bias torch.Size([128])
+blocks.9.0.conv2.weight torch.Size([128, 128, 3, 3])
+blocks.9.0.conv2.bias torch.Size([128])
+blocks.9.0.conv_sc.weight torch.Size([128, 512, 1, 1])
+blocks.9.0.conv_sc.bias torch.Size([128])
+blocks.10.0.conv1.weight torch.Size([64, 256, 3, 3])
+blocks.10.0.conv1.bias torch.Size([64])
+blocks.10.0.conv2.weight torch.Size([64, 64, 3, 3])
+blocks.10.0.conv2.bias torch.Size([64])
+blocks.10.0.conv_sc.weight torch.Size([64, 256, 1, 1])
+blocks.10.0.conv_sc.bias torch.Size([64])
+blocks.11.0.conv1.weight torch.Size([64, 128, 3, 3])
+blocks.11.0.conv1.bias torch.Size([64])
+blocks.11.0.conv2.weight torch.Size([64, 64, 3, 3])
+blocks.11.0.conv2.bias torch.Size([64])
+blocks.11.0.conv_sc.weight torch.Size([64, 128, 1, 1])
+blocks.11.0.conv_sc.bias torch.Size([64])
+blocks.12.weight torch.Size([2, 64, 1, 1])
+blocks.12.bias torch.Size([2])
+Mode --> Train
+Lets ride...
+epoch =      0/  1000, exp = train
+train_iter_loss: 0.7013679146766663
+train_iter_loss: 0.7029526829719543
+train_iter_loss: 0.6822568774223328
+train_iter_loss: 0.6855766773223877
+train_iter_loss: 0.6821471452713013
+train_iter_loss: 0.6675072908401489
+train_iter_loss: 0.6533092260360718
+train_iter_loss: 0.6320229768753052
+train_iter_loss: 0.640822172164917
+train_iter_loss: 0.6528618931770325
+train_iter_loss: 0.5853809714317322
+train_iter_loss: 0.5672324299812317
+train_iter_loss: 0.5328731536865234
+train_iter_loss: 0.5271126627922058
+train_iter_loss: 0.5603982210159302
+train_iter_loss: 0.5292765498161316
+train_iter_loss: 0.5727904438972473
+train_iter_loss: 0.4853709638118744
+train_iter_loss: 0.46174734830856323
+train_iter_loss: 0.45211079716682434
+train_iter_loss: 0.4586484432220459
+train_iter_loss: 0.4309282898902893
+train_iter_loss: 0.4582633972167969
+train_iter_loss: 0.5464311242103577
+train_iter_loss: 0.4663783013820648
+train loss :0.5734
+---------------------
+Validation seg loss: 0.4889687514811192 at epoch 0
+********************
+best_val_epoch_loss:  0.4889687514811192
+MODEL UPDATED
+epoch =      1/  1000, exp = train
+train_iter_loss: 0.5013402104377747
+train_iter_loss: 0.480838418006897
+train_iter_loss: 0.4920532703399658
+train_iter_loss: 0.4890533983707428
+train_iter_loss: 0.406610906124115
+train_iter_loss: 0.3984878361225128
+train_iter_loss: 0.4854597747325897
+train_iter_loss: 0.4780946671962738
+train_iter_loss: 0.32155340909957886
+train_iter_loss: 0.3434886634349823
+train_iter_loss: 0.45853909850120544
+train_iter_loss: 0.4214027523994446
+train_iter_loss: 0.3988148272037506
+train_iter_loss: 0.36295977234840393
+train_iter_loss: 0.3112630248069763
+train_iter_loss: 0.4225189685821533
+train_iter_loss: 0.3089318871498108
+train_iter_loss: 0.3385154604911804
+train_iter_loss: 0.31915682554244995
+train_iter_loss: 0.5688827633857727
+train_iter_loss: 0.4408611059188843
+train_iter_loss: 0.536081075668335
+train_iter_loss: 0.3974929451942444
+train_iter_loss: 0.337457537651062
+train_iter_loss: 0.5078619122505188
+train loss :0.4440
+---------------------
+Validation seg loss: 0.4777236818423811 at epoch 1
+********************
+best_val_epoch_loss:  0.4777236818423811
+MODEL UPDATED
+epoch =      2/  1000, exp = train
+train_iter_loss: 0.36907002329826355
+train_iter_loss: 0.5072729587554932
+train_iter_loss: 0.3613767623901367
+train_iter_loss: 0.47661063075065613
+train_iter_loss: 0.42806175351142883
+train_iter_loss: 0.4280417263507843
+train_iter_loss: 0.4222555160522461
+train_iter_loss: 0.4257475435733795
+train_iter_loss: 0.5344019532203674
+train_iter_loss: 0.3415760099887848
+train_iter_loss: 0.4410571753978729
+train_iter_loss: 0.3838837444782257
+train_iter_loss: 0.5053662061691284
+train_iter_loss: 0.3809124529361725
+train_iter_loss: 0.42100417613983154
+train_iter_loss: 0.44262075424194336
+train_iter_loss: 0.33038410544395447
+train_iter_loss: 0.3903330862522125
+train_iter_loss: 0.4778957962989807
+train_iter_loss: 0.40885573625564575
+train_iter_loss: 0.3403191566467285
+train_iter_loss: 0.5616714358329773
+train_iter_loss: 0.44232165813446045
+train_iter_loss: 0.31794217228889465
+train_iter_loss: 0.3572417199611664
+train loss :0.4376
+---------------------
+Validation seg loss: 0.4673919088013892 at epoch 2
+********************
+best_val_epoch_loss:  0.4673919088013892
+MODEL UPDATED
+epoch =      3/  1000, exp = train
+train_iter_loss: 0.4247393012046814
+train_iter_loss: 0.5160536170005798
+train_iter_loss: 0.4870757460594177
+train_iter_loss: 0.4386789798736572
+train_iter_loss: 0.4607679545879364
+train_iter_loss: 0.4852707087993622
+train_iter_loss: 0.38682010769844055
+train_iter_loss: 0.3497750759124756
+train_iter_loss: 0.45110559463500977
+train_iter_loss: 0.3794960379600525
+train_iter_loss: 0.43554481863975525
+train_iter_loss: 0.3204498291015625
+train_iter_loss: 0.4353184103965759
+train_iter_loss: 0.31171053647994995
+train_iter_loss: 0.3821917176246643
+train_iter_loss: 0.3920186758041382
+train_iter_loss: 0.3938886225223541
+train_iter_loss: 0.3889848589897156
+train_iter_loss: 0.4564781188964844
+train_iter_loss: 0.31444913148880005
+train_iter_loss: 0.3350173830986023
+train_iter_loss: 0.32918253540992737
+train_iter_loss: 0.33423081040382385
+train_iter_loss: 0.4813406765460968
+train_iter_loss: 0.44366559386253357
+train loss :0.4229
+---------------------
+Validation seg loss: 0.46520313775202016 at epoch 3
+********************
+best_val_epoch_loss:  0.46520313775202016
+MODEL UPDATED
+epoch =      4/  1000, exp = train
+train_iter_loss: 0.4304044246673584
+train_iter_loss: 0.533946692943573
+train_iter_loss: 0.39038097858428955
+train_iter_loss: 0.40971511602401733
+train_iter_loss: 0.380670428276062
+train_iter_loss: 0.39232519268989563
+train_iter_loss: 0.39249318838119507
+train_iter_loss: 0.38107171654701233
+train_iter_loss: 0.2586008310317993
+train_iter_loss: 0.31491297483444214
+train_iter_loss: 0.3673160672187805
+train_iter_loss: 0.5840802192687988
+train_iter_loss: 0.4748155176639557
+train_iter_loss: 0.39393186569213867
+train_iter_loss: 0.32081326842308044
+train_iter_loss: 0.28210631012916565
+train_iter_loss: 0.37821295857429504
+train_iter_loss: 0.3113601803779602
+train_iter_loss: 0.29954400658607483
+train_iter_loss: 0.44782954454421997
+train_iter_loss: 0.29468533396720886
+train_iter_loss: 0.3648121654987335
+train_iter_loss: 0.2714211344718933
+train_iter_loss: 0.37685489654541016
+train_iter_loss: 0.43083393573760986
+train loss :0.3962
+---------------------
+Validation seg loss: 0.4693455951956083 at epoch 4
+epoch =      5/  1000, exp = train
+train_iter_loss: 0.44659942388534546
+train_iter_loss: 0.49356505274772644
+train_iter_loss: 0.3999859392642975
+train_iter_loss: 0.5791167616844177
+train_iter_loss: 0.46658119559288025
+train_iter_loss: 0.4065892696380615
+train_iter_loss: 0.38069722056388855
+train_iter_loss: 0.35119885206222534
+train_iter_loss: 0.59305739402771
+train_iter_loss: 0.4506863057613373
+train_iter_loss: 0.30712899565696716
+train_iter_loss: 0.3861968219280243
+train_iter_loss: 0.32332104444503784
+train_iter_loss: 0.32309335470199585
+train_iter_loss: 0.4835159182548523
+train_iter_loss: 0.364387184381485
+train_iter_loss: 0.4306483864784241
+train_iter_loss: 0.2892944812774658
+train_iter_loss: 0.24575956165790558
+train_iter_loss: 0.4338859021663666
+train_iter_loss: 0.3925977051258087
+train_iter_loss: 0.40677326917648315
+train_iter_loss: 0.47437840700149536
+train_iter_loss: 0.4229287803173065
+train_iter_loss: 0.44007325172424316
+train loss :0.4275
+---------------------
+Validation seg loss: 0.4690287321243646 at epoch 5
+epoch =      6/  1000, exp = train
+train_iter_loss: 0.581578254699707
+train_iter_loss: 0.6061983704566956
+train_iter_loss: 0.4666673243045807
+train_iter_loss: 0.44912293553352356
+train_iter_loss: 0.28163012862205505
+train_iter_loss: 0.4344714879989624
+train_iter_loss: 0.4418374300003052
+train_iter_loss: 0.4233236610889435
+train_iter_loss: 0.3513689339160919
+train_iter_loss: 0.5396333336830139
+train_iter_loss: 0.31354033946990967
+train_iter_loss: 0.3603111803531647
+train_iter_loss: 0.3833217918872833
+train_iter_loss: 0.3709159791469574
+train_iter_loss: 0.5322148203849792
+train_iter_loss: 0.3914308249950409
+train_iter_loss: 0.3573088049888611
+train_iter_loss: 0.3345798850059509
+train_iter_loss: 0.33097413182258606
+train_iter_loss: 0.39107850193977356
+train_iter_loss: 0.3796647787094116
+train_iter_loss: 0.30318719148635864
+train_iter_loss: 0.3439118266105652
+train_iter_loss: 0.44528356194496155
+train_iter_loss: 0.33405205607414246
+train loss :0.4230
+---------------------
+Validation seg loss: 0.4585017987157939 at epoch 6
+********************
+best_val_epoch_loss:  0.4585017987157939
+MODEL UPDATED
+epoch =      7/  1000, exp = train
+train_iter_loss: 0.36580848693847656
+train_iter_loss: 0.4579595625400543
+train_iter_loss: 0.4761703312397003
+train_iter_loss: 0.3899316191673279
+train_iter_loss: 0.42358019948005676
+train_iter_loss: 0.46491214632987976
+train_iter_loss: 0.3529667854309082
+train_iter_loss: 0.3408423364162445
+train_iter_loss: 0.2983357310295105
+train_iter_loss: 0.3621133863925934
+train_iter_loss: 0.4387623071670532
+train_iter_loss: 0.38243308663368225
+train_iter_loss: 0.34082654118537903
+train_iter_loss: 0.39205703139305115
+train_iter_loss: 0.3929777443408966
+train_iter_loss: 0.3301416039466858
+train_iter_loss: 0.4094417989253998
+train_iter_loss: 0.2690476179122925
+train_iter_loss: 0.40570759773254395
+train_iter_loss: 0.2711109220981598
+train_iter_loss: 0.3538663685321808
+train_iter_loss: 0.4048464000225067
+train_iter_loss: 0.3548355996608734
+train_iter_loss: 0.3550350069999695
+train_iter_loss: 0.5112287998199463
+train loss :0.3987
+---------------------
+Validation seg loss: 0.46873622155695593 at epoch 7
+epoch =      8/  1000, exp = train
+train_iter_loss: 0.3762493133544922
+train_iter_loss: 0.44235870242118835
+train_iter_loss: 0.591717004776001
+train_iter_loss: 0.4010443091392517
+train_iter_loss: 0.3975682258605957
+train_iter_loss: 0.3624267578125
+train_iter_loss: 0.43527987599372864
+train_iter_loss: 0.45512330532073975
+train_iter_loss: 0.31957247853279114
+train_iter_loss: 0.36239248514175415
+train_iter_loss: 0.29704996943473816
+train_iter_loss: 0.33500462770462036
+train_iter_loss: 0.4387877583503723
+train_iter_loss: 0.39272964000701904
+train_iter_loss: 0.3714103698730469
+train_iter_loss: 0.3683110475540161
+train_iter_loss: 0.33465632796287537
+train_iter_loss: 0.2748880386352539
+train_iter_loss: 0.33165034651756287
+train_iter_loss: 0.5024744868278503
+train_iter_loss: 0.29663386940956116
+train_iter_loss: 0.35316216945648193
+train_iter_loss: 0.34620627760887146
+train_iter_loss: 0.3669816553592682
+train_iter_loss: 0.39623820781707764
+train loss :0.3979
+---------------------
+Validation seg loss: 0.4652752700560498 at epoch 8
+epoch =      9/  1000, exp = train
+train_iter_loss: 0.48033490777015686
+train_iter_loss: 0.5401850342750549
+train_iter_loss: 0.596010684967041
+train_iter_loss: 0.4284650981426239
+train_iter_loss: 0.37049421668052673
+train_iter_loss: 0.5297874808311462
+train_iter_loss: 0.4214712977409363
+train_iter_loss: 0.3028046488761902
+train_iter_loss: 0.3936291038990021
+train_iter_loss: 0.5015081167221069
+train_iter_loss: 0.3977901339530945
+train_iter_loss: 0.3017154932022095
+train_iter_loss: 0.38694092631340027
+train_iter_loss: 0.31785839796066284
+train_iter_loss: 0.3390311896800995
+train_iter_loss: 0.43027690052986145
+train_iter_loss: 0.2960679829120636
+train_iter_loss: 0.39709770679473877
+train_iter_loss: 0.35733431577682495
+train_iter_loss: 0.23932905495166779
+train_iter_loss: 0.31893542408943176
+train_iter_loss: 0.41854536533355713
+train_iter_loss: 0.35964205861091614
+train_iter_loss: 0.39860495924949646
+train_iter_loss: 0.4775998592376709
+train loss :0.4160
+---------------------
+Validation seg loss: 0.4642945780366097 at epoch 9
+epoch =     10/  1000, exp = train
+train_iter_loss: 0.48783257603645325
+train_iter_loss: 0.36547940969467163
+train_iter_loss: 0.5392940044403076
+train_iter_loss: 0.5241544246673584
+train_iter_loss: 0.33883750438690186
+train_iter_loss: 0.4384780526161194
+train_iter_loss: 0.3726957142353058
+train_iter_loss: 0.42294713854789734
+train_iter_loss: 0.39217323064804077
+train_iter_loss: 0.46972715854644775
+train_iter_loss: 0.4012114107608795
+train_iter_loss: 0.35900408029556274
+train_iter_loss: 0.3900587260723114
+train_iter_loss: 0.3917590081691742
+train_iter_loss: 0.4716562032699585
+train_iter_loss: 0.3420429527759552
+train_iter_loss: 0.26565033197402954
+train_iter_loss: 0.3521312177181244
+train_iter_loss: 0.3689679503440857
+train_iter_loss: 0.33594074845314026
+train_iter_loss: 0.4483696222305298
+train_iter_loss: 0.5537325739860535
+train_iter_loss: 0.3176543414592743
+train_iter_loss: 0.3458249568939209
+train_iter_loss: 0.47437748312950134
+train loss :0.4234
+---------------------
+Validation seg loss: 0.46786934734796576 at epoch 10
+epoch =     11/  1000, exp = train
+train_iter_loss: 0.4539293944835663
+train_iter_loss: 0.41456377506256104
+train_iter_loss: 0.37438836693763733
+train_iter_loss: 0.4888245165348053
+train_iter_loss: 0.3688526153564453
+train_iter_loss: 0.4598024785518646
+train_iter_loss: 0.5079208612442017
+train_iter_loss: 0.4727199673652649
+train_iter_loss: 0.4200659394264221
+train_iter_loss: 0.28072333335876465
+train_iter_loss: 0.32188698649406433
+train_iter_loss: 0.32329362630844116
+train_iter_loss: 0.3488425314426422
+train_iter_loss: 0.35052061080932617
+train_iter_loss: 0.40111979842185974
+train_iter_loss: 0.48054447770118713
+train_iter_loss: 0.26619264483451843
+train_iter_loss: 0.2990210950374603
+train_iter_loss: 0.4143875241279602
+train_iter_loss: 0.42039480805397034
+train_iter_loss: 0.4261060357093811
+train_iter_loss: 0.4842994809150696
+train_iter_loss: 0.3907444477081299
+train_iter_loss: 0.323688805103302
+train_iter_loss: 0.45910146832466125
+train loss :0.4150
+---------------------
+Validation seg loss: 0.46690628101240916 at epoch 11
+epoch =     12/  1000, exp = train
+train_iter_loss: 0.41666725277900696
+train_iter_loss: 0.47331780195236206
+train_iter_loss: 0.4132334887981415
+train_iter_loss: 0.37368470430374146
+train_iter_loss: 0.4295976758003235
+train_iter_loss: 0.3032093644142151
+train_iter_loss: 0.29375186562538147
+train_iter_loss: 0.3642326593399048
+train_iter_loss: 0.5859480500221252
+train_iter_loss: 0.40849947929382324
+train_iter_loss: 0.3742043375968933
+train_iter_loss: 0.2874683737754822
+train_iter_loss: 0.4217698872089386
+train_iter_loss: 0.4407115578651428
+train_iter_loss: 0.4830525517463684
+train_iter_loss: 0.4186464250087738
+train_iter_loss: 0.22187276184558868
+train_iter_loss: 0.40106070041656494
+train_iter_loss: 0.4851609766483307
+train_iter_loss: 0.350979208946228
+train_iter_loss: 0.3851240277290344
+train_iter_loss: 0.3460671603679657
+train_iter_loss: 0.3753696084022522
+train_iter_loss: 0.32798290252685547
+train_iter_loss: 0.47861549258232117
+train loss :0.4110
+---------------------
+Validation seg loss: 0.45339020629817584 at epoch 12
+********************
+best_val_epoch_loss:  0.45339020629817584
+MODEL UPDATED
+epoch =     13/  1000, exp = train
+train_iter_loss: 0.5242484211921692
+train_iter_loss: 0.3420296013355255
+train_iter_loss: 0.36026373505592346
+train_iter_loss: 0.4114427864551544
+train_iter_loss: 0.33917033672332764
+train_iter_loss: 0.5124038457870483
+train_iter_loss: 0.360112726688385
+train_iter_loss: 0.3512462079524994
+train_iter_loss: 0.4054984152317047
+train_iter_loss: 0.3480481803417206
+train_iter_loss: 0.2779843211174011
+train_iter_loss: 0.4095441401004791
+train_iter_loss: 0.3192741870880127
+train_iter_loss: 0.3957998752593994
+train_iter_loss: 0.5916294455528259
+train_iter_loss: 0.33964458107948303
+train_iter_loss: 0.37561914324760437
+train_iter_loss: 0.38992658257484436
+train_iter_loss: 0.28270480036735535
+train_iter_loss: 0.30453160405158997
+train_iter_loss: 0.3342956602573395
+train_iter_loss: 0.40222278237342834
+train_iter_loss: 0.40294715762138367
+train_iter_loss: 0.32830142974853516
+train_iter_loss: 0.44391003251075745
+train loss :0.3986
+---------------------
+Validation seg loss: 0.45512386594178544 at epoch 13
+epoch =     14/  1000, exp = train
+train_iter_loss: 0.3363272547721863
+train_iter_loss: 0.4761429727077484
+train_iter_loss: 0.3977317810058594
+train_iter_loss: 0.42663460969924927
+train_iter_loss: 0.5045625567436218
+train_iter_loss: 0.4387141168117523
+train_iter_loss: 0.4883033037185669
+train_iter_loss: 0.3247238099575043
+train_iter_loss: 0.456949919462204
+train_iter_loss: 0.43457797169685364
+train_iter_loss: 0.4371362030506134
+train_iter_loss: 0.36672866344451904
+train_iter_loss: 0.3707210421562195
+train_iter_loss: 0.3180823028087616
+train_iter_loss: 0.30952680110931396
+train_iter_loss: 0.39791980385780334
+train_iter_loss: 0.2818874418735504
+train_iter_loss: 0.35917428135871887
+train_iter_loss: 0.3637726306915283
+train_iter_loss: 0.3487115502357483
+train_iter_loss: 0.34005624055862427
+train_iter_loss: 0.4420371949672699
+train_iter_loss: 0.3327052891254425
+train_iter_loss: 0.32447943091392517
+train_iter_loss: 0.3746846914291382
+train loss :0.4020
+---------------------
+Validation seg loss: 0.46250568231884037 at epoch 14
+epoch =     15/  1000, exp = train
+train_iter_loss: 0.3466361165046692
+train_iter_loss: 0.5530977249145508
+train_iter_loss: 0.3670344650745392
+train_iter_loss: 0.4070247709751129
+train_iter_loss: 0.3615085780620575
+train_iter_loss: 0.4134371280670166
+train_iter_loss: 0.4123968183994293
+train_iter_loss: 0.36100131273269653
+train_iter_loss: 0.3377769887447357
+train_iter_loss: 0.3812829256057739
+train_iter_loss: 0.46767863631248474
+train_iter_loss: 0.348000168800354
+train_iter_loss: 0.4120388329029083
+train_iter_loss: 0.3691547214984894
+train_iter_loss: 0.3307037949562073
+train_iter_loss: 0.3999883830547333
+train_iter_loss: 0.5596210956573486
+train_iter_loss: 0.26609185338020325
+train_iter_loss: 0.3061790466308594
+train_iter_loss: 0.3753020465373993
+train_iter_loss: 0.36457058787345886
+train_iter_loss: 0.3095700442790985
+train_iter_loss: 0.3937495946884155
+train_iter_loss: 0.4445105791091919
+train_iter_loss: 0.38200879096984863
+train loss :0.4029
+---------------------
+Validation seg loss: 0.4668607390573565 at epoch 15
+epoch =     16/  1000, exp = train
+train_iter_loss: 0.42231810092926025
+train_iter_loss: 0.5306652188301086
+train_iter_loss: 0.4713040590286255
+train_iter_loss: 0.38863250613212585
+train_iter_loss: 0.5179563164710999
+train_iter_loss: 0.47613415122032166
+train_iter_loss: 0.3698406219482422
+train_iter_loss: 0.37787023186683655
+train_iter_loss: 0.39001694321632385
+train_iter_loss: 0.38866594433784485
+train_iter_loss: 0.4459172189235687
+train_iter_loss: 0.4109058678150177
+train_iter_loss: 0.46372565627098083
+train_iter_loss: 0.48973599076271057
+train_iter_loss: 0.37942370772361755
+train_iter_loss: 0.39655694365501404
+train_iter_loss: 0.2764812409877777
+train_iter_loss: 0.29586049914360046
+train_iter_loss: 0.2378285825252533
+train_iter_loss: 0.3743462562561035
+train_iter_loss: 0.3439842462539673
+train_iter_loss: 0.317039430141449
+train_iter_loss: 0.47970110177993774
+train_iter_loss: 0.30466005206108093
+train_iter_loss: 0.35838013887405396
+train loss :0.4124
+---------------------
+Validation seg loss: 0.45592463958375856 at epoch 16
+epoch =     17/  1000, exp = train
+train_iter_loss: 0.40111029148101807
+train_iter_loss: 0.3746008574962616
+train_iter_loss: 0.46221938729286194
+train_iter_loss: 0.43264684081077576
+train_iter_loss: 0.5279155969619751
+train_iter_loss: 0.4250912666320801
+train_iter_loss: 0.43020519614219666
+train_iter_loss: 0.40497076511383057
+train_iter_loss: 0.4656386971473694
+train_iter_loss: 0.46172675490379333
+train_iter_loss: 0.48372766375541687
+train_iter_loss: 0.3533281981945038
+train_iter_loss: 0.30945760011672974
+train_iter_loss: 0.5118586421012878
+train_iter_loss: 0.4970739483833313
+train_iter_loss: 0.42534536123275757
+train_iter_loss: 0.3312021791934967
+train_iter_loss: 0.4101875126361847
+train_iter_loss: 0.4065292477607727
+train_iter_loss: 0.32725420594215393
+train_iter_loss: 0.47432953119277954
+train_iter_loss: 0.3698468804359436
+train_iter_loss: 0.3613907992839813
+train_iter_loss: 0.31133589148521423
+train_iter_loss: 0.45008862018585205
+train loss :0.4329
+---------------------
+Validation seg loss: 0.4571694347234267 at epoch 17
+epoch =     18/  1000, exp = train
+train_iter_loss: 0.47876179218292236
+train_iter_loss: 0.42427167296409607
+train_iter_loss: 0.3846982717514038
+train_iter_loss: 0.506190836429596
+train_iter_loss: 0.47974127531051636
+train_iter_loss: 0.4951171278953552
+train_iter_loss: 0.4257049560546875
+train_iter_loss: 0.302875816822052
+train_iter_loss: 0.2807779610157013
+train_iter_loss: 0.6418877243995667
+train_iter_loss: 0.4594578444957733
+train_iter_loss: 0.4086684584617615
+train_iter_loss: 0.3018607199192047
+train_iter_loss: 0.4740554094314575
+train_iter_loss: 0.3502379357814789
+train_iter_loss: 0.35502004623413086
+train_iter_loss: 0.3433072865009308
+train_iter_loss: 0.35992783308029175
+train_iter_loss: 0.3188839256763458
+train_iter_loss: 0.31932759284973145
+train_iter_loss: 0.48972082138061523
+train_iter_loss: 0.34061098098754883
+train_iter_loss: 0.340223103761673
+train_iter_loss: 0.42934519052505493
+train_iter_loss: 0.3651205003261566
+train loss :0.4203
+---------------------
+Validation seg loss: 0.4475990296253618 at epoch 18
+********************
+best_val_epoch_loss:  0.4475990296253618
+MODEL UPDATED
+epoch =     19/  1000, exp = train
+train_iter_loss: 0.47866275906562805
+train_iter_loss: 0.5421391129493713
+train_iter_loss: 0.4244133532047272
+train_iter_loss: 0.49838799238204956
+train_iter_loss: 0.32931461930274963
+train_iter_loss: 0.342527836561203
+train_iter_loss: 0.33019813895225525
+train_iter_loss: 0.4279060661792755
+train_iter_loss: 0.37796857953071594
+train_iter_loss: 0.3079654276371002
+train_iter_loss: 0.5310713052749634
+train_iter_loss: 0.46782734990119934
+train_iter_loss: 0.32410529255867004
+train_iter_loss: 0.4061010777950287
+train_iter_loss: 0.3457411825656891
+train_iter_loss: 0.3157559037208557
+train_iter_loss: 0.32336941361427307
+train_iter_loss: 0.3633463978767395
+train_iter_loss: 0.2653598189353943
+train_iter_loss: 0.3427216708660126
+train_iter_loss: 0.5436707735061646
+train_iter_loss: 0.3506612181663513
+train_iter_loss: 0.36584460735321045
+train_iter_loss: 0.33301904797554016
+train_iter_loss: 0.4590243399143219
+train loss :0.4087
+---------------------
+Validation seg loss: 0.4588345939398937 at epoch 19
+epoch =     20/  1000, exp = train
+train_iter_loss: 0.4559800922870636
+train_iter_loss: 0.44117411971092224
+train_iter_loss: 0.4205687940120697
+train_iter_loss: 0.5143116116523743
+train_iter_loss: 0.30064186453819275
+train_iter_loss: 0.5587435364723206
+train_iter_loss: 0.35544252395629883
+train_iter_loss: 0.4200126528739929
+train_iter_loss: 0.45173701643943787
+train_iter_loss: 0.40042153000831604
+train_iter_loss: 0.4030348062515259
+train_iter_loss: 0.45663487911224365
+train_iter_loss: 0.3874492645263672
+train_iter_loss: 0.4459760785102844
+train_iter_loss: 0.43303045630455017
+train_iter_loss: 0.2995263636112213
+train_iter_loss: 0.3651651442050934
+train_iter_loss: 0.43169546127319336
+train_iter_loss: 0.47499898076057434
+train_iter_loss: 0.4173738658428192
+train_iter_loss: 0.5123853087425232
+train_iter_loss: 0.3475381135940552
+train_iter_loss: 0.4486772119998932
+train_iter_loss: 0.4356391429901123
+train_iter_loss: 0.37972256541252136
+train loss :0.4387
+---------------------
+Validation seg loss: 0.45489256976629205 at epoch 20
+epoch =     21/  1000, exp = train
+train_iter_loss: 0.5930438041687012
+train_iter_loss: 0.4981869161128998
+train_iter_loss: 0.5348613858222961
+train_iter_loss: 0.3785383701324463
+train_iter_loss: 0.3470197319984436
+train_iter_loss: 0.37008294463157654
+train_iter_loss: 0.3782239556312561
+train_iter_loss: 0.40703558921813965
+train_iter_loss: 0.3808800280094147
+train_iter_loss: 0.44001415371894836
+train_iter_loss: 0.3590658903121948
+train_iter_loss: 0.36478930711746216
+train_iter_loss: 0.5130287408828735
+train_iter_loss: 0.269867479801178
+train_iter_loss: 0.3854168951511383
+train_iter_loss: 0.3663369119167328
+train_iter_loss: 0.41270002722740173
+train_iter_loss: 0.3391052484512329
+train_iter_loss: 0.3402537405490875
+train_iter_loss: 0.37062013149261475
+train_iter_loss: 0.3300378918647766
+train_iter_loss: 0.3970871865749359
+train_iter_loss: 0.3632434010505676
+train_iter_loss: 0.38812026381492615
+train_iter_loss: 0.4226209223270416
+train loss :0.4156
+---------------------
+Validation seg loss: 0.44469523479072554 at epoch 21
+********************
+best_val_epoch_loss:  0.44469523479072554
+MODEL UPDATED
+epoch =     22/  1000, exp = train
+train_iter_loss: 0.462332159280777
+train_iter_loss: 0.513247013092041
+train_iter_loss: 0.3953597843647003
+train_iter_loss: 0.5058876872062683
+train_iter_loss: 0.4505298137664795
+train_iter_loss: 0.34122422337532043
+train_iter_loss: 0.3458895981311798
+train_iter_loss: 0.3593083918094635
+train_iter_loss: 0.5798949003219604
+train_iter_loss: 0.4211511015892029
+train_iter_loss: 0.4145505726337433
+train_iter_loss: 0.35636985301971436
+train_iter_loss: 0.4196185767650604
+train_iter_loss: 0.3961624801158905
+train_iter_loss: 0.24397505819797516
+train_iter_loss: 0.3290032744407654
+train_iter_loss: 0.3731522560119629
+train_iter_loss: 0.25481370091438293
+train_iter_loss: 0.27280735969543457
+train_iter_loss: 0.307168185710907
+train_iter_loss: 0.3883433938026428
+train_iter_loss: 0.3375088572502136
+train_iter_loss: 0.34927594661712646
+train_iter_loss: 0.42937159538269043
+train_iter_loss: 0.333729088306427
+train loss :0.3998
+---------------------
+Validation seg loss: 0.4625519481751154 at epoch 22
+epoch =     23/  1000, exp = train
+train_iter_loss: 0.4739738702774048
+train_iter_loss: 0.5003315806388855
+train_iter_loss: 0.4761729836463928
+train_iter_loss: 0.4156896770000458
+train_iter_loss: 0.38791802525520325
+train_iter_loss: 0.2794903814792633
+train_iter_loss: 0.43710076808929443
+train_iter_loss: 0.4648692011833191
+train_iter_loss: 0.6437032222747803
+train_iter_loss: 0.24701517820358276
+train_iter_loss: 0.40042808651924133
+train_iter_loss: 0.39660295844078064
+train_iter_loss: 0.33446213603019714
+train_iter_loss: 0.32927045226097107
+train_iter_loss: 0.40058377385139465
+train_iter_loss: 0.3438025116920471
+train_iter_loss: 0.3553905189037323
+train_iter_loss: 0.3498910069465637
+train_iter_loss: 0.34011584520339966
+train_iter_loss: 0.3465549945831299
+train_iter_loss: 0.4778609871864319
+train_iter_loss: 0.3110349178314209
+train_iter_loss: 0.40566426515579224
+train_iter_loss: 0.27750521898269653
+train_iter_loss: 0.40985435247421265
+train loss :0.4082
+---------------------
+Validation seg loss: nan at epoch 23
+epoch =     24/  1000, exp = train
+train_iter_loss: 0.5273047089576721
+train_iter_loss: 0.35750705003738403
+train_iter_loss: 0.6026417016983032
+train_iter_loss: 0.42733675241470337
+train_iter_loss: 0.423772931098938
+train_iter_loss: 0.36104515194892883
+train_iter_loss: 0.3660206198692322
+train_iter_loss: 0.26666948199272156
+train_iter_loss: 0.44076788425445557
+train_iter_loss: 0.38688594102859497
+train_iter_loss: 0.4109829366207123
+train_iter_loss: 0.3885575234889984
+train_iter_loss: 0.4238419532775879
+train_iter_loss: 0.4155983328819275
+train_iter_loss: 0.5142818093299866
+train_iter_loss: 0.33155956864356995
+train_iter_loss: 0.31400904059410095
+train_iter_loss: 0.42576879262924194
+train_iter_loss: 0.35437512397766113
+train_iter_loss: 0.3040916621685028
+train_iter_loss: 0.3459283113479614
+train_iter_loss: 0.3719828128814697
+train_iter_loss: 0.3562314808368683
+train_iter_loss: 0.5351378321647644
+train_iter_loss: 0.316976398229599
+train loss :0.4151
+---------------------
+Validation seg loss: 0.4506030973609326 at epoch 24
+epoch =     25/  1000, exp = train
+train_iter_loss: 0.3941936492919922
+train_iter_loss: 0.4405333697795868
+train_iter_loss: 0.4720861613750458
+train_iter_loss: 0.3331904411315918
+train_iter_loss: 0.44312596321105957
+train_iter_loss: 0.3943357765674591
+train_iter_loss: 0.38337966799736023
+train_iter_loss: 0.3096860647201538
+train_iter_loss: 0.2842259705066681
+train_iter_loss: 0.49613648653030396
+train_iter_loss: 0.34958696365356445
+train_iter_loss: 0.3549593985080719
+train_iter_loss: 0.34298306703567505
+train_iter_loss: 0.40690916776657104
+train_iter_loss: 0.30180951952934265
+train_iter_loss: 0.31180158257484436
+train_iter_loss: 0.29166632890701294
+train_iter_loss: 0.317017138004303
+train_iter_loss: 0.459297776222229
+train_iter_loss: 0.29026344418525696
+train_iter_loss: 0.3271443843841553
+train_iter_loss: 0.4182051122188568
+train_iter_loss: 0.3853381276130676
+train_iter_loss: 0.38130420446395874
+train_iter_loss: 0.44145870208740234
+train loss :0.3898
+---------------------
+Validation seg loss: 0.44269893849092834 at epoch 25
+********************
+best_val_epoch_loss:  0.44269893849092834
+MODEL UPDATED
+epoch =     26/  1000, exp = train
+train_iter_loss: 0.5033919215202332
+train_iter_loss: 0.5274677276611328
+train_iter_loss: 0.5228415727615356
+train_iter_loss: 0.43002304434776306
+train_iter_loss: 0.34290963411331177
+train_iter_loss: 0.44765543937683105
+train_iter_loss: 0.3533099889755249
+train_iter_loss: 0.37520408630371094
+train_iter_loss: 0.4079217314720154
+train_iter_loss: 0.3890944719314575
+train_iter_loss: 0.2928605079650879
+train_iter_loss: 0.40992605686187744
+train_iter_loss: 0.39842063188552856
+train_iter_loss: 0.39867860078811646
+train_iter_loss: 0.3683894872665405
+train_iter_loss: 0.28172895312309265
+train_iter_loss: 0.2665887176990509
+train_iter_loss: 0.3342420756816864
+train_iter_loss: 0.3117215633392334
+train_iter_loss: 0.33420446515083313
+train_iter_loss: 0.45528122782707214
+train_iter_loss: 0.31139254570007324
+train_iter_loss: 0.3915517330169678
+train_iter_loss: 0.42892810702323914
+train_iter_loss: 0.3855842351913452
+train loss :0.4024
+---------------------
+Validation seg loss: 0.4433933417049219 at epoch 26
+epoch =     27/  1000, exp = train
+train_iter_loss: 0.4435143768787384
+train_iter_loss: 0.5238574743270874
+train_iter_loss: 0.3936440944671631
+train_iter_loss: 0.4495052397251129
+train_iter_loss: 0.35793858766555786
+train_iter_loss: 0.34180569648742676
+train_iter_loss: 0.31129541993141174
+train_iter_loss: 0.40750014781951904
+train_iter_loss: 0.34908169507980347
+train_iter_loss: 0.26626914739608765
+train_iter_loss: 0.3873927593231201
+train_iter_loss: 0.425098717212677
+train_iter_loss: 0.3316102921962738
+train_iter_loss: 0.365387886762619
+train_iter_loss: 0.27576443552970886
+train_iter_loss: 0.42706698179244995
+train_iter_loss: 0.39877191185951233
+train_iter_loss: 0.37433382868766785
+train_iter_loss: 0.30797597765922546
+train_iter_loss: 0.4968222677707672
+train_iter_loss: 0.43158480525016785
+train_iter_loss: 0.45594215393066406
+train_iter_loss: 0.4559773802757263
+train_iter_loss: 0.41671720147132874
+train_iter_loss: 0.3960873782634735
+train loss :0.4077
+---------------------
+Validation seg loss: 0.4631054410183767 at epoch 27
+epoch =     28/  1000, exp = train
+train_iter_loss: 0.3776381015777588
+train_iter_loss: 0.5005428791046143
+train_iter_loss: 0.4635818302631378
+train_iter_loss: 0.43350520730018616
+train_iter_loss: 0.30678805708885193
+train_iter_loss: 0.4656680226325989
+train_iter_loss: 0.3399471342563629
+train_iter_loss: 0.3190092146396637
+train_iter_loss: 0.5586012601852417
+train_iter_loss: 0.35520896315574646
+train_iter_loss: 0.33174195885658264
+train_iter_loss: 0.3290337324142456
+train_iter_loss: 0.2545569837093353
+train_iter_loss: 0.4475501775741577
+train_iter_loss: 0.23081187903881073
+train_iter_loss: 0.3091870844364166
+train_iter_loss: 0.2845250070095062
+train_iter_loss: 0.37899017333984375
+train_iter_loss: 0.3447686433792114
+train_iter_loss: 0.2973328232765198
+train_iter_loss: 0.5091794729232788
+train_iter_loss: 0.24071912467479706
+train_iter_loss: 0.35839128494262695
+train_iter_loss: 0.42195138335227966
+train_iter_loss: 0.32659345865249634
+train loss :0.3837
+---------------------
+Validation seg loss: 0.4496322663254895 at epoch 28
+epoch =     29/  1000, exp = train
+train_iter_loss: 0.5369342565536499
+train_iter_loss: 0.5221871137619019
+train_iter_loss: 0.5606505274772644
+train_iter_loss: 0.4083459675312042
+train_iter_loss: 0.35341542959213257
+train_iter_loss: 0.2536172568798065
+train_iter_loss: 0.435246080160141
+train_iter_loss: 0.44512566924095154
+train_iter_loss: 0.42166078090667725
+train_iter_loss: 0.36274829506874084
+train_iter_loss: 0.35532495379447937
+train_iter_loss: 0.3054127097129822
+train_iter_loss: 0.49696287512779236
+train_iter_loss: 0.3017953634262085
+train_iter_loss: 0.2655702829360962
+train_iter_loss: 0.34340307116508484
+train_iter_loss: 0.3388074040412903
+train_iter_loss: 0.443772554397583
+train_iter_loss: 0.3019092082977295
+train_iter_loss: 0.43422648310661316
+train_iter_loss: 0.43873870372772217
+train_iter_loss: 0.31127995252609253
+train_iter_loss: 0.37428492307662964
+train_iter_loss: 0.330908864736557
+train_iter_loss: 0.47084900736808777
+train loss :0.4079
+---------------------
+Validation seg loss: 0.44409553984285527 at epoch 29
+epoch =     30/  1000, exp = train
+train_iter_loss: 0.4298948049545288
+train_iter_loss: 0.3722427487373352
+train_iter_loss: 0.5211712718009949
+train_iter_loss: 0.5102052688598633
+train_iter_loss: 0.4260062277317047
+train_iter_loss: 0.34644457697868347
+train_iter_loss: 0.3266102373600006
+train_iter_loss: 0.4284183382987976
+train_iter_loss: 0.28695282340049744
+train_iter_loss: 0.37808704376220703
+train_iter_loss: 0.3295789361000061
+train_iter_loss: 0.4191688597202301
+train_iter_loss: 0.43642890453338623
+train_iter_loss: 0.42448684573173523
+train_iter_loss: 0.2975299060344696
+train_iter_loss: 0.3746339976787567
+train_iter_loss: 0.4787233769893646
+train_iter_loss: 0.3746647536754608
+train_iter_loss: 0.41805192828178406
+train_iter_loss: 0.40083035826683044
+train_iter_loss: 0.31051987409591675
+train_iter_loss: 0.3870350122451782
+train_iter_loss: 0.31497180461883545
+train_iter_loss: 0.3577156364917755
+train_iter_loss: 0.4663139283657074
+train loss :0.4090
+---------------------
+Validation seg loss: 0.44427777376939664 at epoch 30
+epoch =     31/  1000, exp = train
+train_iter_loss: 0.4458031952381134
+train_iter_loss: 0.5268027186393738
+train_iter_loss: 0.6145250201225281
+train_iter_loss: 0.47285065054893494
+train_iter_loss: 0.37327682971954346
+train_iter_loss: 0.3654841184616089
+train_iter_loss: 0.30400434136390686
+train_iter_loss: 0.32763582468032837
+train_iter_loss: 0.40929704904556274
+train_iter_loss: 0.37943607568740845
+train_iter_loss: 0.3970702290534973
+train_iter_loss: 0.42149922251701355
+train_iter_loss: 0.33448460698127747
+train_iter_loss: 0.40658265352249146
+train_iter_loss: 0.37686410546302795
+train_iter_loss: 0.40271613001823425
+train_iter_loss: 0.3663311004638672
+train_iter_loss: 0.3938147723674774
+train_iter_loss: 0.38351312279701233
+train_iter_loss: 0.43237221240997314
+train_iter_loss: 0.2980705201625824
+train_iter_loss: 0.36735814809799194
+train_iter_loss: 0.5644100308418274
+train_iter_loss: 0.2944367527961731
+train_iter_loss: 0.40937796235084534
+train loss :0.4191
+---------------------
+Validation seg loss: 0.43778377493738 at epoch 31
+********************
+best_val_epoch_loss:  0.43778377493738
+MODEL UPDATED
+epoch =     32/  1000, exp = train
+train_iter_loss: 0.4672943949699402
+train_iter_loss: 0.37664344906806946
+train_iter_loss: 0.43173232674598694
+train_iter_loss: 0.3571920692920685
+train_iter_loss: 0.49311649799346924
+train_iter_loss: 0.3731363117694855
+train_iter_loss: 0.31470417976379395
+train_iter_loss: 0.3745000660419464
+train_iter_loss: 0.5162331461906433
+train_iter_loss: 0.28034651279449463
+train_iter_loss: 0.43480241298675537
+train_iter_loss: 0.45386338233947754
+train_iter_loss: 0.4141102433204651
+train_iter_loss: 0.2586052417755127
+train_iter_loss: 0.43276795744895935
+train_iter_loss: 0.36300572752952576
+train_iter_loss: 0.2645576000213623
+train_iter_loss: 0.3463113307952881
+train_iter_loss: 0.2861940264701843
+train_iter_loss: 0.3342956304550171
+train_iter_loss: 0.39888063073158264
+train_iter_loss: 0.2931402623653412
+train_iter_loss: 0.37248262763023376
+train_iter_loss: 0.37201768159866333
+train_iter_loss: 0.38634905219078064
+train loss :0.3926
+---------------------
+Validation seg loss: 0.45928003515977905 at epoch 32
+epoch =     33/  1000, exp = train
+train_iter_loss: 0.3320710361003876
+train_iter_loss: 0.4523935914039612
+train_iter_loss: 0.5199315547943115
+train_iter_loss: 0.5054190754890442
+train_iter_loss: 0.3450752794742584
+train_iter_loss: 0.33893096446990967
+train_iter_loss: 0.38561031222343445
+train_iter_loss: 0.34578049182891846
+train_iter_loss: 0.34334301948547363
+train_iter_loss: 0.43673598766326904
+train_iter_loss: 0.32935574650764465
+train_iter_loss: 0.5258271098136902
+train_iter_loss: 0.3109404742717743
+train_iter_loss: 0.527933657169342
+train_iter_loss: 0.35937589406967163
+train_iter_loss: 0.33615341782569885
+train_iter_loss: 0.29066720604896545
+train_iter_loss: 0.26016247272491455
+train_iter_loss: 0.34308311343193054
+train_iter_loss: 0.26285213232040405
+train_iter_loss: 0.3694925308227539
+train_iter_loss: 0.44620099663734436
+train_iter_loss: 0.3006848692893982
+train_iter_loss: 0.37250518798828125
+train_iter_loss: 0.503211259841919
+train loss :0.3975
+---------------------
+Validation seg loss: nan at epoch 33
+epoch =     34/  1000, exp = train
+train_iter_loss: 0.3505665957927704
+train_iter_loss: 0.43798941373825073
+train_iter_loss: 0.44096890091896057
+train_iter_loss: 0.3952997624874115
+train_iter_loss: 0.3563701808452606
+train_iter_loss: 0.34265273809432983
+train_iter_loss: 0.41877660155296326
+train_iter_loss: 0.39005228877067566
+train_iter_loss: 0.4934430718421936
+train_iter_loss: 0.317697674036026
+train_iter_loss: 0.37394416332244873
+train_iter_loss: 0.33969372510910034
+train_iter_loss: 0.39407339692115784
+train_iter_loss: 0.43138939142227173
+train_iter_loss: 0.3503100872039795
+train_iter_loss: 0.44184380769729614
+train_iter_loss: 0.3361313045024872
+train_iter_loss: 0.293608695268631
+train_iter_loss: 0.346247136592865
+train_iter_loss: 0.3862413465976715
+train_iter_loss: 0.4857397675514221
+train_iter_loss: 0.44544532895088196
+train_iter_loss: 0.28574472665786743
+train_iter_loss: 0.3277549147605896
+train_iter_loss: 0.35419970750808716
+train loss :0.3973
+---------------------
+Validation seg loss: 0.46928616873217077 at epoch 34
+epoch =     35/  1000, exp = train
+train_iter_loss: 0.44391930103302
+train_iter_loss: 0.45033180713653564
+train_iter_loss: 0.3888465464115143
+train_iter_loss: 0.5134400129318237
+train_iter_loss: 0.4282679855823517
+train_iter_loss: 0.3508174419403076
+train_iter_loss: 0.34916016459465027
+train_iter_loss: 0.35177966952323914
+train_iter_loss: 0.315988153219223
+train_iter_loss: 0.4073641896247864
+train_iter_loss: 0.3966304361820221
+train_iter_loss: 0.2791770398616791
+train_iter_loss: 0.4454168975353241
+train_iter_loss: 0.4858165681362152
+train_iter_loss: 0.35785308480262756
+train_iter_loss: 0.39502155780792236
+train_iter_loss: 0.41463354229927063
+train_iter_loss: 0.3064442574977875
+train_iter_loss: 0.4481431543827057
+train_iter_loss: 0.5440040230751038
+train_iter_loss: 0.3325657844543457
+train_iter_loss: 0.3839324414730072
+train_iter_loss: 0.33122187852859497
+train_iter_loss: 0.42527061700820923
+train_iter_loss: 0.4144188463687897
+train loss :0.4143
+---------------------
+Validation seg loss: 0.4526105074317388 at epoch 35
+epoch =     36/  1000, exp = train
+train_iter_loss: 0.4661007821559906
+train_iter_loss: 0.34811046719551086
+train_iter_loss: 0.3063735067844391
+train_iter_loss: 0.3093746602535248
+train_iter_loss: 0.40687572956085205
+train_iter_loss: 0.36991435289382935
+train_iter_loss: 0.40921834111213684
+train_iter_loss: 0.33414286375045776
+train_iter_loss: 0.3613208532333374
+train_iter_loss: 0.4092986583709717
+train_iter_loss: 0.3827885389328003
+train_iter_loss: 0.4282192289829254
+train_iter_loss: 0.3007735311985016
+train_iter_loss: 0.38816186785697937
+train_iter_loss: 0.6023430228233337
+train_iter_loss: 0.3327520191669464
+train_iter_loss: 0.459995299577713
+train_iter_loss: 0.41034454107284546
+train_iter_loss: 0.2711026966571808
+train_iter_loss: 0.3623661696910858
+train_iter_loss: 0.3259962797164917
+train_iter_loss: 0.32169386744499207
+train_iter_loss: 0.4008292257785797
+train_iter_loss: 0.32408860325813293
+train_iter_loss: 0.3418494462966919
+train loss :0.3915
+---------------------
+Validation seg loss: 0.45503261917323434 at epoch 36
+epoch =     37/  1000, exp = train
+train_iter_loss: 0.557915985584259
+train_iter_loss: 0.39009204506874084
+train_iter_loss: 0.5135335326194763
+train_iter_loss: 0.47668132185935974
+train_iter_loss: 0.3870665431022644
+train_iter_loss: 0.3274945318698883
+train_iter_loss: 0.3844422996044159
+train_iter_loss: 0.3465617299079895
+train_iter_loss: 0.3863237202167511
+train_iter_loss: 0.37241584062576294
+train_iter_loss: 0.32782432436943054
+train_iter_loss: 0.2871277630329132
+train_iter_loss: 0.32032904028892517
+train_iter_loss: 0.37225964665412903
+train_iter_loss: 0.3611346483230591
+train_iter_loss: 0.3428049683570862
+train_iter_loss: 0.27368661761283875
+train_iter_loss: 0.27757561206817627
+train_iter_loss: 0.41595959663391113
+train_iter_loss: 0.25818750262260437
+train_iter_loss: 0.36563220620155334
+train_iter_loss: 0.39241155982017517
+train_iter_loss: 0.3800654113292694
+train_iter_loss: 0.3892851173877716
+train_iter_loss: 0.617497444152832
+train loss :0.3966
+---------------------
+Validation seg loss: 0.4415485473736277 at epoch 37
+epoch =     38/  1000, exp = train
+train_iter_loss: 0.5146379470825195
+train_iter_loss: 0.5657632946968079
+train_iter_loss: 0.4187568128108978
+train_iter_loss: 0.3929719030857086
+train_iter_loss: 0.5008510947227478
+train_iter_loss: 0.36287257075309753
+train_iter_loss: 0.40912482142448425
+train_iter_loss: 0.3986324667930603
+train_iter_loss: 0.43563422560691833
+train_iter_loss: 0.34426459670066833
+train_iter_loss: 0.6584619283676147
+train_iter_loss: 0.4129519462585449
+train_iter_loss: 0.21631447970867157
+train_iter_loss: 0.40040135383605957
+train_iter_loss: 0.28714004158973694
+train_iter_loss: 0.377755343914032
+train_iter_loss: 0.2965914309024811
+train_iter_loss: 0.44616949558258057
+train_iter_loss: 0.26700425148010254
+train_iter_loss: 0.4770132601261139
+train_iter_loss: 0.426622599363327
+train_iter_loss: 0.33951640129089355
+train_iter_loss: 0.2869783639907837
+train_iter_loss: 0.3407398462295532
+train_iter_loss: 0.41829654574394226
+train loss :0.4157
+---------------------
+Validation seg loss: 0.44396876656221895 at epoch 38
+epoch =     39/  1000, exp = train
+train_iter_loss: 0.44855788350105286
+train_iter_loss: 0.43813061714172363
+train_iter_loss: 0.43573054671287537
+train_iter_loss: 0.3908945322036743
+train_iter_loss: 0.35752642154693604
+train_iter_loss: 0.38533300161361694
+train_iter_loss: 0.3679179549217224
+train_iter_loss: 0.4233853816986084
+train_iter_loss: 0.36287614703178406
+train_iter_loss: 0.40979862213134766
+train_iter_loss: 0.373623251914978
+train_iter_loss: 0.2928306758403778
+train_iter_loss: 0.38156771659851074
+train_iter_loss: 0.2941588759422302
+train_iter_loss: 0.4659307301044464
+train_iter_loss: 0.3875759541988373
+train_iter_loss: 0.3811221122741699
+train_iter_loss: 0.398479700088501
+train_iter_loss: 0.2865389287471771
+train_iter_loss: 0.25646424293518066
+train_iter_loss: 0.2754474878311157
+train_iter_loss: 0.2886287271976471
+train_iter_loss: 0.37029826641082764
+train_iter_loss: 0.3131641149520874
+train_iter_loss: 0.4059927463531494
+train loss :0.3843
+---------------------
+Validation seg loss: 0.441312590297663 at epoch 39
+epoch =     40/  1000, exp = train
+train_iter_loss: 0.5188011527061462
+train_iter_loss: 0.4647270143032074
+train_iter_loss: 0.5018593668937683
+train_iter_loss: 0.3697478473186493
+train_iter_loss: 0.40904998779296875
+train_iter_loss: 0.4406032860279083
+train_iter_loss: 0.3980596363544464
+train_iter_loss: 0.47045910358428955
+train_iter_loss: 0.4327889382839203
+train_iter_loss: 0.4087265431880951
+train_iter_loss: 0.3305099308490753
+train_iter_loss: 0.46513596177101135
+train_iter_loss: 0.3759392201900482
+train_iter_loss: 0.35710370540618896
+train_iter_loss: 0.4570331871509552
+train_iter_loss: 0.4063163697719574
+train_iter_loss: 0.3381921052932739
+train_iter_loss: 0.32018622756004333
+train_iter_loss: 0.31517019867897034
+train_iter_loss: 0.4253062307834625
+train_iter_loss: 0.380428671836853
+train_iter_loss: 0.43645793199539185
+train_iter_loss: 0.3782270550727844
+train_iter_loss: 0.2992384731769562
+train_iter_loss: 0.28641989827156067
+train loss :0.4148
+---------------------
+Validation seg loss: 0.4490774108694409 at epoch 40
+epoch =     41/  1000, exp = train
+train_iter_loss: 0.4908373951911926
+train_iter_loss: 0.36583077907562256
+train_iter_loss: 0.46573886275291443
+train_iter_loss: 0.42602869868278503
+train_iter_loss: 0.29547014832496643
+train_iter_loss: 0.29168954491615295
+train_iter_loss: 0.3669557273387909
+train_iter_loss: 0.33179986476898193
+train_iter_loss: 0.39381086826324463
+train_iter_loss: 0.3652300238609314
+train_iter_loss: 0.34445711970329285
+train_iter_loss: 0.4857214093208313
+train_iter_loss: 0.37296679615974426
+train_iter_loss: 0.24883607029914856
+train_iter_loss: 0.2644610106945038
+train_iter_loss: 0.3443448543548584
+train_iter_loss: 0.4775916337966919
+train_iter_loss: 0.334720641374588
+train_iter_loss: 0.34333038330078125
+train_iter_loss: 0.3941035568714142
+train_iter_loss: 0.38919320702552795
+train_iter_loss: 0.37538284063339233
+train_iter_loss: 0.34001630544662476
+train_iter_loss: 0.31158435344696045
+train_iter_loss: 0.28556081652641296
+train loss :0.3808
+---------------------
+Validation seg loss: 0.4504664274600317 at epoch 41
+epoch =     42/  1000, exp = train
+train_iter_loss: 0.4796332120895386
+train_iter_loss: 0.3305804431438446
+train_iter_loss: 0.3460994064807892
+train_iter_loss: 0.46252700686454773
+train_iter_loss: 0.45244085788726807
+train_iter_loss: 0.2770698666572571
+train_iter_loss: 0.40951302647590637
+train_iter_loss: 0.34023624658584595
+train_iter_loss: 0.35508421063423157
+train_iter_loss: 0.4317784309387207
+train_iter_loss: 0.3074929416179657
+train_iter_loss: 0.312669962644577
+train_iter_loss: 0.42190229892730713
+train_iter_loss: 0.37163442373275757
+train_iter_loss: 0.3849533200263977
+train_iter_loss: 0.47583267092704773
+train_iter_loss: 0.24528558552265167
+train_iter_loss: 0.36900490522384644
+train_iter_loss: 0.47689515352249146
+train_iter_loss: 0.3198695480823517
+train_iter_loss: 0.45903924107551575
+train_iter_loss: 0.38114774227142334
+train_iter_loss: 0.3739762306213379
+train_iter_loss: 0.26362335681915283
+train_iter_loss: 0.4092244803905487
+train loss :0.3935
+---------------------
+Validation seg loss: 0.4390608683790801 at epoch 42
+epoch =     43/  1000, exp = train
+train_iter_loss: 0.48248183727264404
+train_iter_loss: 0.5156169533729553
+train_iter_loss: 0.3399055600166321
+train_iter_loss: 0.3776739537715912
+train_iter_loss: 0.32452672719955444
+train_iter_loss: 0.3828470706939697
+train_iter_loss: 0.41287198662757874
+train_iter_loss: 0.2686322331428528
+train_iter_loss: 0.34947678446769714
+train_iter_loss: 0.4349175989627838
+train_iter_loss: 0.42671215534210205
+train_iter_loss: 0.3571512699127197
+train_iter_loss: 0.37345051765441895
+train_iter_loss: 0.3153653144836426
+train_iter_loss: 0.34079623222351074
+train_iter_loss: 0.33757567405700684
+train_iter_loss: 0.3330097198486328
+train_iter_loss: 0.3389606177806854
+train_iter_loss: 0.2630898356437683
+train_iter_loss: 0.3363872766494751
+train_iter_loss: 0.3539009988307953
+train_iter_loss: 0.343034565448761
+train_iter_loss: 0.4232831299304962
+train_iter_loss: 0.37594074010849
+train_iter_loss: 0.317649781703949
+train loss :0.3808
+---------------------
+Validation seg loss: 0.4470956615822495 at epoch 43
+epoch =     44/  1000, exp = train
+train_iter_loss: 0.5538730621337891
+train_iter_loss: 0.4173886775970459
+train_iter_loss: 0.39363211393356323
+train_iter_loss: 0.4579610228538513
+train_iter_loss: 0.3425115942955017
+train_iter_loss: 0.2904907464981079
+train_iter_loss: 0.4035148322582245
+train_iter_loss: 0.4075559079647064
+train_iter_loss: 0.3949735164642334
+train_iter_loss: 0.37124577164649963
+train_iter_loss: 0.3931402564048767
+train_iter_loss: 0.4183962345123291
+train_iter_loss: 0.28703513741493225
+train_iter_loss: 0.37427687644958496
+train_iter_loss: 0.49051231145858765
+train_iter_loss: 0.3233373165130615
+train_iter_loss: 0.3375873863697052
+train_iter_loss: 0.34678375720977783
+train_iter_loss: 0.2947475016117096
+train_iter_loss: 0.3329004645347595
+train_iter_loss: 0.38874053955078125
+train_iter_loss: 0.2874401807785034
+train_iter_loss: 0.32807615399360657
+train_iter_loss: 0.38812729716300964
+train_iter_loss: 0.48406073451042175
+train loss :0.3956
+---------------------
+Validation seg loss: 0.45191011500527273 at epoch 44
+epoch =     45/  1000, exp = train
+train_iter_loss: 0.49354055523872375
+train_iter_loss: 0.4620434045791626
+train_iter_loss: 0.46247559785842896
+train_iter_loss: 0.4847848415374756
+train_iter_loss: 0.31788793206214905
+train_iter_loss: 0.30208951234817505
+train_iter_loss: 0.3934207558631897
+train_iter_loss: 0.4633268117904663
+train_iter_loss: 0.32098016142845154
+train_iter_loss: 0.39396899938583374
+train_iter_loss: 0.3831494152545929
+train_iter_loss: 0.4084209203720093
+train_iter_loss: 0.3706691265106201
+train_iter_loss: 0.5073333382606506
+train_iter_loss: 0.34702175855636597
+train_iter_loss: 0.4579741656780243
+train_iter_loss: 0.3275185823440552
+train_iter_loss: 0.3323615789413452
+train_iter_loss: 0.4555131494998932
+train_iter_loss: 0.37653687596321106
+train_iter_loss: 0.5655750632286072
+train_iter_loss: 0.2915584444999695
+train_iter_loss: 0.3590904176235199
+train_iter_loss: 0.35122525691986084
+train_iter_loss: 0.3729031980037689
+train loss :0.4159
+---------------------
+Validation seg loss: 0.43726717975904356 at epoch 45
+********************
+best_val_epoch_loss:  0.43726717975904356
+MODEL UPDATED
+epoch =     46/  1000, exp = train
+train_iter_loss: 0.392270028591156
+train_iter_loss: 0.45859479904174805
+train_iter_loss: 0.3777274489402771
+train_iter_loss: 0.3666631579399109
+train_iter_loss: 0.4749552011489868
+train_iter_loss: 0.2983546555042267
+train_iter_loss: 0.3633185625076294
+train_iter_loss: 0.4054023325443268
+train_iter_loss: 0.5982783436775208
+train_iter_loss: 0.4490954279899597
+train_iter_loss: 0.43759685754776
+train_iter_loss: 0.34157973527908325
+train_iter_loss: 0.30362826585769653
+train_iter_loss: 0.33321961760520935
+train_iter_loss: 0.4160570502281189
+train_iter_loss: 0.35071513056755066
+train_iter_loss: 0.2912852168083191
+train_iter_loss: 0.3149504065513611
+train_iter_loss: 0.3483109772205353
+train_iter_loss: 0.29635995626449585
+train_iter_loss: 0.2724999487400055
+train_iter_loss: 0.34624773263931274
+train_iter_loss: 0.3493625223636627
+train_iter_loss: 0.38907748460769653
+train_iter_loss: 0.44463494420051575
+train loss :0.3934
+---------------------
+Validation seg loss: 0.4309889444343324 at epoch 46
+********************
+best_val_epoch_loss:  0.4309889444343324
+MODEL UPDATED
+epoch =     47/  1000, exp = train
+train_iter_loss: 0.5158640146255493
+train_iter_loss: 0.3930869996547699
+train_iter_loss: 0.42463260889053345
+train_iter_loss: 0.410538911819458
+train_iter_loss: 0.466619610786438
+train_iter_loss: 0.4096545875072479
+train_iter_loss: 0.3749491274356842
+train_iter_loss: 0.48600515723228455
+train_iter_loss: 0.5201351046562195
+train_iter_loss: 0.3141510784626007
+train_iter_loss: 0.35394811630249023
+train_iter_loss: 0.42982640862464905
+train_iter_loss: 0.2835482060909271
+train_iter_loss: 0.3422505259513855
+train_iter_loss: 0.4955962598323822
+train_iter_loss: 0.35948845744132996
+train_iter_loss: 0.3766787350177765
+train_iter_loss: 0.4830315411090851
+train_iter_loss: 0.2871178388595581
+train_iter_loss: 0.40461790561676025
+train_iter_loss: 0.4453504681587219
+train_iter_loss: 0.27388736605644226
+train_iter_loss: 0.3886963725090027
+train_iter_loss: 0.29152292013168335
+train_iter_loss: 0.3111819922924042
+train loss :0.4094
+---------------------
+Validation seg loss: 0.43786517731001917 at epoch 47
+epoch =     48/  1000, exp = train
+train_iter_loss: 0.33558225631713867
+train_iter_loss: 0.5596556663513184
+train_iter_loss: 0.4409131109714508
+train_iter_loss: 0.3871299922466278
+train_iter_loss: 0.29828694462776184
+train_iter_loss: 0.30181699991226196
+train_iter_loss: 0.3412308692932129
+train_iter_loss: 0.39537182450294495
+train_iter_loss: 0.26141348481178284
+train_iter_loss: 0.40742671489715576
+train_iter_loss: 0.3126692771911621
+train_iter_loss: 0.2900078594684601
+train_iter_loss: 0.39431700110435486
+train_iter_loss: 0.3895551264286041
+train_iter_loss: 0.24828214943408966
+train_iter_loss: 0.2528352439403534
+train_iter_loss: 0.2549133002758026
+train_iter_loss: 0.4799998700618744
+train_iter_loss: 0.22618994116783142
+train_iter_loss: 0.3407480716705322
+train_iter_loss: 0.2770894169807434
+train_iter_loss: 0.33300355076789856
+train_iter_loss: 0.40004485845565796
+train_iter_loss: 0.2721771001815796
+train_iter_loss: 0.5081526637077332
+train loss :0.3647
+---------------------
+Validation seg loss: 0.4399196788457767 at epoch 48
+epoch =     49/  1000, exp = train
+train_iter_loss: 0.44904187321662903
+train_iter_loss: 0.4751880466938019
+train_iter_loss: 0.5188706517219543
+train_iter_loss: 0.5003942847251892
+train_iter_loss: 0.3814208507537842
+train_iter_loss: 0.5183681845664978
+train_iter_loss: 0.3442211449146271
+train_iter_loss: 0.37930619716644287
+train_iter_loss: 0.3710339367389679
+train_iter_loss: 0.39966997504234314
+train_iter_loss: 0.3262694776058197
+train_iter_loss: 0.2914297878742218
+train_iter_loss: 0.3848089575767517
+train_iter_loss: 0.3050548732280731
+train_iter_loss: 0.3554378151893616
+train_iter_loss: 0.39012351632118225
+train_iter_loss: 0.2313646525144577
+train_iter_loss: 0.3313480615615845
+train_iter_loss: 0.37380462884902954
+train_iter_loss: 0.4064713418483734
+train_iter_loss: 0.3460417091846466
+train_iter_loss: 0.35999178886413574
+train_iter_loss: 0.422800213098526
+train_iter_loss: 0.4651883840560913
+train_iter_loss: 0.2804144322872162
+train loss :0.3989
+---------------------
+Validation seg loss: 0.43294750027499107 at epoch 49
+epoch =     50/  1000, exp = train
+train_iter_loss: 0.4098353087902069
+train_iter_loss: 0.4296233654022217
+train_iter_loss: 0.47468528151512146
+train_iter_loss: 0.43081599473953247
+train_iter_loss: 0.27014511823654175
+train_iter_loss: 0.2506824731826782
+train_iter_loss: 0.4971659183502197
+train_iter_loss: 0.3540406823158264
+train_iter_loss: 0.4367205500602722
+train_iter_loss: 0.3531935214996338
+train_iter_loss: 0.45103734731674194
+train_iter_loss: 0.3228401839733124
+train_iter_loss: 0.3777271509170532
+train_iter_loss: 0.2950592339038849
+train_iter_loss: 0.35318523645401
+train_iter_loss: 0.3821084499359131
+train_iter_loss: 0.4217294454574585
+train_iter_loss: 0.27459806203842163
+train_iter_loss: 0.3302136957645416
+train_iter_loss: 0.3648492991924286
+train_iter_loss: 0.3169533610343933
+train_iter_loss: 0.4706960916519165
+train_iter_loss: 0.3884965777397156
+train_iter_loss: 0.3454132378101349
+train_iter_loss: 0.38379204273223877
+train loss :0.3914
+---------------------
+Validation seg loss: 0.4336794323446053 at epoch 50
+epoch =     51/  1000, exp = train
+train_iter_loss: 0.651066780090332
+train_iter_loss: 0.5685648918151855
+train_iter_loss: 0.5779484510421753
+train_iter_loss: 0.5146039724349976
+train_iter_loss: 0.35855376720428467
+train_iter_loss: 0.2898712158203125
+train_iter_loss: 0.3879433870315552
+train_iter_loss: 0.48209089040756226
+train_iter_loss: 0.38082155585289
+train_iter_loss: 0.3531281352043152
+train_iter_loss: 0.42284783720970154
+train_iter_loss: 0.4282427728176117
+train_iter_loss: 0.4548508822917938
+train_iter_loss: 0.3711748421192169
+train_iter_loss: 0.518750786781311
+train_iter_loss: 0.2613435685634613
+train_iter_loss: 0.2666880786418915
+train_iter_loss: 0.3354880213737488
+train_iter_loss: 0.3883674442768097
+train_iter_loss: 0.4269503355026245
+train_iter_loss: 0.39670315384864807
+train_iter_loss: 0.37454190850257874
+train_iter_loss: 0.36030760407447815
+train_iter_loss: 0.39606374502182007
+train_iter_loss: 0.42690327763557434
+train loss :0.4314
+---------------------
+Validation seg loss: 0.4250271410312293 at epoch 51
+********************
+best_val_epoch_loss:  0.4250271410312293
+MODEL UPDATED
+epoch =     52/  1000, exp = train
+train_iter_loss: 0.4465993344783783
+train_iter_loss: 0.5462578535079956
+train_iter_loss: 0.3755353093147278
+train_iter_loss: 0.3896236717700958
+train_iter_loss: 0.33253785967826843
+train_iter_loss: 0.33507734537124634
+train_iter_loss: 0.31659048795700073
+train_iter_loss: 0.30948278307914734
+train_iter_loss: 0.2632865309715271
+train_iter_loss: 0.3272058367729187
+train_iter_loss: 0.3020681142807007
+train_iter_loss: 0.428404837846756
+train_iter_loss: 0.34227216243743896
+train_iter_loss: 0.3092169761657715
+train_iter_loss: 0.279198557138443
+train_iter_loss: 0.37435993552207947
+train_iter_loss: 0.27294203639030457
+train_iter_loss: 0.3201557695865631
+train_iter_loss: 0.2034056931734085
+train_iter_loss: 0.318148672580719
+train_iter_loss: 0.4123495817184448
+train_iter_loss: 0.49155062437057495
+train_iter_loss: 0.5462136268615723
+train_iter_loss: 0.2435566931962967
+train_iter_loss: 0.4349704086780548
+train loss :0.3741
+---------------------
+Validation seg loss: 0.4353202002931316 at epoch 52
+epoch =     53/  1000, exp = train
+train_iter_loss: 0.5059888958930969
+train_iter_loss: 0.33595991134643555
+train_iter_loss: 0.37874969840049744
+train_iter_loss: 0.4866311848163605
+train_iter_loss: 0.39382404088974
+train_iter_loss: 0.417323499917984
+train_iter_loss: 0.5021323561668396
+train_iter_loss: 0.46746546030044556
+train_iter_loss: 0.4362257122993469
+train_iter_loss: 0.4430834650993347
+train_iter_loss: 0.4002358913421631
+train_iter_loss: 0.38141947984695435
+train_iter_loss: 0.41373854875564575
+train_iter_loss: 0.49450328946113586
+train_iter_loss: 0.4497881829738617
+train_iter_loss: 0.31954824924468994
+train_iter_loss: 0.3551609218120575
+train_iter_loss: 0.3590700924396515
+train_iter_loss: 0.31373465061187744
+train_iter_loss: 0.3555421829223633
+train_iter_loss: 0.3173718750476837
+train_iter_loss: 0.3605336844921112
+train_iter_loss: 0.3194694519042969
+train_iter_loss: 0.3179669976234436
+train_iter_loss: 0.37969771027565
+train loss :0.4112
+---------------------
+Validation seg loss: 0.44326405687573944 at epoch 53
+epoch =     54/  1000, exp = train
+train_iter_loss: 0.39437299966812134
+train_iter_loss: 0.3635803461074829
+train_iter_loss: 0.40354183316230774
+train_iter_loss: 0.5267831683158875
+train_iter_loss: 0.39054498076438904
+train_iter_loss: 0.3410509526729584
+train_iter_loss: 0.3004787862300873
+train_iter_loss: 0.37077343463897705
+train_iter_loss: 0.5367678999900818
+train_iter_loss: 0.5209623575210571
+train_iter_loss: 0.40275833010673523
+train_iter_loss: 0.43083101511001587
+train_iter_loss: 0.3982364237308502
+train_iter_loss: 0.34720373153686523
+train_iter_loss: 0.40177392959594727
+train_iter_loss: 0.37875035405158997
+train_iter_loss: 0.3445172607898712
+train_iter_loss: 0.3751893937587738
+train_iter_loss: 0.46699059009552
+train_iter_loss: 0.279664546251297
+train_iter_loss: 0.42445236444473267
+train_iter_loss: 0.3602837324142456
+train_iter_loss: 0.27733829617500305
+train_iter_loss: 0.4524332284927368
+train_iter_loss: 0.44795238971710205
+train loss :0.4139
+---------------------
+Validation seg loss: 0.43467121258518604 at epoch 54
+epoch =     55/  1000, exp = train
+train_iter_loss: 0.54505455493927
+train_iter_loss: 0.44273051619529724
+train_iter_loss: 0.4617025852203369
+train_iter_loss: 0.4457910656929016
+train_iter_loss: 0.37225663661956787
+train_iter_loss: 0.40119174122810364
+train_iter_loss: 0.32326245307922363
+train_iter_loss: 0.36209580302238464
+train_iter_loss: 0.3946019411087036
+train_iter_loss: 0.38792869448661804
+train_iter_loss: 0.48104122281074524
+train_iter_loss: 0.3801846206188202
+train_iter_loss: 0.3579491376876831
+train_iter_loss: 0.4113364517688751
+train_iter_loss: 0.33552101254463196
+train_iter_loss: 0.2583617866039276
+train_iter_loss: 0.3924385607242584
+train_iter_loss: 0.49134379625320435
+train_iter_loss: 0.42724931240081787
+train_iter_loss: 0.3788403570652008
+train_iter_loss: 0.2546719014644623
+train_iter_loss: 0.4045712947845459
+train_iter_loss: 0.329931378364563
+train_iter_loss: 0.4055330455303192
+train_iter_loss: 0.34426119923591614
+train loss :0.4082
+---------------------
+Validation seg loss: 0.42596383533387816 at epoch 55
+epoch =     56/  1000, exp = train
+train_iter_loss: 0.3712784945964813
+train_iter_loss: 0.6565175652503967
+train_iter_loss: 0.4670799970626831
+train_iter_loss: 0.41472548246383667
+train_iter_loss: 0.3833903670310974
+train_iter_loss: 0.27899959683418274
+train_iter_loss: 0.34536364674568176
+train_iter_loss: 0.3104058504104614
+train_iter_loss: 0.4597575068473816
+train_iter_loss: 0.40372589230537415
+train_iter_loss: 0.38211408257484436
+train_iter_loss: 0.40270763635635376
+train_iter_loss: 0.4331916868686676
+train_iter_loss: 0.3665325939655304
+train_iter_loss: 0.30819815397262573
+train_iter_loss: 0.456503301858902
+train_iter_loss: 0.28252625465393066
+train_iter_loss: 0.40974271297454834
+train_iter_loss: 0.3576531410217285
+train_iter_loss: 0.32341551780700684
+train_iter_loss: 0.4163731336593628
+train_iter_loss: 0.3703528344631195
+train_iter_loss: 0.3560706377029419
+train_iter_loss: 0.38835999369621277
+train_iter_loss: 0.3679443597793579
+train loss :0.4048
+---------------------
+Validation seg loss: 0.4329139535789782 at epoch 56
+epoch =     57/  1000, exp = train
+train_iter_loss: 0.41972169280052185
+train_iter_loss: 0.3598703444004059
+train_iter_loss: 0.4752478003501892
+train_iter_loss: 0.39838457107543945
+train_iter_loss: 0.3644571602344513
+train_iter_loss: 0.37101757526397705
+train_iter_loss: 0.40045347809791565
+train_iter_loss: 0.5027607679367065
+train_iter_loss: 0.25170356035232544
+train_iter_loss: 0.2997196316719055
+train_iter_loss: 0.29610517621040344
+train_iter_loss: 0.39790773391723633
+train_iter_loss: 0.40030789375305176
+train_iter_loss: 0.39945000410079956
+train_iter_loss: 0.37505021691322327
+train_iter_loss: 0.4554683268070221
+train_iter_loss: 0.28055092692375183
+train_iter_loss: 0.4028889238834381
+train_iter_loss: 0.2683192491531372
+train_iter_loss: 0.385845422744751
+train_iter_loss: 0.4195060431957245
+train_iter_loss: 0.4098604619503021
+train_iter_loss: 0.25779423117637634
+train_iter_loss: 0.43506568670272827
+train_iter_loss: 0.4792812466621399
+train loss :0.3965
+---------------------
+Validation seg loss: 0.4393378833906268 at epoch 57
+epoch =     58/  1000, exp = train
+train_iter_loss: 0.35402098298072815
+train_iter_loss: 0.4650115668773651
+train_iter_loss: 0.45332592725753784
+train_iter_loss: 0.4671823978424072
+train_iter_loss: 0.33351513743400574
+train_iter_loss: 0.4029271900653839
+train_iter_loss: 0.3425467312335968
+train_iter_loss: 0.35303041338920593
+train_iter_loss: 0.40444058179855347
+train_iter_loss: 0.41230955719947815
+train_iter_loss: 0.4003554582595825
+train_iter_loss: 0.35784202814102173
+train_iter_loss: 0.5074119567871094
+train_iter_loss: 0.2617470324039459
+train_iter_loss: 0.4106270372867584
+train_iter_loss: 0.29076018929481506
+train_iter_loss: 0.4472506046295166
+train_iter_loss: 0.22972145676612854
+train_iter_loss: 0.3046797513961792
+train_iter_loss: 0.35454702377319336
+train_iter_loss: 0.4101901054382324
+train_iter_loss: 0.28920987248420715
+train_iter_loss: 0.4139966368675232
+train_iter_loss: 0.37583020329475403
+train_iter_loss: 0.2844011187553406
+train loss :0.3889
+---------------------
+Validation seg loss: 0.4317825695956653 at epoch 58
+epoch =     59/  1000, exp = train
+train_iter_loss: 0.3860735595226288
+train_iter_loss: 0.47867685556411743
+train_iter_loss: 0.4244326651096344
+train_iter_loss: 0.44848278164863586
+train_iter_loss: 0.34031322598457336
+train_iter_loss: 0.35684576630592346
+train_iter_loss: 0.4305514395236969
+train_iter_loss: 0.34956836700439453
+train_iter_loss: 0.47944122552871704
+train_iter_loss: 0.4737268388271332
+train_iter_loss: 0.4239003360271454
+train_iter_loss: 0.3687083125114441
+train_iter_loss: 0.3472277820110321
+train_iter_loss: 0.3115648925304413
+train_iter_loss: 0.29598063230514526
+train_iter_loss: 0.3071597218513489
+train_iter_loss: 0.37378159165382385
+train_iter_loss: 0.36440882086753845
+train_iter_loss: 0.3438453674316406
+train_iter_loss: 0.24515467882156372
+train_iter_loss: 0.3912658393383026
+train_iter_loss: 0.3438269793987274
+train_iter_loss: 0.31694069504737854
+train_iter_loss: 0.462413489818573
+train_iter_loss: 0.46668508648872375
+train loss :0.3968
+---------------------
+Validation seg loss: nan at epoch 59
+epoch =     60/  1000, exp = train
+train_iter_loss: 0.5507722496986389
+train_iter_loss: 0.49259814620018005
+train_iter_loss: 0.47974759340286255
+train_iter_loss: 0.467233806848526
+train_iter_loss: 0.3912300765514374
+train_iter_loss: 0.39531153440475464
+train_iter_loss: 0.44372281432151794
+train_iter_loss: 0.3099275231361389
+train_iter_loss: 0.43949124217033386
+train_iter_loss: 0.5221152901649475
+train_iter_loss: 0.4037744402885437
+train_iter_loss: 0.2999384105205536
+train_iter_loss: 0.4021918475627899
+train_iter_loss: 0.3292709290981293
+train_iter_loss: 0.29206496477127075
+train_iter_loss: 0.35356923937797546
+train_iter_loss: 0.39452528953552246
+train_iter_loss: 0.4083821773529053
+train_iter_loss: 0.36486247181892395
+train_iter_loss: 0.48571962118148804
+train_iter_loss: 0.2882082164287567
+train_iter_loss: 0.4485010802745819
+train_iter_loss: 0.38028621673583984
+train_iter_loss: 0.3745015263557434
+train_iter_loss: 0.3647898733615875
+train loss :0.4192
+---------------------
+Validation seg loss: 0.4307177276965582 at epoch 60
+epoch =     61/  1000, exp = train
+train_iter_loss: 0.4476400315761566
+train_iter_loss: 0.5045076608657837
+train_iter_loss: 0.4257897138595581
+train_iter_loss: 0.41418489813804626
+train_iter_loss: 0.29936397075653076
+train_iter_loss: 0.3689252734184265
+train_iter_loss: 0.27756235003471375
+train_iter_loss: 0.2892863154411316
+train_iter_loss: 0.3959847688674927
+train_iter_loss: 0.35192635655403137
+train_iter_loss: 0.342983216047287
+train_iter_loss: 0.3772164583206177
+train_iter_loss: 0.3404795527458191
+train_iter_loss: 0.3750118315219879
+train_iter_loss: 0.35673099756240845
+train_iter_loss: 0.2969183921813965
+train_iter_loss: 0.4207223653793335
+train_iter_loss: 0.30845049023628235
+train_iter_loss: 0.32043686509132385
+train_iter_loss: 0.49380338191986084
+train_iter_loss: 0.3616734743118286
+train_iter_loss: 0.33010396361351013
+train_iter_loss: 0.429174542427063
+train_iter_loss: 0.4381268322467804
+train_iter_loss: 0.4391673505306244
+train loss :0.3930
+---------------------
+Validation seg loss: 0.43508236215643165 at epoch 61
+epoch =     62/  1000, exp = train
+train_iter_loss: 0.3912493884563446
+train_iter_loss: 0.37509429454803467
+train_iter_loss: 0.5255487561225891
+train_iter_loss: 0.3484657108783722
+train_iter_loss: 0.4274628460407257
+train_iter_loss: 0.3895605504512787
+train_iter_loss: 0.3707910478115082
+train_iter_loss: 0.39365729689598083
+train_iter_loss: 0.4710577726364136
+train_iter_loss: 0.4006761908531189
+train_iter_loss: 0.4773613214492798
+train_iter_loss: 0.41502895951271057
+train_iter_loss: 0.3190653622150421
+train_iter_loss: 0.5017932653427124
+train_iter_loss: 0.41475623846054077
+train_iter_loss: 0.3302493393421173
+train_iter_loss: 0.4435661733150482
+train_iter_loss: 0.36835384368896484
+train_iter_loss: 0.27339333295822144
+train_iter_loss: 0.37134456634521484
+train_iter_loss: 0.359394907951355
+train_iter_loss: 0.38016054034233093
+train_iter_loss: 0.28621548414230347
+train_iter_loss: 0.3511626124382019
+train_iter_loss: 0.44761374592781067
+train loss :0.4090
+---------------------
+Validation seg loss: 0.441191236752103 at epoch 62
+epoch =     63/  1000, exp = train
+train_iter_loss: 0.35186508297920227
+train_iter_loss: 0.42562633752822876
+train_iter_loss: 0.44910988211631775
+train_iter_loss: 0.4174784719944
+train_iter_loss: 0.32191604375839233
+train_iter_loss: 0.3619045615196228
+train_iter_loss: 0.3246195614337921
+train_iter_loss: 0.4010947644710541
+train_iter_loss: 0.3365240693092346
+train_iter_loss: 0.2865440547466278
+train_iter_loss: 0.33472445607185364
+train_iter_loss: 0.40345168113708496
+train_iter_loss: 0.32086750864982605
+train_iter_loss: 0.37840983271598816
+train_iter_loss: 0.27150020003318787
+train_iter_loss: 0.31375348567962646
+train_iter_loss: 0.31871235370635986
+train_iter_loss: 0.40606188774108887
+train_iter_loss: 0.4087591767311096
+train_iter_loss: 0.34425362944602966
+train_iter_loss: 0.4011247456073761
+train_iter_loss: 0.492027223110199
+train_iter_loss: 0.5962786674499512
+train_iter_loss: 0.3169559836387634
+train_iter_loss: 0.442641019821167
+train loss :0.3934
+---------------------
+Validation seg loss: 0.4381876923495306 at epoch 63
+epoch =     64/  1000, exp = train
+train_iter_loss: 0.389692485332489
+train_iter_loss: 0.3552323877811432
+train_iter_loss: 0.32898205518722534
+train_iter_loss: 0.41570809483528137
+train_iter_loss: 0.4161408245563507
+train_iter_loss: 0.4062950909137726
+train_iter_loss: 0.3300365209579468
+train_iter_loss: 0.4380599558353424
+train_iter_loss: 0.27227604389190674
+train_iter_loss: 0.43808290362358093
+train_iter_loss: 0.45158883929252625
+train_iter_loss: 0.5271827578544617
+train_iter_loss: 0.3423435091972351
+train_iter_loss: 0.4290718734264374
+train_iter_loss: 0.2696340084075928
+train_iter_loss: 0.23929929733276367
+train_iter_loss: 0.30869096517562866
+train_iter_loss: 0.33108019828796387
+train_iter_loss: 0.3473014235496521
+train_iter_loss: 0.2679961323738098
+train_iter_loss: 0.5503787994384766
+train_iter_loss: 0.42998671531677246
+train_iter_loss: 0.38427942991256714
+train_iter_loss: 0.4436575174331665
+train_iter_loss: 0.5116935968399048
+train loss :0.4007
+---------------------
+Validation seg loss: 0.44497104045355096 at epoch 64
+epoch =     65/  1000, exp = train
+train_iter_loss: 0.3608394265174866
+train_iter_loss: 0.41501984000205994
+train_iter_loss: 0.3936072289943695
+train_iter_loss: 0.4555763006210327
+train_iter_loss: 0.39827391505241394
+train_iter_loss: 0.3881494700908661
+train_iter_loss: 0.3332538604736328
+train_iter_loss: 0.37109458446502686
+train_iter_loss: 0.3421132266521454
+train_iter_loss: 0.27933648228645325
+train_iter_loss: 0.38006967306137085
+train_iter_loss: 0.29170557856559753
+train_iter_loss: 0.3080739676952362
+train_iter_loss: 0.2785486876964569
+train_iter_loss: 0.4711662530899048
+train_iter_loss: 0.3730695843696594
+train_iter_loss: 0.3838934302330017
+train_iter_loss: 0.3788231611251831
+train_iter_loss: 0.3554799258708954
+train_iter_loss: 0.350832998752594
+train_iter_loss: 0.4663727283477783
+train_iter_loss: 0.3373781144618988
+train_iter_loss: 0.34802690148353577
+train_iter_loss: 0.3391457796096802
+train_iter_loss: 0.34777554869651794
+train loss :0.3819
+---------------------
+Validation seg loss: 0.4300672163800249 at epoch 65
+epoch =     66/  1000, exp = train
+train_iter_loss: 0.5240092277526855
+train_iter_loss: 0.4371374547481537
+train_iter_loss: 0.3880827724933624
+train_iter_loss: 0.373642235994339
+train_iter_loss: 0.4008723795413971
+train_iter_loss: 0.35985615849494934
+train_iter_loss: 0.37326064705848694
+train_iter_loss: 0.4585208594799042
+train_iter_loss: 0.3689142167568207
+train_iter_loss: 0.29006195068359375
+train_iter_loss: 0.37729403376579285
+train_iter_loss: 0.4610189199447632
+train_iter_loss: 0.32730647921562195
+train_iter_loss: 0.31232163310050964
+train_iter_loss: 0.38784995675086975
+train_iter_loss: 0.32916000485420227
+train_iter_loss: 0.35774746537208557
+train_iter_loss: 0.2042669802904129
+train_iter_loss: 0.3172108829021454
+train_iter_loss: 0.29007014632225037
+train_iter_loss: 0.34369269013404846
+train_iter_loss: 0.38009387254714966
+train_iter_loss: 0.3035351634025574
+train_iter_loss: 0.38075587153434753
+train_iter_loss: 0.43473389744758606
+train loss :0.3825
+---------------------
+Validation seg loss: 0.4283693592011366 at epoch 66
+epoch =     67/  1000, exp = train
+train_iter_loss: 0.523428738117218
+train_iter_loss: 0.42558053135871887
+train_iter_loss: 0.4233865737915039
+train_iter_loss: 0.34598609805107117
+train_iter_loss: 0.3895701467990875
+train_iter_loss: 0.3383370637893677
+train_iter_loss: 0.47332045435905457
+train_iter_loss: 0.45519402623176575
+train_iter_loss: 0.2978324294090271
+train_iter_loss: 0.3671151101589203
+train_iter_loss: 0.3620901107788086
+train_iter_loss: 0.39514797925949097
+train_iter_loss: 0.34791404008865356
+train_iter_loss: 0.418819397687912
+train_iter_loss: 0.2889755666255951
+train_iter_loss: 0.273743599653244
+train_iter_loss: 0.3451492190361023
+train_iter_loss: 0.3462759852409363
+train_iter_loss: 0.2941984236240387
+train_iter_loss: 0.29900923371315
+train_iter_loss: 0.36449792981147766
+train_iter_loss: 0.4334568381309509
+train_iter_loss: 0.39985960721969604
+train_iter_loss: 0.3402552306652069
+train_iter_loss: 0.35337379574775696
+train loss :0.3874
+---------------------
+Validation seg loss: 0.44911359858540995 at epoch 67
+epoch =     68/  1000, exp = train
+train_iter_loss: 0.41351908445358276
+train_iter_loss: 0.44201672077178955
+train_iter_loss: 0.4599657952785492
+train_iter_loss: 0.3467065691947937
+train_iter_loss: 0.25960850715637207
+train_iter_loss: 0.32164567708969116
+train_iter_loss: 0.43515560030937195
+train_iter_loss: 0.41635435819625854
+train_iter_loss: 0.32785528898239136
+train_iter_loss: 0.30936285853385925
+train_iter_loss: 0.3346748352050781
+train_iter_loss: 0.45178622007369995
+train_iter_loss: 0.3574948310852051
+train_iter_loss: 0.36284059286117554
+train_iter_loss: 0.3573364019393921
+train_iter_loss: 0.5029628872871399
+train_iter_loss: 0.3828287124633789
+train_iter_loss: 0.3645293712615967
+train_iter_loss: 0.28648287057876587
+train_iter_loss: 0.28063181042671204
+train_iter_loss: 0.44947853684425354
+train_iter_loss: 0.4714604914188385
+train_iter_loss: 0.29284337162971497
+train_iter_loss: 0.40570083260536194
+train_iter_loss: 0.3304346799850464
+train loss :0.3900
+---------------------
+Validation seg loss: 0.42341180887284147 at epoch 68
+********************
+best_val_epoch_loss:  0.42341180887284147
+MODEL UPDATED
+epoch =     69/  1000, exp = train
+train_iter_loss: 0.3585410714149475
+train_iter_loss: 0.4952434003353119
+train_iter_loss: 0.4721004366874695
+train_iter_loss: 0.619689404964447
+train_iter_loss: 0.339986652135849
+train_iter_loss: 0.35030150413513184
+train_iter_loss: 0.36274662613868713
+train_iter_loss: 0.3146119713783264
+train_iter_loss: 0.35182350873947144
+train_iter_loss: 0.3502123951911926
+train_iter_loss: 0.3651603162288666
+train_iter_loss: 0.31483086943626404
+train_iter_loss: 0.3831695020198822
+train_iter_loss: 0.265098512172699
+train_iter_loss: 0.30827146768569946
+train_iter_loss: 0.45501792430877686
+train_iter_loss: 0.37866678833961487
+train_iter_loss: 0.3479386270046234
+train_iter_loss: 0.44717779755592346
+train_iter_loss: 0.26140281558036804
+train_iter_loss: 0.5488441586494446
+train_iter_loss: 0.38921278715133667
+train_iter_loss: 0.4230305552482605
+train_iter_loss: 0.40715292096138
+train_iter_loss: 0.4594479501247406
+train loss :0.4064
+---------------------
+Validation seg loss: 0.43705328174357144 at epoch 69
+epoch =     70/  1000, exp = train
+train_iter_loss: 0.3813285231590271
+train_iter_loss: 0.32681286334991455
+train_iter_loss: 0.38472145795822144
+train_iter_loss: 0.43869709968566895
+train_iter_loss: 0.3558979630470276
+train_iter_loss: 0.30473390221595764
+train_iter_loss: 0.389175683259964
+train_iter_loss: 0.31659209728240967
+train_iter_loss: 0.3149837255477905
+train_iter_loss: 0.2590517997741699
+train_iter_loss: 0.44045355916023254
+train_iter_loss: 0.33648553490638733
+train_iter_loss: 0.3328084349632263
+train_iter_loss: 0.3150388300418854
+train_iter_loss: 0.3274255394935608
+train_iter_loss: 0.31064629554748535
+train_iter_loss: 0.42590293288230896
+train_iter_loss: 0.43097615242004395
+train_iter_loss: 0.313340961933136
+train_iter_loss: 0.2887154817581177
+train_iter_loss: 0.32078292965888977
+train_iter_loss: 0.4043756425380707
+train_iter_loss: 0.5349491238594055
+train_iter_loss: 0.3415758013725281
+train_iter_loss: 0.40195363759994507
+train loss :0.3762
+---------------------
+Validation seg loss: 0.4336931137543804 at epoch 70
+epoch =     71/  1000, exp = train
+train_iter_loss: 0.38411659002304077
+train_iter_loss: 0.3345872163772583
+train_iter_loss: 0.40449878573417664
+train_iter_loss: 0.59282386302948
+train_iter_loss: 0.3265736401081085
+train_iter_loss: 0.30988213419914246
+train_iter_loss: 0.33754611015319824
+train_iter_loss: 0.34993699193000793
+train_iter_loss: 0.33262208104133606
+train_iter_loss: 0.38789525628089905
+train_iter_loss: 0.3671727180480957
+train_iter_loss: 0.4843870997428894
+train_iter_loss: 0.39701196551322937
+train_iter_loss: 0.32104894518852234
+train_iter_loss: 0.4185950458049774
+train_iter_loss: 0.43130505084991455
+train_iter_loss: 0.2617497444152832
+train_iter_loss: 0.3242655098438263
+train_iter_loss: 0.3224669098854065
+train_iter_loss: 0.3011714220046997
+train_iter_loss: 0.26713407039642334
+train_iter_loss: 0.4911242723464966
+train_iter_loss: 0.4190959930419922
+train_iter_loss: 0.4256662428379059
+train_iter_loss: 0.32282698154449463
+train loss :0.3877
+---------------------
+Validation seg loss: 0.44504538016780365 at epoch 71
+epoch =     72/  1000, exp = train
+train_iter_loss: 0.35869261622428894
+train_iter_loss: 0.44997140765190125
+train_iter_loss: 0.44979554414749146
+train_iter_loss: 0.623647153377533
+train_iter_loss: 0.37695011496543884
+train_iter_loss: 0.3716396689414978
+train_iter_loss: 0.3804337680339813
+train_iter_loss: 0.3445670008659363
+train_iter_loss: 0.4784404933452606
+train_iter_loss: 0.4801659882068634
+train_iter_loss: 0.34087327122688293
+train_iter_loss: 0.3455740809440613
+train_iter_loss: 0.2803776264190674
+train_iter_loss: 0.34936025738716125
+train_iter_loss: 0.2769530415534973
+train_iter_loss: 0.3195034861564636
+train_iter_loss: 0.3149147033691406
+train_iter_loss: 0.38702595233917236
+train_iter_loss: 0.26899656653404236
+train_iter_loss: 0.29661452770233154
+train_iter_loss: 0.25717395544052124
+train_iter_loss: 0.4764918088912964
+train_iter_loss: 0.3571709096431732
+train_iter_loss: 0.43154069781303406
+train_iter_loss: 0.493264764547348
+train loss :0.3959
+---------------------
+Validation seg loss: 0.4399006408902834 at epoch 72
+epoch =     73/  1000, exp = train
+train_iter_loss: 0.4961473047733307
+train_iter_loss: 0.41720259189605713
+train_iter_loss: 0.38452816009521484
+train_iter_loss: 0.49301981925964355
+train_iter_loss: 0.27055007219314575
+train_iter_loss: 0.3988598585128784
+train_iter_loss: 0.4310099482536316
+train_iter_loss: 0.38744938373565674
+train_iter_loss: 0.4204046428203583
+train_iter_loss: 0.4222746193408966
+train_iter_loss: 0.3932841122150421
+train_iter_loss: 0.29925814270973206
+train_iter_loss: 0.3252805471420288
+train_iter_loss: 0.40780556201934814
+train_iter_loss: 0.3185287117958069
+train_iter_loss: 0.5472067594528198
+train_iter_loss: 0.37290430068969727
+train_iter_loss: 0.3815423548221588
+train_iter_loss: 0.2885439693927765
+train_iter_loss: 0.3623189926147461
+train_iter_loss: 0.3323613405227661
+train_iter_loss: 0.34097781777381897
+train_iter_loss: 0.35203349590301514
+train_iter_loss: 0.3566129803657532
+train_iter_loss: 0.3731011748313904
+train loss :0.3988
+---------------------
+Validation seg loss: 0.42861735472842205 at epoch 73
+epoch =     74/  1000, exp = train
+train_iter_loss: 0.43916428089141846
+train_iter_loss: 0.4232677221298218
+train_iter_loss: 0.4664575457572937
+train_iter_loss: 0.3610265552997589
+train_iter_loss: 0.3247818946838379
+train_iter_loss: 0.3897874057292938
+train_iter_loss: 0.3194376826286316
+train_iter_loss: 0.46217772364616394
+train_iter_loss: 0.3035339415073395
+train_iter_loss: 0.3392070531845093
+train_iter_loss: 0.2842499315738678
+train_iter_loss: 0.3255907893180847
+train_iter_loss: 0.4711911976337433
+train_iter_loss: 0.39537110924720764
+train_iter_loss: 0.3675377666950226
+train_iter_loss: 0.3507835268974304
+train_iter_loss: 0.308772474527359
+train_iter_loss: 0.48126456141471863
+train_iter_loss: 0.3539176285266876
+train_iter_loss: 0.2940995395183563
+train_iter_loss: 0.36888933181762695
+train_iter_loss: 0.5009182095527649
+train_iter_loss: 0.4449146091938019
+train_iter_loss: 0.5407912135124207
+train_iter_loss: 0.35005825757980347
+train loss :0.4026
+---------------------
+Validation seg loss: 0.4285841163528978 at epoch 74
+epoch =     75/  1000, exp = train
+train_iter_loss: 0.44528728723526
+train_iter_loss: 0.44277045130729675
+train_iter_loss: 0.5898380875587463
+train_iter_loss: 0.3959350287914276
+train_iter_loss: 0.4688713550567627
+train_iter_loss: 0.38308408856391907
+train_iter_loss: 0.32832810282707214
+train_iter_loss: 0.2683822214603424
+train_iter_loss: 0.3922480046749115
+train_iter_loss: 0.4422893822193146
+train_iter_loss: 0.42498472332954407
+train_iter_loss: 0.35471439361572266
+train_iter_loss: 0.39992058277130127
+train_iter_loss: 0.38695043325424194
+train_iter_loss: 0.4146115779876709
+train_iter_loss: 0.3007233738899231
+train_iter_loss: 0.34524521231651306
+train_iter_loss: 0.43566837906837463
+train_iter_loss: 0.3009802997112274
+train_iter_loss: 0.33001720905303955
+train_iter_loss: 0.415386825799942
+train_iter_loss: 0.46595069766044617
+train_iter_loss: 0.30492445826530457
+train_iter_loss: 0.35986626148223877
+train_iter_loss: 0.5199068188667297
+train loss :0.4128
+---------------------
+Validation seg loss: 0.43627432712687636 at epoch 75
+epoch =     76/  1000, exp = train
+train_iter_loss: 0.45861923694610596
+train_iter_loss: 0.375480979681015
+train_iter_loss: 0.3434118926525116
+train_iter_loss: 0.45437702536582947
+train_iter_loss: 0.37335848808288574
+train_iter_loss: 0.34650588035583496
+train_iter_loss: 0.32131969928741455
+train_iter_loss: 0.38614144921302795
+train_iter_loss: 0.39017313718795776
+train_iter_loss: 0.4558303952217102
+train_iter_loss: 0.3772435784339905
+train_iter_loss: 0.4727623164653778
+train_iter_loss: 0.33770814538002014
+train_iter_loss: 0.31120413541793823
+train_iter_loss: 0.42310845851898193
+train_iter_loss: 0.4450397491455078
+train_iter_loss: 0.25326043367385864
+train_iter_loss: 0.33905163407325745
+train_iter_loss: 0.4791167676448822
+train_iter_loss: 0.3134087026119232
+train_iter_loss: 0.330391526222229
+train_iter_loss: 0.43000197410583496
+train_iter_loss: 0.3717871904373169
+train_iter_loss: 0.5034359693527222
+train_iter_loss: 0.6015611290931702
+train loss :0.4123
+---------------------
+Validation seg loss: 0.4349799748018103 at epoch 76
+epoch =     77/  1000, exp = train
+train_iter_loss: 0.43405118584632874
+train_iter_loss: 0.3652525246143341
+train_iter_loss: 0.44164833426475525
+train_iter_loss: 0.3719847798347473
+train_iter_loss: 0.3118985593318939
+train_iter_loss: 0.43668773770332336
+train_iter_loss: 0.43585819005966187
+train_iter_loss: 0.3348563015460968
+train_iter_loss: 0.357795774936676
+train_iter_loss: 0.45807647705078125
+train_iter_loss: 0.3982299268245697
+train_iter_loss: 0.5191189646720886
+train_iter_loss: 0.24751399457454681
+train_iter_loss: 0.47555112838745117
+train_iter_loss: 0.3100932240486145
+train_iter_loss: 0.44473281502723694
+train_iter_loss: 0.28703057765960693
+train_iter_loss: 0.3330213725566864
+train_iter_loss: 0.25300896167755127
+train_iter_loss: 0.37798988819122314
+train_iter_loss: 0.293283075094223
+train_iter_loss: 0.428475022315979
+train_iter_loss: 0.35659193992614746
+train_iter_loss: 0.3022458553314209
+train_iter_loss: 0.5240674614906311
+train loss :0.3965
+---------------------
+Validation seg loss: 0.4381042875630676 at epoch 77
+epoch =     78/  1000, exp = train
+train_iter_loss: 0.5286127924919128
+train_iter_loss: 0.37195926904678345
+train_iter_loss: 0.32540658116340637
+train_iter_loss: 0.516733705997467
+train_iter_loss: 0.3375755250453949
+train_iter_loss: 0.30254796147346497
+train_iter_loss: 0.33368948101997375
+train_iter_loss: 0.4083783030509949
+train_iter_loss: 0.2744572162628174
+train_iter_loss: 0.32374653220176697
+train_iter_loss: 0.5230982303619385
+train_iter_loss: 0.4179169833660126
+train_iter_loss: 0.32935041189193726
+train_iter_loss: 0.4410400092601776
+train_iter_loss: 0.35834208130836487
+train_iter_loss: 0.38959142565727234
+train_iter_loss: 0.25724276900291443
+train_iter_loss: 0.393870085477829
+train_iter_loss: 0.284488320350647
+train_iter_loss: 0.3622531592845917
+train_iter_loss: 0.3157101273536682
+train_iter_loss: 0.2957688868045807
+train_iter_loss: 0.3261832594871521
+train_iter_loss: 0.46021121740341187
+train_iter_loss: 0.49138787388801575
+train loss :0.3906
+---------------------
+Validation seg loss: 0.435876301577631 at epoch 78
+epoch =     79/  1000, exp = train
+train_iter_loss: 0.41371119022369385
+train_iter_loss: 0.5143770575523376
+train_iter_loss: 0.42288824915885925
+train_iter_loss: 0.2693537473678589
+train_iter_loss: 0.4290789067745209
+train_iter_loss: 0.40240418910980225
+train_iter_loss: 0.3587840795516968
+train_iter_loss: 0.4045601189136505
+train_iter_loss: 0.43413278460502625
+train_iter_loss: 0.31504344940185547
+train_iter_loss: 0.5260920524597168
+train_iter_loss: 0.4254246950149536
+train_iter_loss: 0.5025789737701416
+train_iter_loss: 0.32315483689308167
+train_iter_loss: 0.3114338517189026
+train_iter_loss: 0.41513869166374207
+train_iter_loss: 0.35419875383377075
+train_iter_loss: 0.33786290884017944
+train_iter_loss: 0.2839561104774475
+train_iter_loss: 0.28556308150291443
+train_iter_loss: 0.36464840173721313
+train_iter_loss: 0.33672237396240234
+train_iter_loss: 0.4114735722541809
+train_iter_loss: 0.3977520763874054
+train_iter_loss: 0.3676242232322693
+train loss :0.3999
+---------------------
+Validation seg loss: 0.4249826423331814 at epoch 79
+epoch =     80/  1000, exp = train
+train_iter_loss: 0.35469451546669006
+train_iter_loss: 0.48273906111717224
+train_iter_loss: 0.4169777035713196
+train_iter_loss: 0.4380677044391632
+train_iter_loss: 0.34463149309158325
+train_iter_loss: 0.26188579201698303
+train_iter_loss: 0.39289185404777527
+train_iter_loss: 0.391770601272583
+train_iter_loss: 0.42196106910705566
+train_iter_loss: 0.30541592836380005
+train_iter_loss: 0.3384801745414734
+train_iter_loss: 0.3861837089061737
+train_iter_loss: 0.33290931582450867
+train_iter_loss: 0.2880883812904358
+train_iter_loss: 0.4557955861091614
+train_iter_loss: 0.36105918884277344
+train_iter_loss: 0.2908629775047302
+train_iter_loss: 0.39573362469673157
+train_iter_loss: 0.30652233958244324
+train_iter_loss: 0.4325812757015228
+train_iter_loss: 0.35700494050979614
+train_iter_loss: 0.4772737920284271
+train_iter_loss: 0.3632367253303528
+train_iter_loss: 0.27296578884124756
+train_iter_loss: 0.4148833155632019
+train loss :0.3874
+---------------------
+Validation seg loss: 0.42348737107976425 at epoch 80
+epoch =     81/  1000, exp = train
+train_iter_loss: 0.4393961727619171
+train_iter_loss: 0.42151907086372375
+train_iter_loss: 0.4607418477535248
+train_iter_loss: 0.4491562843322754
+train_iter_loss: 0.4094827175140381
+train_iter_loss: 0.35116884112358093
+train_iter_loss: 0.3923308253288269
+train_iter_loss: 0.4699568748474121
+train_iter_loss: 0.3238494098186493
+train_iter_loss: 0.17822156846523285
+train_iter_loss: 0.327411025762558
+train_iter_loss: 0.3377194106578827
+train_iter_loss: 0.22641393542289734
+train_iter_loss: 0.2854154407978058
+train_iter_loss: 0.2532329559326172
+train_iter_loss: 0.4209560751914978
+train_iter_loss: 0.33282485604286194
+train_iter_loss: 0.47389689087867737
+train_iter_loss: 0.3390568792819977
+train_iter_loss: 0.391084223985672
+train_iter_loss: 0.3468170166015625
+train_iter_loss: 0.33042654395103455
+train_iter_loss: 0.3242003321647644
+train_iter_loss: 0.46038833260536194
+train_iter_loss: 0.4240676164627075
+train loss :0.3823
+---------------------
+Validation seg loss: 0.4262007539213266 at epoch 81
+epoch =     82/  1000, exp = train
+train_iter_loss: 0.4984615445137024
+train_iter_loss: 0.3913392126560211
+train_iter_loss: 0.4883531332015991
+train_iter_loss: 0.3828088045120239
+train_iter_loss: 0.4323424696922302
+train_iter_loss: 0.3719916045665741
+train_iter_loss: 0.4127650558948517
+train_iter_loss: 0.3478691279888153
+train_iter_loss: 0.43394991755485535
+train_iter_loss: 0.39028167724609375
+train_iter_loss: 0.3605155944824219
+train_iter_loss: 0.34161055088043213
+train_iter_loss: 0.3003944754600525
+train_iter_loss: 0.23345017433166504
+train_iter_loss: 0.4499923288822174
+train_iter_loss: 0.32821449637413025
+train_iter_loss: 0.3185045123100281
+train_iter_loss: 0.3035699129104614
+train_iter_loss: 0.2803041934967041
+train_iter_loss: 0.4378977119922638
+train_iter_loss: 0.33868128061294556
+train_iter_loss: 0.27901142835617065
+train_iter_loss: 0.4886869490146637
+train_iter_loss: 0.35479772090911865
+train_iter_loss: 0.2983156442642212
+train loss :0.3859
+---------------------
+Validation seg loss: 0.4329703088568629 at epoch 82
+epoch =     83/  1000, exp = train
+train_iter_loss: 0.37891316413879395
+train_iter_loss: 0.3610491454601288
+train_iter_loss: 0.4605652093887329
+train_iter_loss: 0.437182754278183
+train_iter_loss: 0.5035766363143921
+train_iter_loss: 0.381317675113678
+train_iter_loss: 0.4053470492362976
+train_iter_loss: 0.36472198367118835
+train_iter_loss: 0.49488526582717896
+train_iter_loss: 0.4086267948150635
+train_iter_loss: 0.30116209387779236
+train_iter_loss: 0.431181401014328
+train_iter_loss: 0.3863329589366913
+train_iter_loss: 0.24093568325042725
+train_iter_loss: 0.4034344255924225
+train_iter_loss: 0.3957933187484741
+train_iter_loss: 0.2899669110774994
+train_iter_loss: 0.3331115245819092
+train_iter_loss: 0.4233129322528839
+train_iter_loss: 0.3813965320587158
+train_iter_loss: 0.4014193117618561
+train_iter_loss: 0.4250084459781647
+train_iter_loss: 0.3857862949371338
+train_iter_loss: 0.3880670964717865
+train_iter_loss: 0.4197641611099243
+train loss :0.4075
+---------------------
+Validation seg loss: 0.4416020565297244 at epoch 83
+epoch =     84/  1000, exp = train
+train_iter_loss: 0.42800360918045044
+train_iter_loss: 0.41610413789749146
+train_iter_loss: 0.4523220956325531
+train_iter_loss: 0.5260255336761475
+train_iter_loss: 0.37870433926582336
+train_iter_loss: 0.3218459486961365
+train_iter_loss: 0.39955011010169983
+train_iter_loss: 0.3772561252117157
+train_iter_loss: 0.3383052349090576
+train_iter_loss: 0.2979671359062195
+train_iter_loss: 0.368431955575943
+train_iter_loss: 0.43807747960090637
+train_iter_loss: 0.41638121008872986
+train_iter_loss: 0.3943122625350952
+train_iter_loss: 0.2717822194099426
+train_iter_loss: 0.3818415105342865
+train_iter_loss: 0.3079962134361267
+train_iter_loss: 0.3078751862049103
+train_iter_loss: 0.3388909101486206
+train_iter_loss: 0.29587438702583313
+train_iter_loss: 0.28108036518096924
+train_iter_loss: 0.3345297873020172
+train_iter_loss: 0.32523825764656067
+train_iter_loss: 0.30391162633895874
+train_iter_loss: 0.5158680081367493
+train loss :0.3850
+---------------------
+Validation seg loss: 0.43162227123272867 at epoch 84
+epoch =     85/  1000, exp = train
+train_iter_loss: 0.4333694875240326
+train_iter_loss: 0.44458189606666565
+train_iter_loss: 0.3976401686668396
+train_iter_loss: 0.42847922444343567
+train_iter_loss: 0.36761409044265747
+train_iter_loss: 0.3424777388572693
+train_iter_loss: 0.33780187368392944
+train_iter_loss: 0.35333821177482605
+train_iter_loss: 0.29036465287208557
+train_iter_loss: 0.46827515959739685
+train_iter_loss: 0.35582929849624634
+train_iter_loss: 0.39248284697532654
+train_iter_loss: 0.2732388973236084
+train_iter_loss: 0.37381279468536377
+train_iter_loss: 0.2910652756690979
+train_iter_loss: 0.29954782128334045
+train_iter_loss: 0.4127551019191742
+train_iter_loss: 0.3604241609573364
+train_iter_loss: 0.3273927569389343
+train_iter_loss: 0.40231814980506897
+train_iter_loss: 0.4640922546386719
+train_iter_loss: 0.32922664284706116
+train_iter_loss: 0.37985315918922424
+train_iter_loss: 0.5412174463272095
+train_iter_loss: 0.3387742042541504
+train loss :0.3916
+---------------------
+Validation seg loss: nan at epoch 85
+epoch =     86/  1000, exp = train
+train_iter_loss: 0.5066829323768616
+train_iter_loss: 0.3191128373146057
+train_iter_loss: 0.44889283180236816
+train_iter_loss: 0.4681655168533325
+train_iter_loss: 0.4458191692829132
+train_iter_loss: 0.3373793661594391
+train_iter_loss: 0.2924656569957733
+train_iter_loss: 0.40792736411094666
+train_iter_loss: 0.34479764103889465
+train_iter_loss: 0.43650466203689575
+train_iter_loss: 0.35328778624534607
+train_iter_loss: 0.3114868402481079
+train_iter_loss: 0.31569117307662964
+train_iter_loss: 0.3888586163520813
+train_iter_loss: 0.3622368276119232
+train_iter_loss: 0.3309592008590698
+train_iter_loss: 0.36459219455718994
+train_iter_loss: 0.35323143005371094
+train_iter_loss: 0.2528949975967407
+train_iter_loss: 0.31549039483070374
+train_iter_loss: 0.29311612248420715
+train_iter_loss: 0.32705026865005493
+train_iter_loss: 0.3102920949459076
+train_iter_loss: 0.2792625427246094
+train_iter_loss: 0.5094311237335205
+train loss :0.3787
+---------------------
+Validation seg loss: 0.43719377323001063 at epoch 86
+epoch =     87/  1000, exp = train
+train_iter_loss: 0.39255785942077637
+train_iter_loss: 0.4399626851081848
+train_iter_loss: 0.41550105810165405
+train_iter_loss: 0.4538939595222473
+train_iter_loss: 0.3640564978122711
+train_iter_loss: 0.3843265473842621
+train_iter_loss: 0.3552178740501404
+train_iter_loss: 0.367838978767395
+train_iter_loss: 0.4856300950050354
+train_iter_loss: 0.5132850408554077
+train_iter_loss: 0.3224412798881531
+train_iter_loss: 0.3891335129737854
+train_iter_loss: 0.4047101140022278
+train_iter_loss: 0.404188334941864
+train_iter_loss: 0.5433263182640076
+train_iter_loss: 0.4150705635547638
+train_iter_loss: 0.29935869574546814
+train_iter_loss: 0.3742449879646301
+train_iter_loss: 0.32968512177467346
+train_iter_loss: 0.3401169180870056
+train_iter_loss: 0.3748053312301636
+train_iter_loss: 0.2768377363681793
+train_iter_loss: 0.35460489988327026
+train_iter_loss: 0.3442592918872833
+train_iter_loss: 0.4004720151424408
+train loss :0.4050
+---------------------
+Validation seg loss: 0.43725052310751295 at epoch 87
+epoch =     88/  1000, exp = train
+train_iter_loss: 0.4974419176578522
+train_iter_loss: 0.548182487487793
+train_iter_loss: 0.43297865986824036
+train_iter_loss: 0.4589354693889618
+train_iter_loss: 0.556021511554718
+train_iter_loss: 0.44229045510292053
+train_iter_loss: 0.2789193093776703
+train_iter_loss: 0.48467403650283813
+train_iter_loss: 0.2672669291496277
+train_iter_loss: 0.278511106967926
+train_iter_loss: 0.3321831524372101
+train_iter_loss: 0.37277355790138245
+train_iter_loss: 0.48324844241142273
+train_iter_loss: 0.5010186433792114
+train_iter_loss: 0.324726939201355
+train_iter_loss: 0.36648279428482056
+train_iter_loss: 0.3034554719924927
+train_iter_loss: 0.34754234552383423
+train_iter_loss: 0.42002055048942566
+train_iter_loss: 0.35294708609580994
+train_iter_loss: 0.32437634468078613
+train_iter_loss: 0.23066271841526031
+train_iter_loss: 0.42183876037597656
+train_iter_loss: 0.36132577061653137
+train_iter_loss: 0.5040135979652405
+train loss :0.4119
+---------------------
+Validation seg loss: 0.432983162865605 at epoch 88
+epoch =     89/  1000, exp = train
+train_iter_loss: 0.44404035806655884
+train_iter_loss: 0.6365146040916443
+train_iter_loss: 0.3918307423591614
+train_iter_loss: 0.4112611711025238
+train_iter_loss: 0.38234585523605347
+train_iter_loss: 0.34543710947036743
+train_iter_loss: 0.45710718631744385
+train_iter_loss: 0.46347442269325256
+train_iter_loss: 0.3652086555957794
+train_iter_loss: 0.3194408714771271
+train_iter_loss: 0.33428019285202026
+train_iter_loss: 0.3264004588127136
+train_iter_loss: 0.3248591721057892
+train_iter_loss: 0.3246241807937622
+train_iter_loss: 0.28820890188217163
+train_iter_loss: 0.3000144362449646
+train_iter_loss: 0.35847926139831543
+train_iter_loss: 0.29532766342163086
+train_iter_loss: 0.20272214710712433
+train_iter_loss: 0.37931951880455017
+train_iter_loss: 0.4256475567817688
+train_iter_loss: 0.4196338653564453
+train_iter_loss: 0.2741222083568573
+train_iter_loss: 0.37531647086143494
+train_iter_loss: 0.41641220450401306
+train loss :0.3870
+---------------------
+Validation seg loss: 0.4271928797704431 at epoch 89
+epoch =     90/  1000, exp = train
+train_iter_loss: 0.39365148544311523
+train_iter_loss: 0.375180184841156
+train_iter_loss: 0.566145122051239
+train_iter_loss: 0.4786452651023865
+train_iter_loss: 0.28898948431015015
+train_iter_loss: 0.44614869356155396
+train_iter_loss: 0.41802507638931274
+train_iter_loss: 0.298888236284256
+train_iter_loss: 0.5393550395965576
+train_iter_loss: 0.37515246868133545
+train_iter_loss: 0.4121473431587219
+train_iter_loss: 0.3938100039958954
+train_iter_loss: 0.286283403635025
+train_iter_loss: 0.33938702940940857
+train_iter_loss: 0.23445066809654236
+train_iter_loss: 0.4437553882598877
+train_iter_loss: 0.2974165380001068
+train_iter_loss: 0.43845126032829285
+train_iter_loss: 0.42266127467155457
+train_iter_loss: 0.23804812133312225
+train_iter_loss: 0.4867543876171112
+train_iter_loss: 0.33575889468193054
+train_iter_loss: 0.313385546207428
+train_iter_loss: 0.38160061836242676
+train_iter_loss: 0.38412728905677795
+train loss :0.3990
+---------------------
+Validation seg loss: 0.4221274517828001 at epoch 90
+********************
+best_val_epoch_loss:  0.4221274517828001
+MODEL UPDATED
+epoch =     91/  1000, exp = train
+train_iter_loss: 0.41868719458580017
+train_iter_loss: 0.46285873651504517
+train_iter_loss: 0.4389263391494751
+train_iter_loss: 0.40570396184921265
+train_iter_loss: 0.3650433421134949
+train_iter_loss: 0.33467230200767517
+train_iter_loss: 0.32185861468315125
+train_iter_loss: 0.36681655049324036
+train_iter_loss: 0.3364303410053253
+train_iter_loss: 0.4493477940559387
+train_iter_loss: 0.46472418308258057
+train_iter_loss: 0.3260440528392792
+train_iter_loss: 0.2793309986591339
+train_iter_loss: 0.4612624943256378
+train_iter_loss: 0.4061182141304016
+train_iter_loss: 0.35598814487457275
+train_iter_loss: 0.3385525941848755
+train_iter_loss: 0.28782927989959717
+train_iter_loss: 0.3157764971256256
+train_iter_loss: 0.29135772585868835
+train_iter_loss: 0.400566965341568
+train_iter_loss: 0.3291446566581726
+train_iter_loss: 0.27991506457328796
+train_iter_loss: 0.379226952791214
+train_iter_loss: 0.35596171021461487
+train loss :0.3828
+---------------------
+Validation seg loss: 0.42996613663744254 at epoch 91
+epoch =     92/  1000, exp = train
+train_iter_loss: 0.4804624915122986
+train_iter_loss: 0.4401719570159912
+train_iter_loss: 0.37078213691711426
+train_iter_loss: 0.4998643696308136
+train_iter_loss: 0.35512930154800415
+train_iter_loss: 0.34180474281311035
+train_iter_loss: 0.4141702353954315
+train_iter_loss: 0.3498246967792511
+train_iter_loss: 0.3279859721660614
+train_iter_loss: 0.3867182731628418
+train_iter_loss: 0.35211867094039917
+train_iter_loss: 0.4663747251033783
+train_iter_loss: 0.3339247703552246
+train_iter_loss: 0.3607695698738098
+train_iter_loss: 0.4219237267971039
+train_iter_loss: 0.3639315664768219
+train_iter_loss: 0.3409537076950073
+train_iter_loss: 0.4142822325229645
+train_iter_loss: 0.32734352350234985
+train_iter_loss: 0.3563070297241211
+train_iter_loss: 0.4428536891937256
+train_iter_loss: 0.32149559259414673
+train_iter_loss: 0.3415027856826782
+train_iter_loss: 0.3388371467590332
+train_iter_loss: 0.3241994082927704
+train loss :0.3943
+---------------------
+Validation seg loss: 0.43270797823678775 at epoch 92
+epoch =     93/  1000, exp = train
+train_iter_loss: 0.3561066687107086
+train_iter_loss: 0.4933062195777893
+train_iter_loss: 0.48288100957870483
+train_iter_loss: 0.3195889890193939
+train_iter_loss: 0.39607223868370056
+train_iter_loss: 0.36318036913871765
+train_iter_loss: 0.34180787205696106
+train_iter_loss: 0.35924357175827026
+train_iter_loss: 0.4404474198818207
+train_iter_loss: 0.26975929737091064
+train_iter_loss: 0.4163931906223297
+train_iter_loss: 0.21214215457439423
+train_iter_loss: 0.41204431653022766
+train_iter_loss: 0.46538281440734863
+train_iter_loss: 0.43914660811424255
+train_iter_loss: 0.49116480350494385
+train_iter_loss: 0.3833341598510742
+train_iter_loss: 0.48021000623703003
+train_iter_loss: 0.21864773333072662
+train_iter_loss: 0.36554887890815735
+train_iter_loss: 0.2560189366340637
+train_iter_loss: 0.4181033670902252
+train_iter_loss: 0.3020235002040863
+train_iter_loss: 0.4525602459907532
+train_iter_loss: 0.4054160416126251
+train loss :0.3974
+---------------------
+Validation seg loss: 0.4200224200579918 at epoch 93
+********************
+best_val_epoch_loss:  0.4200224200579918
+MODEL UPDATED
+epoch =     94/  1000, exp = train
+train_iter_loss: 0.3733518421649933
+train_iter_loss: 0.4284333288669586
+train_iter_loss: 0.46565353870391846
+train_iter_loss: 0.561311662197113
+train_iter_loss: 0.28546690940856934
+train_iter_loss: 0.3662393391132355
+train_iter_loss: 0.32138335704803467
+train_iter_loss: 0.3979305028915405
+train_iter_loss: 0.48017123341560364
+train_iter_loss: 0.3541853129863739
+train_iter_loss: 0.27564722299575806
+train_iter_loss: 0.38882747292518616
+train_iter_loss: 0.2850644886493683
+train_iter_loss: 0.3359517753124237
+train_iter_loss: 0.4808582365512848
+train_iter_loss: 0.3403331935405731
+train_iter_loss: 0.3367600739002228
+train_iter_loss: 0.34582531452178955
+train_iter_loss: 0.44433197379112244
+train_iter_loss: 0.3397248387336731
+train_iter_loss: 0.48317253589630127
+train_iter_loss: 0.27868887782096863
+train_iter_loss: 0.26885589957237244
+train_iter_loss: 0.4006122350692749
+train_iter_loss: 0.46283984184265137
+train loss :0.3960
+---------------------
+Validation seg loss: 0.4260172559967581 at epoch 94
+epoch =     95/  1000, exp = train
+train_iter_loss: 0.4381800889968872
+train_iter_loss: 0.39233914017677307
+train_iter_loss: 0.5072073936462402
+train_iter_loss: 0.3995571434497833
+train_iter_loss: 0.3253779411315918
+train_iter_loss: 0.22724169492721558
+train_iter_loss: 0.3469074070453644
+train_iter_loss: 0.41924235224723816
+train_iter_loss: 0.462676465511322
+train_iter_loss: 0.4917509853839874
+train_iter_loss: 0.32866978645324707
+train_iter_loss: 0.28801023960113525
+train_iter_loss: 0.3586702048778534
+train_iter_loss: 0.3309725522994995
+train_iter_loss: 0.3232223093509674
+train_iter_loss: 0.28066158294677734
+train_iter_loss: 0.35845738649368286
+train_iter_loss: 0.2996312081813812
+train_iter_loss: 0.37331777811050415
+train_iter_loss: 0.30785250663757324
+train_iter_loss: 0.4231044054031372
+train_iter_loss: 0.3547736704349518
+train_iter_loss: 0.38753533363342285
+train_iter_loss: 0.308872789144516
+train_iter_loss: 0.3687586784362793
+train loss :0.3800
+---------------------
+Validation seg loss: 0.4322659670955168 at epoch 95
+epoch =     96/  1000, exp = train
+train_iter_loss: 0.42433711886405945
+train_iter_loss: 0.36186233162879944
+train_iter_loss: 0.46925103664398193
+train_iter_loss: 0.44208917021751404
+train_iter_loss: 0.4287761151790619
+train_iter_loss: 0.3240329325199127
+train_iter_loss: 0.28135019540786743
+train_iter_loss: 0.36603161692619324
+train_iter_loss: 0.3409382700920105
+train_iter_loss: 0.2665909230709076
+train_iter_loss: 0.5186620950698853
+train_iter_loss: 0.3086218237876892
+train_iter_loss: 0.4129195809364319
+train_iter_loss: 0.2738814949989319
+train_iter_loss: 0.35863786935806274
+train_iter_loss: 0.3663047254085541
+train_iter_loss: 0.31420084834098816
+train_iter_loss: 0.21429529786109924
+train_iter_loss: 0.271842360496521
+train_iter_loss: 0.36085471510887146
+train_iter_loss: 0.3706762194633484
+train_iter_loss: 0.3105068802833557
+train_iter_loss: 0.40960973501205444
+train_iter_loss: 0.28111857175827026
+train_iter_loss: 0.4068653881549835
+train loss :0.3706
+---------------------
+Validation seg loss: 0.4187952636407231 at epoch 96
+********************
+best_val_epoch_loss:  0.4187952636407231
+MODEL UPDATED
+epoch =     97/  1000, exp = train
+train_iter_loss: 0.33686140179634094
+train_iter_loss: 0.39695754647254944
+train_iter_loss: 0.41178491711616516
+train_iter_loss: 0.4684927761554718
+train_iter_loss: 0.32358378171920776
+train_iter_loss: 0.38690194487571716
+train_iter_loss: 0.3083409368991852
+train_iter_loss: 0.3817159831523895
+train_iter_loss: 0.35701557993888855
+train_iter_loss: 0.3969372808933258
+train_iter_loss: 0.3089047372341156
+train_iter_loss: 0.47697898745536804
+train_iter_loss: 0.39432600140571594
+train_iter_loss: 0.21902018785476685
+train_iter_loss: 0.37169158458709717
+train_iter_loss: 0.3730517327785492
+train_iter_loss: 0.5284091830253601
+train_iter_loss: 0.2622773349285126
+train_iter_loss: 0.2967038154602051
+train_iter_loss: 0.40606755018234253
+train_iter_loss: 0.3463601768016815
+train_iter_loss: 0.3853762447834015
+train_iter_loss: 0.4045014977455139
+train_iter_loss: 0.47889256477355957
+train_iter_loss: 0.3917020857334137
+train loss :0.3913
+---------------------
+Validation seg loss: 0.4185527235199258 at epoch 97
+********************
+best_val_epoch_loss:  0.4185527235199258
+MODEL UPDATED
+epoch =     98/  1000, exp = train
+train_iter_loss: 0.4565879702568054
+train_iter_loss: 0.5781371593475342
+train_iter_loss: 0.40756726264953613
+train_iter_loss: 0.4761967658996582
+train_iter_loss: 0.342058002948761
+train_iter_loss: 0.3665553629398346
+train_iter_loss: 0.4204522967338562
+train_iter_loss: 0.3096623122692108
+train_iter_loss: 0.3695783317089081
+train_iter_loss: 0.27918416261672974
+train_iter_loss: 0.33447572588920593
+train_iter_loss: 0.41298139095306396
+train_iter_loss: 0.5254719257354736
+train_iter_loss: 0.3489701747894287
+train_iter_loss: 0.331611305475235
+train_iter_loss: 0.316451758146286
+train_iter_loss: 0.2768235504627228
+train_iter_loss: 0.38853389024734497
+train_iter_loss: 0.24989651143550873
+train_iter_loss: 0.37932372093200684
+train_iter_loss: 0.2869459390640259
+train_iter_loss: 0.3899078667163849
+train_iter_loss: 0.34728559851646423
+train_iter_loss: 0.4066525995731354
+train_iter_loss: 0.47675421833992004
+train loss :0.3948
+---------------------
+Validation seg loss: 0.4249115106561836 at epoch 98
+epoch =     99/  1000, exp = train
+train_iter_loss: 0.4102728068828583
+train_iter_loss: 0.4301796853542328
+train_iter_loss: 0.4104025065898895
+train_iter_loss: 0.5478774309158325
+train_iter_loss: 0.3885461986064911
+train_iter_loss: 0.30090850591659546
+train_iter_loss: 0.40090689063072205
+train_iter_loss: 0.2991510033607483
+train_iter_loss: 0.3755554258823395
+train_iter_loss: 0.4705086648464203
+train_iter_loss: 0.39564281702041626
+train_iter_loss: 0.39861565828323364
+train_iter_loss: 0.3075813353061676
+train_iter_loss: 0.3315872550010681
+train_iter_loss: 0.44368159770965576
+train_iter_loss: 0.3913617432117462
+train_iter_loss: 0.3076050877571106
+train_iter_loss: 0.4779428243637085
+train_iter_loss: 0.4623137414455414
+train_iter_loss: 0.26414600014686584
+train_iter_loss: 0.3558899760246277
+train_iter_loss: 0.4222859740257263
+train_iter_loss: 0.4086052179336548
+train_iter_loss: 0.2635177969932556
+train_iter_loss: 0.34572622179985046
+train loss :0.4002
+---------------------
+Validation seg loss: 0.4206393648220121 at epoch 99
+epoch =    100/  1000, exp = train
+train_iter_loss: 0.3087816834449768
+train_iter_loss: 0.4803524315357208
+train_iter_loss: 0.39120838046073914
+train_iter_loss: 0.35432007908821106
+train_iter_loss: 0.3349291682243347
+train_iter_loss: 0.3974023759365082
+train_iter_loss: 0.3965986967086792
+train_iter_loss: 0.3556954860687256
+train_iter_loss: 0.5002464652061462
+train_iter_loss: 0.3872104287147522
+train_iter_loss: 0.22297027707099915
+train_iter_loss: 0.42000317573547363
+train_iter_loss: 0.40468165278434753
+train_iter_loss: 0.42410707473754883
+train_iter_loss: 0.2736368179321289
+train_iter_loss: 0.2848164737224579
+train_iter_loss: 0.34646373987197876
+train_iter_loss: 0.3274606466293335
+train_iter_loss: 0.3780097961425781
+train_iter_loss: 0.40824416279792786
+train_iter_loss: 0.4037661552429199
+train_iter_loss: 0.3158675730228424
+train_iter_loss: 0.3175836205482483
+train_iter_loss: 0.3157987892627716
+train_iter_loss: 0.4635928273200989
+train loss :0.3846
+---------------------
+Validation seg loss: 0.4423235775024261 at epoch 100
+epoch =    101/  1000, exp = train
+train_iter_loss: 0.4821109175682068
+train_iter_loss: 0.4295545816421509
+train_iter_loss: 0.37049388885498047
+train_iter_loss: 0.5377441644668579
+train_iter_loss: 0.40208005905151367
+train_iter_loss: 0.318852037191391
+train_iter_loss: 0.4053802192211151
+train_iter_loss: 0.3346657454967499
+train_iter_loss: 0.35581374168395996
+train_iter_loss: 0.31083744764328003
+train_iter_loss: 0.4048556685447693
+train_iter_loss: 0.3904368281364441
+train_iter_loss: 0.39960721135139465
+train_iter_loss: 0.31248489022254944
+train_iter_loss: 0.36273786425590515
+train_iter_loss: 0.25409579277038574
+train_iter_loss: 0.30834078788757324
+train_iter_loss: 0.2350175529718399
+train_iter_loss: 0.3628746569156647
+train_iter_loss: 0.28265994787216187
+train_iter_loss: 0.42661505937576294
+train_iter_loss: 0.35557839274406433
+train_iter_loss: 0.44618988037109375
+train_iter_loss: 0.3230433762073517
+train_iter_loss: 0.4645595848560333
+train loss :0.3864
+---------------------
+Validation seg loss: 0.4325733892971052 at epoch 101
+epoch =    102/  1000, exp = train
+train_iter_loss: 0.3991232216358185
+train_iter_loss: 0.34349164366722107
+train_iter_loss: 0.3650825023651123
+train_iter_loss: 0.41648104786872864
+train_iter_loss: 0.4675258696079254
+train_iter_loss: 0.3906339406967163
+train_iter_loss: 0.39990487694740295
+train_iter_loss: 0.43569496273994446
+train_iter_loss: 0.4678719639778137
+train_iter_loss: 0.329661101102829
+train_iter_loss: 0.39595288038253784
+train_iter_loss: 0.42422863841056824
+train_iter_loss: 0.5025782585144043
+train_iter_loss: 0.28699520230293274
+train_iter_loss: 0.2932295799255371
+train_iter_loss: 0.23698490858078003
+train_iter_loss: 0.3737800121307373
+train_iter_loss: 0.4307311773300171
+train_iter_loss: 0.35750478506088257
+train_iter_loss: 0.4083463251590729
+train_iter_loss: 0.29048144817352295
+train_iter_loss: 0.3861245810985565
+train_iter_loss: 0.43071842193603516
+train_iter_loss: 0.381255179643631
+train_iter_loss: 0.48659560084342957
+train loss :0.4035
+---------------------
+Validation seg loss: 0.4289391713814353 at epoch 102
+epoch =    103/  1000, exp = train
+train_iter_loss: 0.34263429045677185
+train_iter_loss: 0.34588128328323364
+train_iter_loss: 0.3927411139011383
+train_iter_loss: 0.526702344417572
+train_iter_loss: 0.40333130955696106
+train_iter_loss: 0.39519214630126953
+train_iter_loss: 0.3840903043746948
+train_iter_loss: 0.3080195486545563
+train_iter_loss: 0.5047861933708191
+train_iter_loss: 0.47522827982902527
+train_iter_loss: 0.3921937048435211
+train_iter_loss: 0.4191628694534302
+train_iter_loss: 0.27577781677246094
+train_iter_loss: 0.38421544432640076
+train_iter_loss: 0.23370784521102905
+train_iter_loss: 0.4053910970687866
+train_iter_loss: 0.3134838342666626
+train_iter_loss: 0.3501037061214447
+train_iter_loss: 0.3160913586616516
+train_iter_loss: 0.352649450302124
+train_iter_loss: 0.35389384627342224
+train_iter_loss: 0.3508913815021515
+train_iter_loss: 0.3917168974876404
+train_iter_loss: 0.3955019414424896
+train_iter_loss: 0.4455976188182831
+train loss :0.3945
+---------------------
+Validation seg loss: 0.42705726243977277 at epoch 103
+epoch =    104/  1000, exp = train
+train_iter_loss: 0.45631566643714905
+train_iter_loss: 0.44102776050567627
+train_iter_loss: 0.3801790773868561
+train_iter_loss: 0.3721499443054199
+train_iter_loss: 0.30310460925102234
+train_iter_loss: 0.4233599901199341
+train_iter_loss: 0.3537057936191559
+train_iter_loss: 0.2842423617839813
+train_iter_loss: 0.32982560992240906
+train_iter_loss: 0.3875146210193634
+train_iter_loss: 0.43160685896873474
+train_iter_loss: 0.3773089051246643
+train_iter_loss: 0.3282657563686371
+train_iter_loss: 0.20029249787330627
+train_iter_loss: 0.36887118220329285
+train_iter_loss: 0.39470410346984863
+train_iter_loss: 0.2233019769191742
+train_iter_loss: 0.30583569407463074
+train_iter_loss: 0.4158332645893097
+train_iter_loss: 0.3006092309951782
+train_iter_loss: 0.43976926803588867
+train_iter_loss: 0.30020514130592346
+train_iter_loss: 0.26750263571739197
+train_iter_loss: 0.318978488445282
+train_iter_loss: 0.46818289160728455
+train loss :0.3707
+---------------------
+Validation seg loss: 0.4331630409677636 at epoch 104
+epoch =    105/  1000, exp = train
+train_iter_loss: 0.3735494613647461
+train_iter_loss: 0.5558300614356995
+train_iter_loss: 0.3912428319454193
+train_iter_loss: 0.3839016854763031
+train_iter_loss: 0.4352973401546478
+train_iter_loss: 0.4536008834838867
+train_iter_loss: 0.3986068665981293
+train_iter_loss: 0.3100051283836365
+train_iter_loss: 0.35091203451156616
+train_iter_loss: 0.30637305974960327
+train_iter_loss: 0.3420473337173462
+train_iter_loss: 0.31705063581466675
+train_iter_loss: 0.5802913904190063
+train_iter_loss: 0.28237631916999817
+train_iter_loss: 0.34252530336380005
+train_iter_loss: 0.3923951983451843
+train_iter_loss: 0.3550025522708893
+train_iter_loss: 0.36753717064857483
+train_iter_loss: 0.3267878293991089
+train_iter_loss: 0.299315869808197
+train_iter_loss: 0.2754439413547516
+train_iter_loss: 0.29154691100120544
+train_iter_loss: 0.44861510396003723
+train_iter_loss: 0.4634908139705658
+train_iter_loss: 0.35125717520713806
+train loss :0.3906
+---------------------
+Validation seg loss: 0.42527060523488613 at epoch 105
+epoch =    106/  1000, exp = train
+train_iter_loss: 0.5711368918418884
+train_iter_loss: 0.38579797744750977
+train_iter_loss: 0.4438903033733368
+train_iter_loss: 0.3689848482608795
+train_iter_loss: 0.28484368324279785
+train_iter_loss: 0.3226313292980194
+train_iter_loss: 0.5313838720321655
+train_iter_loss: 0.4843832850456238
+train_iter_loss: 0.3655301332473755
+train_iter_loss: 0.39253199100494385
+train_iter_loss: 0.332340806722641
+train_iter_loss: 0.3696516156196594
+train_iter_loss: 0.37926843762397766
+train_iter_loss: 0.2145683914422989
+train_iter_loss: 0.47565582394599915
+train_iter_loss: 0.2838860750198364
+train_iter_loss: 0.357286274433136
+train_iter_loss: 0.30418482422828674
+train_iter_loss: 0.29554426670074463
+train_iter_loss: 0.43644025921821594
+train_iter_loss: 0.3052706718444824
+train_iter_loss: 0.4130852520465851
+train_iter_loss: 0.2926291227340698
+train_iter_loss: 0.3406413793563843
+train_iter_loss: 0.42984625697135925
+train loss :0.3909

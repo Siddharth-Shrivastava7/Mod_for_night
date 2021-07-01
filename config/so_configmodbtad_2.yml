@@ -1,7 +1,7 @@
 note: 'train'
 # configs of data
 
-model: 'deeplab'
+model: 'unet_focal_aug'
 train: True
 multigpu: False 
 fixbn: False  # check this also ..  chg 
@@ -30,7 +30,7 @@ val_freq: 5 # 372 ..after one epoch for cityscapes train set (2975) with batch 8
 source: 'acdc_train_rf_tensor' #chg
 target: 'acdc_val_rf_tensor' #chg
 worker: 4
-batch_size: 2 #chg
+batch_size: 8 #chg
 num_classes: 2
 
 #Transforms
@@ -45,6 +45,7 @@ rec: False
         
 # Model hypers
 init_weight: './save/model410_city_deeplabv2.pth'
+# restore_from: '../scratch/saved_models/acdc/dannet/train/acdc_train_rf_tensor.pth'
 restore_from: None
 
 snapshot: '../scratch/saved_models/acdc/dannet'
@@ -139,6 +140,16 @@ acdc_val_rf_tensor: {
         input_size: [1920, 1080]
 }
 acdc_dz_val_rf: {
+        data_dir: '/home/cse/phd/anz208849/scratch/data/dark_zurich_val/gt',
+        data_list: './dataset/list/darkzurich/dz_val_rf_dannet.txt',
+        input_size: [1920, 1080]
+}
+acdc_dz_val_rf_tensor: {
+        data_dir: '/home/cse/phd/anz208849/scratch/data/dark_zurich_val/gt',
+        data_list: './dataset/list/darkzurich/dz_val_rf_dannet.txt',
+        input_size: [1920, 1080]
+}
+acdc_dz_val_rf_vr: {
         data_dir: '/home/cse/phd/anz208849/scratch/data/dark_zurich_val/gt',
         data_list: './dataset/list/darkzurich/dz_val_rf_dannet.txt',
         input_size: [1920, 1080]

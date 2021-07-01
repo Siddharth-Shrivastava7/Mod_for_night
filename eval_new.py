@@ -48,6 +48,8 @@ def compute_iou(model, testloader, args):
     union = torch.zeros(args.num_classes, 1,dtype=torch.float).cuda().float()
     inter = torch.zeros(args.num_classes, 1, dtype=torch.float).cuda().float()
     preds = torch.zeros(args.num_classes, 1, dtype=torch.float).cuda().float()
+    # extra 
+    gts = torch.zeros(args.num_classes, 1, dtype=torch.float).cuda().float()
     # 2nd best 
     # totalp = 0
     # Tp = 0  
@@ -60,27 +62,35 @@ def compute_iou(model, testloader, args):
             if name[0].find('dannet_pred')==-1: 
                 continue
             # print(name)
-            output =  model(image.cuda())
+            # output =  model(image.cuda())
             label = label.cuda()
             # print('label shape:{} output shape:{}'.format(label.shape, output.shape))
             # output = interp(output).squeeze()
-            output = output.squeeze()
+            # output = output.squeeze()
             # save_pred(output, './save/dark_zurich_val/btad', args.dataset +str(index)+'.png') # org
             # print(name[0])
             name =name[0].split('/')[-1]
             # save_pred(output, '../scratch/data/try', name)  # current org # now not save
 
-            C, H, W = output.shape # original
-            # print('[*****')
+            output = image.cuda() 
+            output = output.squeeze()
+            C = 2
+            # print(output.shape)
+            # print('**********')
+            H, W = output.shape
+            # C, H, W = output.shape # original
+            # print('[*****]')
             # print(C)
             # print(torch.unique(output))
             # print(torch.unique(torch.argmax(output, dim = 0)))
+            
 
             #########################################################################original
-            Mask = (label.squeeze())<C  # it is ignoring all the labels values equal or greater than 2 # (1080, 1920) 
+            Mask = (label.squeeze())<C  # it is ignoring all the labels values equal or greater than 2 #(1080, 1920) 
             pred_e = torch.linspace(0,C-1, steps=C).view(C, 1, 1)  
             pred_e = pred_e.repeat(1, H, W).cuda() 
-            pred = output.argmax(dim=0).float()
+            # pred = output.argmax(dim=0).float()
+            pred = output.float()
             pred_mask = torch.eq(pred_e, pred).byte() 
             pred_mask = pred_mask*Mask
             # print(Mask.shape) #torch.Size([1080, 1920])
@@ -96,6 +106,9 @@ def compute_iou(model, testloader, args):
             cu_inter = (tmp_inter==2).view(C, -1).sum(dim=1, keepdim=True).float()
             cu_union = (tmp_inter>0).view(C, -1).sum(dim=1, keepdim=True).float()
             cu_preds = pred_mask.view(C, -1).sum(dim=1, keepdim=True).float()
+            #extra
+            cu_gts = label_mask.view(C, -1).sum(dim=1, keepdim=True).float()
+            gts += cu_gts
             union+=cu_union
             inter+=cu_inter
             preds+=cu_preds
@@ -145,6 +158,8 @@ def compute_iou(model, testloader, args):
         acc = inter/preds
         mIoU = iou.mean().item()
         mAcc = acc.mean().item()
+        print('*********')
+        print(gts)
         print_iou(iou, acc, mIoU, mAcc)
         ##################
         
@@ -229,7 +244,7 @@ def save_pred(pred, direc, name):
     pred[pred<0.5] = 0
     pred[pred>=0.5] = 1
     
-    pred = np.asarray(np.argmax(pred, axis=0))
+    # pred = np.asarray(np.argmax(pred, axis=0))
     # print(pred.shape)
     label_img_color = label_img_to_color(pred)
     # print(label_img_color.dtype)

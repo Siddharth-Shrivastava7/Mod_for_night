@@ -12,7 +12,7 @@ from model import *
 from init_config import *
 from easydict import EasyDict as edict
 import sys
-from trainer.btad_trainer import Trainer
+from trainer.btad_trainer_2 import Trainer
 import trainer
 import time, datetime
 import copy

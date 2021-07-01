@@ -23,7 +23,9 @@ def release_bnad(net):
 def init_model(cfg):
 
     # model = Res_Deeplab(num_classes = cfg.num_classes).cuda()
-    model = Unet_model(num_classes= cfg.num_classes).cuda()
+    # model = Unet_model(num_classes= cfg.num_classes).cuda()
+    # model = Unet_Discriminator(resolution = 256).cuda()
+    model = UNet_mod().cuda()
 
     # if cfg.fixbn:
     #     freeze_bn(model)
@@ -57,7 +59,7 @@ def init_model(cfg):
     if cfg.restore_from != 'None':
         params = torch.load(cfg.restore_from)
         model.load_state_dict(params)
-        print('Model initialize with weights from : {}'.format(cfg.restore_from))
+        print('----------Model initialize with weights from-------------: {}'.format(cfg.restore_from))
 
     if cfg.multigpu:
         model = convert_model(model)

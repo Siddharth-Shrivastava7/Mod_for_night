@@ -209,15 +209,17 @@ class BaseTrainer(object):
             # print(img.shape)
             # print('******')
             # print(seg_label.shape)
-            seg_label = seg_label.long().cuda()
-            # seg_label = seg_label.float().cuda()
+            # seg_label = seg_label.long().cuda() # ce loss
+            seg_label = seg_label.float().cuda() # bce or focal loss 
             b, c, h, w = img.shape
             # print(img.shape)
             seg_pred = self.model(img.cuda())
-            # seg_pred = seg_pred.squeeze(dim=1)
+            seg_pred = seg_pred.squeeze(dim=1) # for bce or focal loss 
             # print(seg_pred.shape, seg_label.shape)
             # seg_loss = F.binary_cross_entropy(seg_pred, seg_label)
-            loss = CrossEntropy2d()
+            # loss = CrossEntropy2d() 
+            # seg_loss = loss(seg_pred, seg_label)
+            loss = WeightedFocalLoss(alpha=0.82, gamma=2)
             seg_loss = loss(seg_pred, seg_label)
             total_loss += seg_loss.item()
         total_loss /= len(iter(testloader))
@@ -257,3 +259,28 @@ class CrossEntropy2d(nn.Module):
         # print(target.shape)
         loss = F.cross_entropy(predict, target, weight=weight, size_average=self.size_average)
         return loss
+
+class WeightedFocalLoss(nn.Module):
+    "Non weighted version of Focal Loss"
+    def __init__(self, alpha=.25, gamma=2, ignore_label=255):
+        super(WeightedFocalLoss, self).__init__()
+        self.alpha = torch.tensor([alpha, 1-alpha]).cuda()
+        self.gamma = gamma
+        self.ignore_label = ignore_label
+
+    def forward(self, inputs, targets):
+        # n, h, w = inputs.size()
+        targets_mask = (targets >= 0) * (targets != self.ignore_label)
+        targets = targets[targets_mask]
+        inputs = inputs[targets_mask]
+        BCE_loss = F.binary_cross_entropy(inputs, targets)
+        targets = targets.type(torch.long)
+        at = self.alpha.gather(0, targets.data.view(-1))
+        # print(at[targets==1])
+        # # print(at)
+        # print('**********')
+        pt = torch.exp(-BCE_loss)
+        # print(pt)
+        # print('^^^^^^^^^^^^')
+        F_loss = at*(1-pt)**self.gamma * BCE_loss
+        return F_loss.mean()
