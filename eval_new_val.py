@@ -18,6 +18,8 @@ from PIL import Image
 import json
 import torchvision
 import cv2
+from trainer.btad_trainer import *
+import cv2
 
 
 def get_arguments():
@@ -43,6 +45,7 @@ def print_iou(iou, acc, miou, macc):
 def compute_iou(model, testloader, args):
     model = model.eval()
 
+    interp_backp = nn.UpsamplingNearest2d(size=(1080, 1920)) 
     interp = nn.Upsample(size=(1080, 1920), mode='bilinear', align_corners=True)   # dark_zurich -> (1080,1920)
     union = torch.zeros(args.num_classes, 1,dtype=torch.float).cuda().float()
     inter = torch.zeros(args.num_classes, 1, dtype=torch.float).cuda().float()
@@ -50,8 +53,8 @@ def compute_iou(model, testloader, args):
     gts = torch.zeros(args.num_classes, 1, dtype=torch.float).cuda().float()
     # 2nd best 
     # totalp = 0
-    # Tp = 0  
-    with torch.no_grad():
+    # Tp = 0 
+    with torch.enable_grad():
         for index, batch in tqdm(enumerate(testloader)):
             image, label, edge, _, name = batch
 #            edge = F.interpolate(edge.unsqueeze(0), (512, 1024)).view(1,512,1024)``
@@ -60,8 +63,12 @@ def compute_iou(model, testloader, args):
             # if name[0].find('dannet_pred')==-1:  
             #     continue
             ## 
+            # print(image.shape)
+            image.requires_grad = True  ## for test time gradient calculation
             output =  model(image.cuda())
             label = label.cuda()
+            # print(output.shape) # torch.Size([1, 1, 512, 512]) 
+            # print(output.type) 
             # print('label shape:{} output shape:{}'.format(label.shape, output.shape))
             output = interp(output).squeeze()  #org .. orginial size evalutation 
             # output = F.softmax(output, dim=0) # one exp... not worked
@@ -81,81 +88,139 @@ def compute_iou(model, testloader, args):
             # # print(H, W)
             C = 2
 
+            ###########loss at test time  calc .. back prop to get which pixels have the highest gradients...visualisation process only i think 
+            # @torch.enable_grad()   # ensure grads in possible no grad context for testing 
+            loss = WeightedFocalLoss(alpha= 0.75, gamma=3)  ## loss which was used at the training time 
+            # print(output.shape) # torch.Size([1080, 1920])
+            # print(label.squeeze().shape) # torch.Size([1080, 1920])
+            # print(image.shape) # torch.Size([1, 19, 512, 512])
+            # print(image.requires_grad)
+            # print(image.is_leaf) # true
+            # print(output.is_leaf) # False
+            # print(label.is_leaf) # true
+            seg_loss = loss(output, label.squeeze().float()) 
+            loss = seg_loss
+            # print(seg_loss) 
+            # print('******')
+            loss.backward() 
+            # print(image.grad) # image gradient while doing the backprop 
+            # print(image.grad.shape) ##  Same as the original image (#torch.Size([1, 19, 512, 512]) 
+            # print(torch.argmax(image.grad , dim =1).shape) 
+            # pred_label_backp =  torch.argmax(image.grad, dim =1).unsqueeze(dim=1)   
+            # print(pred_label_backp.shape) # torch.Size([1, 1, 512, 512]) 
+            # pred_label_backp = interp_backp(pred_label_backp.to(torch.float32)).squeeze().cpu().numpy()  # by upsampling...not working...next plan
+            # pred_label_backp =  torch.argmax(image.grad, dim =1) 
+            # pred_label_backp = image.grad 
+            imgg = image.grad.squeeze(dim=0)[0] # 1 channel # torch.Size([512, 512]) 
+            # print(imgg.shape)
+            imgg = F.softmax(imgg) # between 0 and 1 proba distribution torch.Size([512, 512]) 
+            # print(np.unique(imgg))
+            # print(imgg.shape)
+            # imgg = np.array(imgg)*255 
+            imgg = np.array(imgg)
+            imgg_min = imgg.min()
+            imgg_max = imgg.max()
+            imgg_mean = np.mean(imgg)
+            imgg_std = np.std(imgg)
+            imgg = (imgg - imgg_min) / (imgg_max - imgg_min) ## min max normalisation 
+            # imgg = imgg / imgg_max  ## only max normalisation
+            # imgg = (imgg - imgg_mean) / (imgg_std) ## z score normalisation
+            print(np.unique(imgg))
+            # heatmap = cv2.applyColorMap(np.uint8(imgg*255), cv2.COLORMAP_HOT)
+            # cv2.imwrite('heatmap.png',heatmap)
+            # pred_label_backp = pred_label_backp.squeeze().cpu().numpy()
+            # label_img_color = label_img_to_color(pred_label_backp)
+            # im = Image.fromarray(label_img_color) 
+            # im.save(os.path.join('../scratch/data_hpc/data/dark_zurich_val/gt/dz_val_pred_backprop', name))
+
+            ## image pred from input..for testing 
+            # img_pred = torch.argmax(image, dim=1).unsqueeze(dim=1)
+            # img_pred = interp_backp(img_pred.to(torch.float32)).squeeze().detach().cpu().numpy()
+            # img_pred = torch.argmax(image, dim=1)
+            # img_pred = img_pred.squeeze().detach().cpu().numpy()
+            # label_img_color = label_img_to_color(img_pred)
+            # im = Image.fromarray(label_img_color) 
+            # im.save(os.path.join('../scratch/data_hpc/data/dark_zurich_val/gt/dz_val_pred_backprop', name))
+            # print(pred_label_backp.shape)  # torch.Size([1080, 1920])
+            # print(pred_label_backp)
+            # print(index)
+            
+            ############
             #########################################################################original
-            Mask = (label.squeeze())<C
-            # print(sum(sum(Mask==0)))
-            # print(Mask.shape) # torch.Size([1080, 1920])
-            # break
-            pred_e = torch.linspace(0,C-1, steps=C).view(C, 1, 1)
-            pred_e = pred_e.repeat(1, H, W).cuda()
-            # pred = output.argmax(dim=0).float() # org 
-            # print(pred.shape)
+            # Mask = (label.squeeze())<C
+            # # print(sum(sum(Mask==0)))
+            # # print(Mask.shape) # torch.Size([1080, 1920])
+            # # break
+            # pred_e = torch.linspace(0,C-1, steps=C).view(C, 1, 1)
+            # pred_e = pred_e.repeat(1, H, W).cuda()
+            # # pred = output.argmax(dim=0).float() # org 
+            # # print(pred.shape)
 
-            #mod focal loss is used / bce 
-            pred = output.float()
-            pred[output>=0.5] = 1
-            pred[output<0.5] = 0
-            #mod
+            # #mod focal loss is used / bce 
+            # pred = output.float()
+            # pred[output>=0.5] = 1
+            # pred[output<0.5] = 0
+            # #mod
 
-            pred_mask = torch.eq(pred_e, pred).byte()
-            pred_mask = pred_mask*Mask
+            # pred_mask = torch.eq(pred_e, pred).byte()
+            # pred_mask = pred_mask*Mask
 
-            label_e = torch.linspace(0,C-1, steps=C).view(C, 1, 1)
-            label_e = label_e.repeat(1, H, W).cuda()
-            label = label.view(1, H, W)
-            label_mask = torch.eq(label_e, label.float()).byte()
-            label_mask = label_mask*Mask
+            # label_e = torch.linspace(0,C-1, steps=C).view(C, 1, 1)
+            # label_e = label_e.repeat(1, H, W).cuda()
+            # label = label.view(1, H, W)
+            # label_mask = torch.eq(label_e, label.float()).byte()
+            # label_mask = label_mask*Mask
 
-            tmp_inter = label_mask+pred_mask
+            # tmp_inter = label_mask+pred_mask
 
-            # calc for RR, RF, FR, FF 
-            # # print(tmp_inter.shape) #torch.Size([2, 1080, 1920])
-            # # print(label_mask.shape) #torch.Size([2, 1080, 1920])
-            # # print(torch.unique(tmp_inter)) # tensor([0, 1, 2], device='cuda:0', dtype=torch.uint8)
-            # # print(torch.unique(label_mask)) # tensor([0, 1], device='cuda:0', dtype=torch.uint8)
-            # # where tmp_inter equal to 2 there...is RR..where label_mask is 0 and pred_mask is 1 is...FR..similarly others 
-            # label = label.squeeze(dim = 0).cpu().numpy()
-            # pred = pred.cpu().numpy()
-            # # print(np.unique(pred)) # [0. 1.]
-            # # print(np.unique(label)) # [  0   1 255]
-            # # print(label.shape) # (1080, 1920)
-            # # print(pred.shape) # (1080, 1920)
-            # # print(tmp_inter_np.shape) # (2, 1080, 1920)
-            # # RR 
-            # indrr = np.argwhere((label==1) & (pred==1)) 
-            # # indrr = np.where((label==1) & (pred==1))
-            # # print('yahhoo')
-            # # print('yes!!') 
-            # # indrr = np.transpose(indrr)
-            # # print(indrr)
-            # # FF  
-            # indff = np.argwhere((label==0) & (pred==0))
-            # # RF 
-            # indrf = np.argwhere((label==1) & (pred==0))
-            # # FR 
-            # indfr = np.argwhere((label==0) & (pred==1))
-            # # ignore 
-            # ign = np.argwhere(label==255)
-            # # print(len(list(indfr)) + len(list(indrr)) + len(list(indff)) + len(list(indrf)) + len(list(ign)))
-            # # print('*******')
-            # # print(1920*1080) 
-            # save_confusion_pred(pred, indrr, indrf, indff, indfr, ign, '../scratch/data/pred_dannet_rf/unet_chgfoc_aug_resize', name)
-            # # # print('yes')
-            # # # break
+            # # calc for RR, RF, FR, FF 
+            # # # print(tmp_inter.shape) #torch.Size([2, 1080, 1920])
+            # # # print(label_mask.shape) #torch.Size([2, 1080, 1920])
+            # # # print(torch.unique(tmp_inter)) # tensor([0, 1, 2], device='cuda:0', dtype=torch.uint8)
+            # # # print(torch.unique(label_mask)) # tensor([0, 1], device='cuda:0', dtype=torch.uint8)
+            # # # where tmp_inter equal to 2 there...is RR..where label_mask is 0 and pred_mask is 1 is...FR..similarly others 
+            # # label = label.squeeze(dim = 0).cpu().numpy()
+            # # pred = pred.cpu().numpy()
+            # # # print(np.unique(pred)) # [0. 1.]
+            # # # print(np.unique(label)) # [  0   1 255]
+            # # # print(label.shape) # (1080, 1920)
+            # # # print(pred.shape) # (1080, 1920)
+            # # # print(tmp_inter_np.shape) # (2, 1080, 1920)
+            # # # RR 
+            # # indrr = np.argwhere((label==1) & (pred==1)) 
+            # # # # indrr = np.where((label==1) & (pred==1))
+            # # # # print('yahhoo')
+            # # # # print('yes!!') 
+            # # # indrr = np.transpose(indrr)
+            # # # # print(indrr)
+            # # # # FF  
+            # # indff = np.argwhere((label==0) & (pred==0))
+            # # # # RF 
+            # # indrf = np.argwhere((label==1) & (pred==0))
+            # # # # FR 
+            # # indfr = np.argwhere((label==0) & (pred==1))
+            # # # ignore 
+            # # ign = np.argwhere(label==255)
+            # # # print(len(list(indfr)) + len(list(indrr)) + len(list(indff)) + len(list(indrf)) + len(list(ign)))
+            # # # print('*******')
+            # # # print(1920*1080) 
+            # # save_confusion_pred(pred, indrr, indrf, indff, indfr, ign, '../scratch/data/pred_dannet_rf/unet_foc_aug_resize_rf', name)
+            # # # # # print('yes')
+            # # # # break
 
-            cu_inter = (tmp_inter==2).view(C, -1).sum(dim=1, keepdim=True).float()
-            cu_union = (tmp_inter>0).view(C, -1).sum(dim=1, keepdim=True).float()
-            cu_preds = pred_mask.view(C, -1).sum(dim=1, keepdim=True).float()
-            cu_gts = label_mask.view(C, -1).sum(dim=1, keepdim=True).float()
-            # # print(cu_gts) # total number of labels of class fake and real in GT
+            # cu_inter = (tmp_inter==2).view(C, -1).sum(dim=1, keepdim=True).float()
+            # cu_union = (tmp_inter>0).view(C, -1).sum(dim=1, keepdim=True).float()
+            # cu_preds = pred_mask.view(C, -1).sum(dim=1, keepdim=True).float()
+            # cu_gts = label_mask.view(C, -1).sum(dim=1, keepdim=True).float()
+            # # # print(cu_gts) # total number of labels of class fake and real in GT
             # # print('*******')
             # # print(cu_inter) # numbers
             # # break
 
-            union+=cu_union
-            inter+=cu_inter
-            preds+=cu_preds
-            gts+=cu_gts
+            # union+=cu_union
+            # inter+=cu_inter
+            # preds+=cu_preds
+            # gts+=cu_gts
             #########################################################################origninal
 
             ########################################################################with2ndbest
@@ -222,28 +287,28 @@ def compute_iou(model, testloader, args):
         return iou, mIoU, acc, mAcc
 
 def label_img_to_color(img):
-    # label_to_color = {
-    #     0: [128, 64,128],
-    #     1: [244, 35,232],
-    #     2: [ 70, 70, 70],
-    #     3: [102,102,156],
-    #     4: [190,153,153],
-    #     5: [153,153,153],
-    #     6: [250,170, 30],
-    #     7: [220,220,  0],
-    #     8: [107,142, 35],
-    #     9: [152,251,152],
-    #     10: [ 70,130,180],
-    #     11: [220, 20, 60],
-    #     12: [255,  0,  0],
-    #     13: [  0,  0,142],
-    #     14: [  0,  0, 70],
-    #     15: [  0, 60,100],
-    #     16: [  0, 80,100],
-    #     17: [  0,  0,230],
-    #     18: [119, 11, 32],
-    #     19: [0,  0, 0]
-    #     }
+    label_to_color = {
+        0: [128, 64,128],
+        1: [244, 35,232],
+        2: [ 70, 70, 70],
+        3: [102,102,156],
+        4: [190,153,153],
+        5: [153,153,153],
+        6: [250,170, 30],
+        7: [220,220,  0],
+        8: [107,142, 35],
+        9: [152,251,152],
+        10: [ 70,130,180],
+        11: [220, 20, 60],
+        12: [255,  0,  0],
+        13: [  0,  0,142],
+        14: [  0,  0, 70],
+        15: [  0, 60,100],
+        16: [  0, 80,100],
+        17: [  0,  0,230],
+        18: [119, 11, 32],
+        19: [0,  0, 0]
+        }
     # # with open('./dataset/cityscapes_list/info.json') as f:
     #     data = json.load(f)
 
@@ -251,13 +316,21 @@ def label_img_to_color(img):
     #     0: [0, 0, 0],
     #     1: [255,255,255]
     # }
-    label_to_color = { 
-        0: [0,0,0], # ignored region
-        1: [0,0,255], # RR # Blue
-        2: [0,255,0], # FF # Green 
-        3: [255, 0, 0], #RF Red   
-        4: [255,255,255] #FR White
-    }
+    # org for confusion mat
+    # label_to_color = { 
+    #     0: [0,0,0], # ignored region
+    #     1: [0,0,255], # RR # Blue
+    #     2: [0,255,0], # FF # Green 
+    #     3: [255, 0, 0], #RF Red   
+    #     4: [255,255,255] #FR White
+    # }
+    # label_to_color = {
+    #     0: [0,0,0], # ignored region
+    #     1: [127,127,127], # RR # Grey
+    #     2: [255,255,255], # FF # white 
+    #     3: [255,255,255], #RF white  
+    #     4: [127,127,127] #FR Grey
+    # }
     img_height, img_width = img.shape
     img_color = np.zeros((img_height, img_width, 3), dtype=np.uint8)
     for row in range(img_height):
@@ -342,7 +415,8 @@ def save_confusion_pred(pred, indrr, indrf, indff, indfr, ign, direc, name):
     # pred = pred.cpu().numpy() 
     # pred = np.asarray(np.argmax(pred, axis=0))
     # print(pred.shape) # (1080, 1920)
-    pred[ign[:,0], ign[:,1]] =  0
+    pred[ign[:,0], ign[:,1]] =  0 
+    # org 
     pred[indrr[:,0], indrr[:,1]] =  1
     pred[indff[:,0], indff[:,1]] =  2
     pred[indrf[:,0], indrf[:,1]] =  3
