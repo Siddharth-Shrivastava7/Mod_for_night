@@ -20,7 +20,10 @@ import torchvision
 import cv2
 from trainer.btad_trainer import *
 import cv2
-
+from torch.autograd import grad
+import matplotlib.pyplot as plt
+from PIL import Image, ImageFilter
+from scipy.ndimage.filters import gaussian_filter
 
 def get_arguments():
     """Parse all the arguments provided from the CLI.
@@ -35,6 +38,9 @@ def get_arguments():
     parser.add_argument("--dataset", type=str, default='darkzurich_val')
     parser.add_argument("--single", action='store_true')
     parser.add_argument("--model", default='deeplab')
+    parser.add_argument("--hist", action='store_true')
+    parser.add_argument("--sampl", action='store_true')
+    parser.add_argument("--gtfake", action='store_true')
     return parser.parse_args()
 
 def print_iou(iou, acc, miou, macc):
@@ -51,22 +57,44 @@ def compute_iou(model, testloader, args):
     inter = torch.zeros(args.num_classes, 1, dtype=torch.float).cuda().float()
     preds = torch.zeros(args.num_classes, 1, dtype=torch.float).cuda().float()
     gts = torch.zeros(args.num_classes, 1, dtype=torch.float).cuda().float()
+
+    lst_gt = [] ## for label distribution (for prior, likelihood, posterior)
+    for i in range(19):
+        lst_gt.append(0) 
+    lst_prior = [] ## for label distribution (for prior, likelihood, posterior)
+    for i in range(19):
+        lst_prior.append(0)
+    lst_posterior = [] ## for label distribution (for prior, likelihood, posterior)
+    for i in range(19):
+        lst_posterior.append(0)
+    lst_likelihood = [] ## for label distribution (for prior, likelihood, posterior)
+    for i in range(19):
+        lst_likelihood.append(0)
+    lst_2_likeli = []
+    for i in range(19): 
+        lst_2_likeli.append(0)
+    
     # 2nd best 
     # totalp = 0
     # Tp = 0 
+    i = 0  ## for saving only one image 
     with torch.enable_grad():
         for index, batch in tqdm(enumerate(testloader)):
             image, label, edge, _, name = batch
 #            edge = F.interpolate(edge.unsqueeze(0), (512, 1024)).view(1,512,1024)``
             # print(name)
-            ## use when testing dark zurich val...
+            # use when testing dark zurich val...
             # if name[0].find('dannet_pred')==-1:  
             #     continue
             ## 
             # print(image.shape)
-            image.requires_grad = True  ## for test time gradient calculation
+            image.requires_grad = True  ## for test time gradient calculation 
+            # print(np.unique(image.detach().numpy()))
             output =  model(image.cuda())
             label = label.cuda()
+
+            ## additional
+            # output.requires_grad = True ## wrong didn't work
             # print(output.shape) # torch.Size([1, 1, 512, 512]) 
             # print(output.type) 
             # print('label shape:{} output shape:{}'.format(label.shape, output.shape))
@@ -91,59 +119,296 @@ def compute_iou(model, testloader, args):
             ###########loss at test time  calc .. back prop to get which pixels have the highest gradients...visualisation process only i think 
             # @torch.enable_grad()   # ensure grads in possible no grad context for testing 
             loss = WeightedFocalLoss(alpha= 0.75, gamma=3)  ## loss which was used at the training time 
-            # print(output.shape) # torch.Size([1080, 1920])
+            # print(output.shape) # torch.Size([1080, 1920]) 
             # print(label.squeeze().shape) # torch.Size([1080, 1920])
-            # print(image.shape) # torch.Size([1, 19, 512, 512])
+            # print(np.unique(label.cpu().numpy())) # [  0   1 255]
+            ## print(image.shape) # torch.Size([1, 19, 512, 512])
             # print(image.requires_grad)
             # print(image.is_leaf) # true
             # print(output.is_leaf) # False
-            # print(label.is_leaf) # true
+            # print(label.is_leaf) # true 
+            # print(label.shape)
+            # print(output.shape)
+            # print(torch.is_tensor(label)) # True
+
+            ## make all real tensor for calculating the real loss 
+            # print(label.shape) # torch.Size([1, 1080, 1920])
+            label_allreal = torch.ones(label.shape).squeeze().cuda() 
+            # label_allfake = torch.ones(label.shape).squeeze().cuda()
+            # print(torch.is_tensor(label_allreal)) # True 
+            # # print(label_allreal.shape) # torch.Size([1080, 1920])
+            
+            # seg_loss = loss(output, label_allfake) 
+            # seg_loss = loss(output, label_allreal) 
+            # seg_loss = F.binary_cross_entropy(output, label_allreal)
             seg_loss = loss(output, label.squeeze().float()) 
-            loss = seg_loss
-            # print(seg_loss) 
-            # print('******')
-            loss.backward() 
-            # print(image.grad) # image gradient while doing the backprop 
-            # print(image.grad.shape) ##  Same as the original image (#torch.Size([1, 19, 512, 512]) 
-            # print(torch.argmax(image.grad , dim =1).shape) 
-            # pred_label_backp =  torch.argmax(image.grad, dim =1).unsqueeze(dim=1)   
-            # print(pred_label_backp.shape) # torch.Size([1, 1, 512, 512]) 
-            # pred_label_backp = interp_backp(pred_label_backp.to(torch.float32)).squeeze().cpu().numpy()  # by upsampling...not working...next plan
-            # pred_label_backp =  torch.argmax(image.grad, dim =1) 
-            # pred_label_backp = image.grad 
-            imgg = image.grad.squeeze(dim=0)[0] # 1 channel # torch.Size([512, 512]) 
+            # # print('yes')
+            loss = seg_loss  
+            # # print(seg_loss) 
+            # # print('******')
+            loss.backward()   ### naive method for calculating grad 
+            # (imgg, ) = grad(loss, image)
+            # imgg = grad(output, image) 
+            # print('yp')
+            # # print(image.grad) # image gradient while doing the backprop 
+            # # print(image.grad.shape) ##  Same as the original image (#torch.Size([1, 19, 512, 512]) 
+            # # print(torch.argmax(image.grad , dim =1).shape) 
+            # # pred_label_backp =  torch.argmax(image.grad, dim =1).unsqueeze(dim=1)   
+            # # print(pred_label_backp.shape) # torch.Size([1, 1, 512, 512]) 
+            # # pred_label_backp = interp_backp(pred_label_backp.to(torch.float32)).squeeze().cpu().numpy()  # by upsampling...not working...next plan
+            # # pred_label_backp =  torch.argmax(image.grad, dim =1) 
+            # # pred_label_backp = image.grad 
+            # # imgg = image.grad.squeeze(dim=0)[18] # 1 channel # torch.Size([512, 512]) 
+            
+            ### fake indicesss...
+            # pred = output.float().detach().cpu().numpy() 
+            # pred[pred>=0.5] = 1
+            # pred[pred<0.5] = 0  
+            # ind_f = np.argwhere(pred==0) ## all pred fakes
+            # # print(pred.shape) # torch.Size([1, 1080, 1920])
+            # # print(label.shape) # torch.Size([1, 1080, 1920])
+            # # print(np.unique(label.cpu().numpy())) # [  0   1 255]
+            # if args.gtfake:
+            #     ind_f = np.argwhere(label.squeeze().cpu().numpy()==0) ## fake gt index 
+            
+            
+            # ## calculating the posterior using prior and likelihood 
+            imgg = image.grad 
+            # imgg = image[0][1].grad ## not working
+            # print(image[0][1].shape)
+            # print(imgg.shape) 
+            # print(imgg.shape) # torch.Size([1, 19, 512, 512]) 
+            # print(imgg[0,:].shape) # torch.Size([19, 512, 512]) 
+            
+            # print(imgg[0,:,ind_f[:,0]].shape)
+            # (imgg, ) = grad(loss, image)  ## using torch autograd module ... if using this we donot need to call loss backwards anymore.
+            
+            # (imgg[ind_f[:,0], ind_f[:,1], ) = grad(loss, image[ind_f[:,0], ind_f[:,1])
+
+            
+            # print("******************")
+            # imgg = image.grad 
+            # print(np.max(imgg.cpu().numpy())) ## 0.0014922811
+            # print(np.min(imgg.cpu().numpy()))  ## -0.0012907375
+            # print(np.mean(imgg.cpu().numpy()))  ## 8.790709e-084
+            
+            # imgg = abs(imgg) 
+            # imgg = np.log(imgg)
+            # imgg = np.exp(imgg)
+
+            imgg = F.softmax(imgg, dim=1) # normalise...so using softmax 
+            
+            # print(np.max(imgg.cpu().numpy()))  # 0.052706894 using softmax only 
+            # print(np.min(imgg.cpu().numpy()))  # 0.052570604 using softmax only 
+            # print(np.max(image.detach().cpu().numpy())) # 0.9986824 # original
+            # print(np.min(image.detach().cpu().numpy())) # 2.3444178e-12 # original
+        
+
+            # print(image.shape) # torch.Size([1, 19, 512, 512])
+            # print(imgg.shape) # torch.Size([1, 19, 512, 512])
+            # print(np.unique(np.log(imgg))) 
+            # print(np.unique(imgg.cpu().numpy()))
+            # print(image.shape) # torch.Size([1, 19, 512, 512])
+            # print(imgg.shape) # torch.Size([1080, 1920]) 
+
+            ## experiments to improve posterior using a prior on likelihood...
+            # imgg_image = imgg * image  # normal MAP calculation
+
+            ## 1 logMAP
+            # imgg_image = torch.log(image * imgg) 
+            ##2 weighlogMAP  (variations of high(10e4) and low weight(10e3))
+            # lamb = 10e4  ## even if I increase the prior...nothing significant occurred due to the fact that predictions by the prior is all random
+            # imgg_image = -(torch.log(image) + lamb*torch.log(imgg))
+            ##3 entropy weighted MAP 
+            # print(image.shape) # torch.Size([1, 19, 512, 512])
+            # break 
+            # entropy_map = -torch.sum(image*torch.log(image), dim=1) # torch.Size([1, 512, 512]) 
+            # print(entropy_map.shape)
+            # print(np.max(entropy_map.detach().cpu().numpy()))
+            # entropy_map = entropy_map / np.max(entropy_map.detach().cpu().numpy())  ## normalising it to be between 0 and 1
+            # imgg = imgg / (np.max(imgg.detach().cpu().numpy())) ## normalising so that value which was closer to 0 raises up and distributes till 1
+            # image = image / (np.max(image.detach().cpu().numpy()))
+
+            # print(np.max(image.detach().cpu().numpy())) # 1.0
+            # print(np.max(imgg.detach().cpu().numpy())) # 1.0  ## without normalising 0.052662175
+            # print(np.max(entropy_map.detach().cpu().numpy())) # 1.0
+
+            # print('***********************************')
+            # print(np.min(image.detach().cpu().numpy())) # 2.3444178e-12
+            # print(np.min(imgg.detach().cpu().numpy())) # 0.9987329 ## without normalising 0.052595448
+            # print(np.min(entropy_map.detach().cpu().numpy())) # 0.005916371
+
+            imgg_image = -((1-entropy_map)*torch.log(image) + entropy_map*torch.log(imgg))
+            # imgg_image = imgg * image # normal MAP  .. every low output values 
+            imgg_image = -(torch.log(image) + torch.log(imgg)) # (-2.94 and -29.72)
+            # print(image.shape) # torch.Size([1, 19, 512, 512])
+            # print('***********')
+            # print(imgg.shape) # torch.Size([1, 19, 512, 512])
+            # lamb = 10e4 
+            # imgg_image = -(torch.log(image) + lamb*torch.log(imgg))
+            # imgg_image = image * imgg 
+            # break 
+
+            # print(np.max(imgg_image.detach().cpu().numpy())) # 2.3444178e-12 # 26.227596
+            # print(np.min(imgg_image.detach().cpu().numpy())) # 2.3444178e-12 # 0.0174
+
+            # img = imgggg
+            # imgg_image = torch.log(imgg_image) ## log proba in MAP ##simlpe log w/o weighted prior 
+            # imgg_image = F.softmax(imgg_image, dim=1) # lets see             
+
+            # print(imgg_image.shape) # torch.Size([1, 19, 512, 512])
+            # print(np.unique(imgg_image.detach().numpy())) 
+            # print(np.unique(image.detach().numpy()))
             # print(imgg.shape)
-            imgg = F.softmax(imgg) # between 0 and 1 proba distribution torch.Size([512, 512]) 
+            # imgg = F.softmax(imgg) # between 0 and 1 proba distribution torch.Size([512, 512]) 
             # print(np.unique(imgg))
             # print(imgg.shape)
             # imgg = np.array(imgg)*255 
-            imgg = np.array(imgg)
-            imgg_min = imgg.min()
-            imgg_max = imgg.max()
-            imgg_mean = np.mean(imgg)
-            imgg_std = np.std(imgg)
-            imgg = (imgg - imgg_min) / (imgg_max - imgg_min) ## min max normalisation 
+            # imgg = np.array(imgg)
+            # imgg_min = imgg.min()
+            # imgg_max = imgg.max()
+            # imgg_mean = np.mean(imgg)
+            # imgg_std = np.std(imgg)
+            # imgg = (imgg - imgg_min) / (imgg_max - imgg_min) ## min max normalisation 
             # imgg = imgg / imgg_max  ## only max normalisation
             # imgg = (imgg - imgg_mean) / (imgg_std) ## z score normalisation
-            print(np.unique(imgg))
-            # heatmap = cv2.applyColorMap(np.uint8(imgg*255), cv2.COLORMAP_HOT)
+            # print(np.unique(imgg))
+            # heatmap = cv2.applyColorMap(np.uint8(imgg*255), cv2.COLORMAP_HSV)
             # cv2.imwrite('heatmap.png',heatmap)
             # pred_label_backp = pred_label_backp.squeeze().cpu().numpy()
             # label_img_color = label_img_to_color(pred_label_backp)
             # im = Image.fromarray(label_img_color) 
             # im.save(os.path.join('../scratch/data_hpc/data/dark_zurich_val/gt/dz_val_pred_backprop', name))
 
-            ## image pred from input..for testing 
-            # img_pred = torch.argmax(image, dim=1).unsqueeze(dim=1)
-            # img_pred = interp_backp(img_pred.to(torch.float32)).squeeze().detach().cpu().numpy()
-            # img_pred = torch.argmax(image, dim=1)
-            # img_pred = img_pred.squeeze().detach().cpu().numpy()
-            # label_img_color = label_img_to_color(img_pred)
-            # im = Image.fromarray(label_img_color) 
-            # im.save(os.path.join('../scratch/data_hpc/data/dark_zurich_val/gt/dz_val_pred_backprop', name))
-            # print(pred_label_backp.shape)  # torch.Size([1080, 1920])
-            # print(pred_label_backp)
-            # print(index)
+
+            ## only fake regions being predicted by the MAP case....
+            img_pred = torch.argmax(image, dim=1).unsqueeze(dim=1) ## real pred 
+            img_pred_grad = torch.argmax(imgg_image, dim=1).unsqueeze(dim=1) ## grad max everywhere for posterior
+            # img_pred_grad = torch.argmin(imgg_image, dim=1).unsqueeze(dim=1) ## grad min everywhere for posterior 
+            
+
+            ## blurry imgg in numpy only...
+            # print(imgg.shape) #torch.Size([1, 19, 512, 512])
+            imgg = imgg.squeeze(dim=0) 
+            # # print(imgg.shape) # torch.Size([19, 512, 512])
+            for ch in range(19):
+                im = np.array(imgg[ch]) ## in dtype int...everything is 0  
+                # im_max = np.max(im)
+                # im_min = np.min(im)
+                # im = im / (im_max) ## for normalising 0 to 1
+                # im = im*1000
+                # im_max = np.max(im)
+                # im_min = np.min(im)
+                # print(im_max) # 13.428025 or 0.052654453
+                # print('***************')
+                # print(im_min) # 13.41325 or 0.052602757
+                # print(im.shape) # (512, 512) 
+                # im = Image.fromarray(im) 
+                # print(np.unique(im))  ## float  
+                # im = Image.fromarray((im*10e4).astype(np.uint8)) 
+            #     im = Image.fromarray((im*255).astype(np.uint8)) 
+            #     im = Image.fromarray((im).astype(np.uint8)) 
+                blurred = im
+                for j in range(5):
+                    # blurred = gaussian_filter(blurred, sigma=50) 
+            #         # im = im.filter(ImageFilter.BLUR)
+            #         # im = im.filter(ImageFilter.GaussianBlur(radius=2)) 
+                    continue
+                imgg[ch] = torch.tensor(blurred)
+            #     im = np.array(im)
+            #     im = torch.tensor(im)
+            #     imgg[ch] = im 
+            #     print('yo')
+            imgg = imgg.unsqueeze(dim=0)
+            # print(imgg.shape)
+            ## blurry image ....
+
+            # img_pred_grad_prior = torch.argmax(imgg, dim=1).unsqueeze(dim=1) ## only grad using  ..only prior
+            img_pred_grad_prior = torch.argmin(imgg, dim=1).unsqueeze(dim=1)   ## prior argmin
+            # img_pred_grad_prior = torch.argmax(torch.log(imgg), dim=1).unsqueeze(dim=1)  ## log prior
+            # print(img_pred_grad_prior.shape) # torch.Size([1, 1, 512, 512])
+            
+            # print(torch.argsort(image, dim=1).squeeze().shape) # torch.Size([19, 512, 512])
+            # print(img_pred.shape) # torch.Size([1, 1, 512, 512])
+            # print(torch.argsort(image, dim=1).squeeze()[-1] == torch.argmax(image, dim=1)) # True
+
+            ## 2nd best likelihood
+            img_pred_2 = torch.argsort(image, dim=1).squeeze()[-2] 
+            img_pred_2 = img_pred_2.unsqueeze(dim=0).unsqueeze(dim=0)
+
+            img_pred = interp_backp(img_pred.to(torch.float32)).squeeze().detach().cpu().numpy() ## upsampling to req size 
+            img_pred_grad = interp_backp(img_pred_grad.to(torch.float32)).squeeze().detach().cpu().numpy() 
+            img_pred_grad_prior = interp_backp(img_pred_grad_prior.to(torch.float32)).squeeze().detach().cpu().numpy() 
+            img_pred_2 = interp_backp(img_pred_2.to(torch.float32)).squeeze().detach().cpu().numpy()
+
+            pred = output.float().detach().cpu().numpy() 
+            pred[pred>=0.5] = 1
+            pred[pred<0.5] = 0 
+            ind_f = np.argwhere(pred==0) ## all pred fakes
+            # print(label.shape) # torch.Size([1, 1080, 1920])
+            # print(np.unique(label.cpu().numpy())) # [  0   1 255]
+            if args.gtfake:
+                ind_f = np.argwhere(label.squeeze().cpu().numpy()==0) ## fake gt index 
+
+            # print(ind_f.shape)
+            # indrf = np.argwhere((label==1) & (pred==0)) ## rf 
+            # indfr = np.argwhere((label==0) & (pred==1)) ## fr ### not handled
+            # indff = np.argwhere((label==0) & (pred==0)) ## ff 
+            # indrr = np.argwhere((label==1) & (pred==1)) ## rr ## not req to do...cause wanting only real pred...if taken its highest backprop would result in 
+            post = img_pred_grad
+            likeli = img_pred
+
+            if args.sampl:
+                if i<2:
+                    i = i + 1
+                    likeli[ind_f[:,0], ind_f[:,1]] = post[ind_f[:,0], ind_f[:,1]]   ### original 
+                    # print(img_pred.shape) # torch.Size([1, 1, 512, 512])
+                    # img_pred = torch.argmax(image,dim=1).unsqueeze(dim=1)
+                    # img_pred = img_pred.squeeze().detach().cpu().numpy()
+                    # img_pred = interp_backp(img_pred.to(torch.float32)).squeeze().detach().cpu().numpy()
+                    # img_pred = torch.argmax(image, dim=1)
+                    # img_pred = img_pred.squeeze().detach().cpu().numpy()
+
+                    # label_img_color = label_img_to_color(likeli)  ###original image with fake regions been replaced by the MAP estimation
+                    # im = np.array(img_pred_grad_prior) 
+                    # im = Image.fromarray(im)
+                    # im_blur = im.filter(ImageFilter.BLUR)
+                    label_img_color = label_img_to_color(img_pred_grad_prior) ## prior
+                    # label_img_color = label_img_to_color(im_blur) 
+                    # label_img_color = label_img_to_color(img_pred_2) ## 2nd best 
+                    im = Image.fromarray(label_img_color) ###original  
+                    # im = Image.fromarray(np.array(img_pred_grad,dtype = np.int32)) 
+                    # im = Image.fromarray(np.array(img_pred,dtype = np.int32)) 
+                    # im = Image.fromarray(np.array(imgg,dtype = np.int32))
+                    # print(img_pred.shape) # (1080, 1920)
+                    # print(np.unique(img_pred)) # [ 0.  1.  3.  4.  5.  8.  9. 10. 13. 14.]
+                    # im.save(name + '.png')
+                    im.save('try3.png') 
+                    # break
+                # name = name.replace('_rgb_anon_color', '_rgb_anon')
+                # print(name) # GOPR0356_frame_000321_rgb_anon.png
+                # im.save(os.path.join('../scratch/data_hpc/data/dark_zurich_val/gt/dz_val_pred_backprop_posterior_allreal_id', name))  ###org
+                # im.save(os.path.join('../scratch/data_hpc/data/dark_zurich_val/gt/dz_val_pred_2nd_best', name))
+                # print(pred_label_backp.shape)  # torch.Size([1080, 1920])
+                # print(pred_label_backp)
+                # print(index)
+
+            ############################list of fake labels by using MAP##########################
+            # print('********************')
+            if args.hist:
+                lenfk = len(ind_f)
+                imgg_fk = img_pred_grad_prior[ind_f[:,0], ind_f[:,1]]  ## prior 
+                image_post_fk = img_pred_grad[ind_f[:,0], ind_f[:,1]] ## posterior 
+                image_likeli = img_pred[ind_f[:,0], ind_f[:,1]] ## likelihood
+                image_2_likeli = img_pred_2[ind_f[:,0], ind_f[:,1]] ## 2best
+                # print(imgg_fk.shape)
+                for i in range(19):
+                    lst_prior[i] = lst_prior[i] + (len(np.argwhere(imgg_fk==i)) / lenfk) 
+                    lst_posterior[i] = lst_posterior[i] + (len(np.argwhere(image_post_fk==i)) / lenfk) 
+                    lst_likelihood[i] = lst_likelihood[i] + (len(np.argwhere(image_likeli==i)) / lenfk) 
+                    lst_2_likeli[i] = lst_2_likeli[i] + (len(np.argwhere(image_2_likeli==i)) / lenfk) 
+                  
+            ############################list of fake labels by using MAP##########################
             
             ############
             #########################################################################original
@@ -221,7 +486,7 @@ def compute_iou(model, testloader, args):
             # inter+=cu_inter
             # preds+=cu_preds
             # gts+=cu_gts
-            #########################################################################origninal
+            # #########################################################################origninal
 
             ########################################################################with2ndbest
             # Mask = (label.squeeze())<C
@@ -282,7 +547,51 @@ def compute_iou(model, testloader, args):
         # acc = inter/preds
         # mIoU = iou.mean().item()
         # mAcc = acc.mean().item()
-        # print_iou(iou, acc, mIoU, mAcc)    
+        # print_iou(iou, acc, mIoU, mAcc)   
+        
+        ############################Comparision of labels in fake regios##########################
+
+        if args.hist:
+
+            with open('dataset/list/darkzurich/val.txt') as f: 
+                data = f.read().splitlines()
+
+
+            for img in tqdm(data): 
+                img_gt = np.array(Image.open(os.path.join('/home/sidd_s/scratch/data_hpc/data/dark_zurich_val/gt', img + '_gt_labelTrainIds.png')))
+                name = img.split('/')[-1]
+                img_rf_gt = np.array(Image.open(os.path.join('/home/sidd_s/scratch/data_hpc/data/dark_zurich_val/gt/rf_fake_dannet', name+'_gt_labelColor.png')))
+                indfk = np.argwhere(img_rf_gt== 0)  ## for real 127..for fake 0..#both overall
+                lenfk = len(indfk)
+                img_gtfk = img_gt[indfk[:,0], indfk[:,1]]
+                for i in range(19):
+                    lst_gt[i] = lst_gt[i] + (len(np.argwhere(img_gtfk==i)) / lenfk)
+
+            
+            fig = plt.figure(figsize = (20, 5)) 
+            x = ['road', 'sidewalk', 'building', 'wall', 'fence', 'pole', 'light', 'sign', 'vegetation', 'terrain', 'sky', 'person', 'rider', 'car', 'truck', 'bus', 'train', 'motocycle', 'bicycle']
+            X_axis = np.arange(len(x))
+            y_gt = lst_gt
+            y_prior = lst_prior
+            y_posterior = lst_posterior
+            y_likeli = lst_likelihood 
+            y_2_likeli = lst_2_likeli
+            width = 0.1
+
+            plt.bar(X_axis,y_gt, width=width,color ='blue', label='gt')
+            plt.bar(X_axis+width,y_prior, width=width, color='red', label = 'prior')
+            plt.bar(X_axis+width*2,y_posterior, width=width, color='green', label = 'posterior')
+            plt.bar(X_axis+width*3,y_likeli, width=width, color='yellow', label = 'likelihood')
+            plt.bar(X_axis+width*4,y_2_likeli, width=width, color='black', label = '2_likeli')
+
+            plt.xticks(X_axis, x)
+            plt.xlabel('classes')
+            plt.ylabel('label_ratio_in_fake_regions')
+            plt.title('Comp_gt_prior_post_likeli_2nd')
+            plt.legend()
+            plt.savefig('Comp_gt_prior_post_likeli_2nd.png')
+
+        ############################Comparision of labels in fake regios##########################
 
         return iou, mIoU, acc, mAcc
 
